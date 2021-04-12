@@ -1,0 +1,56 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10/abr/2021, 21:12:50
+    Author     : Flavio
+*/
+
+.campoLogin:focused{
+    
+    -fx-border-width: 1px;
+    -fx-border-color: rgb(129,126,240);
+    -fx-border-radius: 2px;
+    
+}
+.botaoLogin{
+    -fx-background-color:  rgb(129,126,240);
+    -fx-text-fill: white;
+    
+}
+.botaoLogin:hover{
+    -fx-background-color:rgb(131,123,193);
+}
+
+.botaoMesa{
+    -fx-background-color: rgb(118,226,244);
+}
+.botaoMesa:hover{
+    -fx-background-color: rgb(173,237,248);
+}
+.botaoMesa:pressed{
+    -fx-background-color: rgb(46,168,189);
+}
+
+.abaMenu{
+    border-left-color: black;
+    border-left-width: 2px;
+    -fx-background-color: rgb(46,168,189);
+    
+    
+}
+.botaoDashLado{
+    -fx-background-color:transparent;
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    
+}
+.botaoDashLado:hover{
+    -fx-background-color:rgb(44,160,180);
+}
+.botaoDashLado:pressed{
+    -fx-background-color: rgb(131,123,193);
+    
+}

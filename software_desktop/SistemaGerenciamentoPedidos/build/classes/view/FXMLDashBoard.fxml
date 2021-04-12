@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="584.0" prefWidth="1037.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="-1.0" prefHeight="584.0" prefWidth="1038.0">
+         <children>
+            <Pane prefHeight="478.0" prefWidth="228.0" styleClass="abaMenu" stylesheets="@style.css">
+               <children>
+                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="393.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Mesa">
+                     <graphic>
+                        <ImageView fitHeight="52.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../asset/mesa.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="195.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Pedido">
+                     <graphic>
+                        <ImageView fitHeight="59.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../asset/pedido.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="10.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Garçom">
+                     <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../asset/garcom.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="102.0" mnemonicParsing="false" prefHeight="87.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Cardápio">
+                     <graphic>
+                        <ImageView fitHeight="55.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../asset/cardapio.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="293.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Financias">
+                     <graphic>
+                        <ImageView fitHeight="59.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../asset/financia.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="37.0" layoutY="485.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Configurações">
+                     <graphic>
+                        <ImageView fitHeight="62.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../asset/config2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+               </children>
+            </Pane>
+            <Pane prefHeight="536.0" prefWidth="649.0" style="-fx-background-color: white;">
+               <children>
+                  <ImageView fitHeight="221.0" fitWidth="659.0" layoutX="75.0" layoutY="-41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/linkedin_banner_image_1.png" />
+                     </image>
+                  </ImageView>
+                  <ScrollPane layoutX="12.0" layoutY="127.0" prefHeight="381.0" prefWidth="593.0" style="-fx-background-color: white;">
+                     <content>
+                        <GridPane alignment="CENTER" prefHeight="379.0" prefWidth="591.0" style="-fx-background-color: white;">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="157.20001220703125" minWidth="10.0" prefWidth="154.79998779296875" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="145.20001220703125" minWidth="10.0" prefWidth="145.20001220703125" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="123.79999389648438" minHeight="10.0" prefHeight="123.79999389648438" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="136.79999999999998" minHeight="10.0" prefHeight="129.4" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="169.59995117187498" minHeight="10.0" prefHeight="136.60000000000002" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="129.0" styleClass="botaoMesa" stylesheets="@style.css" text="Mesa 1">
+                                 <graphic>
+                                    <ImageView fitHeight="76.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../asset/mesa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Century Gothic" size="13.0" />
+                                 </font>
+                              </Button>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="129.0" styleClass="botaoMesa" stylesheets="@style.css" text="Mesa 2" GridPane.columnIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="76.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../asset/mesa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Century Gothic" size="13.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="129.0" styleClass="botaoMesa" stylesheets="@style.css" text="Mesa 5" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="76.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../asset/mesa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Century Gothic" size="13.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="129.0" styleClass="botaoMesa" stylesheets="@style.css" text="Mesa 6" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="76.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../asset/mesa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Century Gothic" size="13.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="129.0" styleClass="botaoMesa" stylesheets="@style.css" text="Mesa 9" GridPane.rowIndex="2">
+                                 <graphic>
+                                    <ImageView fitHeight="76.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../asset/mesa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Century Gothic" size="13.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="129.0" styleClass="botaoMesa" stylesheets="@style.css" text="Mesa 3" GridPane.columnIndex="2">
+                                 <graphic>
+                                    <ImageView fitHeight="76.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../asset/mesa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Century Gothic" size="13.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="129.0" styleClass="botaoMesa" stylesheets="@style.css" text="Mesa 4" GridPane.columnIndex="3">
+                                 <graphic>
+                                    <ImageView fitHeight="76.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../asset/mesa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Century Gothic" size="13.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="129.0" styleClass="botaoMesa" stylesheets="@style.css" text="Mesa 7" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="76.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../asset/mesa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Century Gothic" size="13.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="129.0" styleClass="botaoMesa" stylesheets="@style.css" text="Mesa 8" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="76.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../asset/mesa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Century Gothic" size="13.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="129.0" styleClass="botaoMesa" stylesheets="@style.css" text="Mesa 10" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <graphic>
+                                    <ImageView fitHeight="76.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../asset/mesa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Century Gothic" size="13.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="129.0" styleClass="botaoMesa" stylesheets="@style.css" text="Mesa 11" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <graphic>
+                                    <ImageView fitHeight="76.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../asset/mesa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Century Gothic" size="13.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="98.0" prefWidth="129.0" styleClass="botaoMesa" stylesheets="@style.css" text="Mesa 12" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                 <graphic>
+                                    <ImageView fitHeight="76.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../asset/mesa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Century Gothic" size="13.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </Pane>
+            <Pane prefHeight="478.0" prefWidth="241.0" styleClass="abaMenu" stylesheets="@style.css">
+               <children>
+                  <Label layoutX="39.0" layoutY="33.0" text="Fila de pedidos">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane layoutX="8.0" layoutY="74.0" prefHeight="447.0" prefWidth="201.0" styleClass="abaMenu" stylesheets="@style.css">
+                     <content>
+                        <GridPane alignment="CENTER" gridLinesVisible="true" prefHeight="444.0" prefWidth="198.0" styleClass="abaMenu" stylesheets="@style.css">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="189.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Pedido 123456">
+                                 <font>
+                                    <Font name="Century Gothic" size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="190.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Pedido 456789" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Century Gothic" size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -69,7 +69,25 @@ public class Controller {
     }
     
     @PostMapping("/cardapio")
-    public ItemCardapio salvar(@RequestBody ItemCardapio item){
+    public ItemCardapio salvar(@Validated ItemCardapio item){
         return bc.salvar(item);
+    }
+    
+    @GetMapping("/cardapio/{id}")
+    public Optional<ItemCardapio> buscarIdCardapio(@PathVariable("id")int id){
+        return bc.buscarId(id);
+    }
+    @GetMapping("/cardapio")
+    public List<ItemCardapio> buscarTodosCardapio(){
+        return bc.buscarTodos();
+    }
+    @PutMapping("/cardapio/{id}")
+    public ResponseEntity<ItemCardapio> editarCardapio(@Validated ItemCardapio itemCardapio,@PathVariable("id")int id){
+        return bc.editar(id, itemCardapio);
+    }
+    
+    @PutMapping("/cardapio/mudarEstado/{id}")
+    public ResponseEntity<Optional<ItemCardapio>> mudarEstadoCardapio(@PathVariable("id")int id){
+        return bc.alterarEstado(id);
     }
 }

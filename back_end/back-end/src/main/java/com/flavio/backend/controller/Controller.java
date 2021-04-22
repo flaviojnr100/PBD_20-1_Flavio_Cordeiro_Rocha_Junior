@@ -7,8 +7,10 @@ package com.flavio.backend.controller;
 
 import com.flavio.backend.model.business.BusinessCardapio;
 import com.flavio.backend.model.business.BusinessFuncionario;
+import com.flavio.backend.model.business.BusinessMesa;
 import com.flavio.backend.model.object.Funcionario;
 import com.flavio.backend.model.object.ItemCardapio;
+import com.flavio.backend.model.object.Mesa;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,9 @@ public class Controller {
     
     @Autowired
     BusinessCardapio bc;
+    
+    @Autowired
+    BusinessMesa bm;
     
     @GetMapping("/funcionario")
     public List<Funcionario> buscarTodos(){
@@ -89,5 +94,31 @@ public class Controller {
     @PutMapping("/cardapio/mudarEstado/{id}")
     public ResponseEntity<Optional<ItemCardapio>> mudarEstadoCardapio(@PathVariable("id")int id){
         return bc.alterarEstado(id);
+    }
+    
+    @PostMapping("/mesa")
+    public Mesa salvarMesa(@Validated Mesa mesa){
+        return bm.salvar(mesa);
+    }
+    @GetMapping("/mesa")
+    public List<Mesa> buscatTodosMesa(){
+        return bm.buscarTodos();
+    }
+    @GetMapping("/mesa/{id}")
+    public ResponseEntity<Mesa> buscarIdMesa(@PathVariable("id") int id){
+        return bm.buscarId(id);
+    }
+    @GetMapping("/mesa/buscarNumero/{numero}")
+    public Mesa buscarNumero(@PathVariable("numero")int numero){
+        return bm.buscarNumero(numero);
+    }
+    
+    @PutMapping("/mesa/{id}")
+    public ResponseEntity<Mesa> edtiarMesa(@PathVariable("id") int id,@Validated Mesa mesa){
+        return bm.editar(id, mesa);
+    }
+    @PutMapping("/mesa/alterarEstado/{id}")
+    public ResponseEntity<Mesa> alterarEstadoMesa(@PathVariable("id") int id){
+        return bm.alterarEstado(id);
     }
 }

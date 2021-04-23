@@ -49,7 +49,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="10.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Garçom">
+                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="10.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Funcionário">
                      <graphic>
                         <ImageView fitHeight="64.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
                            <image>

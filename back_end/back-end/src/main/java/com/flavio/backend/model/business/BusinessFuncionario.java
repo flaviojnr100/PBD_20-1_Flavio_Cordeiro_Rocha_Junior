@@ -69,7 +69,25 @@ public class BusinessFuncionario {
         return ResponseEntity.ok(funcionario);
     }
     public ResponseEntity<Funcionario> buscarCpf(String cpf){
-        Funcionario f = dao.findCpf(cpf);
+        Funcionario f = dao.buscarCpf(cpf);
+        
+        if(f == null){
+            return null;
+        }
+        f.setSenha(null);
+        return ResponseEntity.ok(f);
+    }
+    public ResponseEntity<Funcionario> buscarNome(String nome){
+        Funcionario f = dao.buscarNome(nome);
+        
+        if(f == null){
+            return null;
+        }
+        f.setSenha(null);
+        return ResponseEntity.ok(f);
+    }
+    public ResponseEntity<Funcionario> buscarLogin(String login){
+        Funcionario f = dao.buscarLogin(login);
         
         if(f == null){
             return null;

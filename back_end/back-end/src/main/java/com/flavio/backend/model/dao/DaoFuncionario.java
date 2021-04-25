@@ -18,9 +18,11 @@ import org.springframework.data.repository.query.Param;
  */
 public interface DaoFuncionario extends JpaRepository<Funcionario, Integer> {
     
-    @Query(value = "select id,nome,sobrenome,telefone,cpf,login,senha,is_permissao,tipo_acesso from Funcionario f where f.cpf = :cpf",nativeQuery = true)
-    public Funcionario findCpf(@Param("cpf") String cpf);
-
-
+    @Query(value = "select * from Funcionario f where f.cpf = :cpf",nativeQuery = true)
+    public Funcionario buscarCpf(@Param("cpf") String cpf);
+    @Query(value = "select * from Funcionario f where f.nome = :nome",nativeQuery = true)
+    public Funcionario buscarNome(@Param("nome") String nome);
+    @Query(value = "select * from Funcionario f where f.login = :login",nativeQuery = true)
+    public Funcionario buscarLogin(@Param("login") String nome);
     
 }

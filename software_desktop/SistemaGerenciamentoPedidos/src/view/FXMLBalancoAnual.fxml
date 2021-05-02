@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="347.0" prefWidth="600.0" style="-fx-background-color: rgb(118,226,244);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerBalancoAnual">
+   <children>
+      <Pane layoutX="36.0" layoutY="118.0" prefHeight="200.0" prefWidth="526.0">
+         <children>
+            <TableView fx:id="tableFinancia" prefHeight="200.0" prefWidth="526.0" styleClass="table" stylesheets="@style.css">
+              <columns>
+                <TableColumn fx:id="colMes" prefWidth="262.4000244140625" text="Mês" />
+                <TableColumn fx:id="colTotal" prefWidth="263.20001220703125" text="Total" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <ComboBox fx:id="comboAno" layoutX="35.0" layoutY="35.0" onAction="#buscarAno" prefHeight="38.0" prefWidth="202.0" promptText="Selecione o ano" styleClass="botaoDashLado" stylesheets="@style.css" />
+      <Button fx:id="btnRelatorio" contentDisplay="TOP" layoutX="440.0" layoutY="11.0" mnemonicParsing="false" onAction="#gerarRelatorio" prefHeight="96.0" prefWidth="122.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Gerar relatorio">
+         <graphic>
+            <ImageView fitHeight="57.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/pdf.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Century Gothic" size="14.0" />
+         </font></Button>
+      <Button fx:id="btnPesquisaDetalhada" contentDisplay="TOP" layoutX="256.0" layoutY="11.0" mnemonicParsing="false" onAction="#pesquisaDetalhada" prefHeight="78.0" prefWidth="167.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Pesquisa detalhada">
+         <graphic>
+            <ImageView fitHeight="62.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/balanco_anual.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Century Gothic" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

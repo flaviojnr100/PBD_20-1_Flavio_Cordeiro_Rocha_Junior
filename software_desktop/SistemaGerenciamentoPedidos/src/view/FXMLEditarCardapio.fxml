@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="298.0" prefWidth="360.0" style="-fx-background-color: rgb(231,87,1);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerEditarCardapio">
+<AnchorPane id="AnchorPane" prefHeight="298.0" prefWidth="360.0" style="-fx-background-color: rgb(118,226,244);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerEditarCardapio">
    <children>
       <GridPane layoutX="47.0" layoutY="118.0" prefHeight="91.0" prefWidth="241.0">
          <columnConstraints>
@@ -40,9 +40,9 @@
                   <Font name="Century Gothic" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="nomeTxt" onKeyPressed="#keySalvar" style="-fx-background-color: rgb(239,143,85);" styleClass="campoTexto" stylesheets="@style.css" GridPane.columnIndex="1" />
-            <TextField fx:id="precoTxt" onKeyPressed="#keySalvar" style="-fx-background-color: rgb(239,143,85);" styleClass="campoTexto" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="descricaoTxt" onKeyPressed="#keySalvar" style="-fx-background-color: rgb(239,143,85);" styleClass="campoTexto" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="nomeTxt" onKeyPressed="#keySalvar" styleClass="campoTexto" stylesheets="@style.css" GridPane.columnIndex="1" />
+            <TextField fx:id="precoTxt" onKeyPressed="#keySalvar" styleClass="campoTexto" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="descricaoTxt" onKeyPressed="#keySalvar" styleClass="campoTexto" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Button fx:id="btnSalvar" layoutX="60.0" layoutY="233.0" mnemonicParsing="false" onAction="#salvar" onKeyPressed="#keySalvar" prefHeight="35.0" prefWidth="70.0" styleClass="botaoCardapio" stylesheets="@style.css" text="Salvar">

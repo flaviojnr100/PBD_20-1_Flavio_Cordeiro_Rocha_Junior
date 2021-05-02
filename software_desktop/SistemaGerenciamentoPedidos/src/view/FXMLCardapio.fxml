@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="510.0" prefWidth="608.0" style="-fx-background-color: rgb(231,87,1);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCardapio">
+   <children>
+      <Pane layoutX="24.0" layoutY="195.0" prefHeight="275.0" prefWidth="565.0">
+         <children>
+            <TableView fx:id="tableCardapio" prefHeight="275.0" prefWidth="566.0" style="-fx-background-color: rgb(239,143,85); -fx-base: rgb(231,87,1); -fx-border-color: black; -fx-font-size: 14px;">
+              <columns>
+                <TableColumn fx:id="colId" prefWidth="75.0" text="Codigo" />
+                <TableColumn fx:id="colNome" prefWidth="84.79998016357422" text="Nome" />
+                  <TableColumn fx:id="colPreco" prefWidth="74.39996337890625" text="Preço" />
+                  <TableColumn fx:id="colDescricao" prefWidth="246.4000244140625" text="Descrição" />
+                  <TableColumn fx:id="colStatus" prefWidth="86.39999389648438" text="Status" />
+              </columns>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+                      <MenuItem mnemonicParsing="false" onAction="#informacoes" text="Ver informações" />
+                      <MenuItem mnemonicParsing="false" onAction="#editar" text="Editar" />
+                      <MenuItem mnemonicParsing="false" onAction="#mudarStatus" text="Habilitar/Desabilitar" />
+                      <MenuItem mnemonicParsing="false" onAction="#sair" text="Sair" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+         </children>
+      </Pane>
+      <Pane layoutX="23.0" layoutY="116.0" prefHeight="78.0" prefWidth="566.0">
+         <children>
+            <TextField fx:id="buscarTxt" layoutX="8.0" layoutY="27.0" onKeyReleased="#keyBuscar" prefHeight="25.0" prefWidth="465.0" style="-fx-background-color: rgb(239,143,85);" styleClass="campoTexto" stylesheets="@style.css" />
+            <Button fx:id="btnBuscar" layoutX="487.0" layoutY="21.0" mnemonicParsing="false" onAction="#buscar" prefHeight="36.0" prefWidth="76.0" styleClass="botaoCardapio" stylesheets="@style.css" text="Buscar">
+               <font>
+                  <Font name="Century Gothic" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <Button fx:id="btnCadastrar" contentDisplay="TOP" layoutX="243.0" layoutY="14.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="100.0" prefWidth="140.0" styleClass="botaoCardapio" stylesheets="@style.css" text="Adicionar item">
+         <graphic>
+            <ImageView fitHeight="71.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/cardapio.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

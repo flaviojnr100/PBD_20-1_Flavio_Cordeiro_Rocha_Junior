@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_gerenciamento_pedido/view/dashboard/dashboard.dart';
 import 'package:projeto_gerenciamento_pedido/view/login.dart';
 
 void main() => runApp(MyApp());
@@ -22,6 +23,6 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: Login());
+        home: Dashboard());
   }
 }

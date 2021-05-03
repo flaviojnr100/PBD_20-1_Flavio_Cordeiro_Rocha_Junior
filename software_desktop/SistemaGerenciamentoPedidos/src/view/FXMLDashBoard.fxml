@@ -15,13 +15,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="584.0" prefWidth="1037.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="584.0" prefWidth="1037.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerDashboard">
    <children>
       <HBox layoutX="-1.0" prefHeight="584.0" prefWidth="1038.0">
          <children>
             <Pane prefHeight="478.0" prefWidth="228.0" styleClass="abaMenu" stylesheets="@style.css">
                <children>
-                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="393.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Mesa">
+                  <Button fx:id="btnMesa" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="393.0" mnemonicParsing="false" onAction="#mesa" prefHeight="84.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Mesa">
                      <graphic>
                         <ImageView fitHeight="52.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -35,7 +35,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="195.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Pedido">
+                  <Button fx:id="btnPedido" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="195.0" mnemonicParsing="false" onAction="#pedido" prefHeight="91.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Pedido">
                      <graphic>
                         <ImageView fitHeight="59.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -49,7 +49,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="10.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Funcionário">
+                  <Button fx:id="btnFuncionario" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="10.0" mnemonicParsing="false" onAction="#funcionario" prefHeight="86.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Funcionário">
                      <graphic>
                         <ImageView fitHeight="64.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -63,7 +63,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="102.0" mnemonicParsing="false" prefHeight="87.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Cardápio">
+                  <Button fx:id="btnCardapio" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="102.0" mnemonicParsing="false" onAction="#cardapio" prefHeight="87.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Cardápio">
                      <graphic>
                         <ImageView fitHeight="55.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -77,7 +77,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="293.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Financias">
+                  <Button fx:id="btnFinancia" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="293.0" mnemonicParsing="false" onAction="#financia" prefHeight="91.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Financias">
                      <graphic>
                         <ImageView fitHeight="59.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -91,7 +91,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button alignment="TOP_CENTER" contentDisplay="TOP" layoutX="37.0" layoutY="485.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Configurações">
+                  <Button fx:id="btnConfiguracao" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="37.0" layoutY="485.0" mnemonicParsing="false" onAction="#configuracao" prefHeight="90.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Configurações">
                      <graphic>
                         <ImageView fitHeight="62.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>

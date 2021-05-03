@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="459.0" prefWidth="600.0" style="-fx-background-color: rgb(118,226,244);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFinancia">
+   <children>
+      <Pane layoutX="22.0" layoutY="155.0" prefHeight="260.0" prefWidth="555.0">
+         <children>
+            <TableView fx:id="tableFinancia" prefHeight="260.0" prefWidth="555.0" styleClass="table" stylesheets="@style.css">
+              <columns>
+                <TableColumn fx:id="colData" prefWidth="277.60003662109375" text="Data" />
+                <TableColumn fx:id="colTotal" prefWidth="276.7999267578125" text="Total" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <Button fx:id="btnMensal" contentDisplay="TOP" layoutX="87.0" layoutY="14.0" mnemonicParsing="false" onAction="#mensal" prefHeight="112.0" prefWidth="146.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Balanço mensal">
+         <font>
+            <Font name="Century Gothic" size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="78.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/balanco_mensal.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="btnAnual" contentDisplay="TOP" layoutX="359.0" layoutY="14.0" mnemonicParsing="false" onAction="#anual" prefHeight="112.0" prefWidth="146.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Balanço anual">
+         <font>
+            <Font name="Century Gothic" size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="78.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/balanco_anual.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+   </children>
+</AnchorPane>

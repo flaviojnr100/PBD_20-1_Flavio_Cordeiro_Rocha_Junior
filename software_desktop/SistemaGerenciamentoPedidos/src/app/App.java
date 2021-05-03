@@ -35,29 +35,6 @@ public class App extends Application {
     }
     
     public static void main(String[] args) {
-        RepositoryFuncionario r = new RepositoryFuncionario();
-    /*    Funcionario f = r.buscarId(1);
-        
-        System.out.println("Nome: "+f.getNome());
-        System.out.println("Nome: "+f.getCpf());
-      */
-    
-      /*  List<Funcionario> fs = r.buscarTodos();
-        for(Funcionario f:fs){
-            System.out.println("Nome: "+f.getNome());
-            System.out.println("Login: "+f.getLogin());
-        }*/
-   /*   Funcionario f = new Funcionario();
-      f.setNome("Roberta");
-      f.setSobrenome("Rocha");
-      f.setCpf("12378945623");
-      f.setLogin("roberta123");
-      f.setSenha("123");
-      f.setIsPermissao(true);
-      f.setTelefone("123456789");
-      f.setTipoAcesso("funcionario");
-      r.salvar(f);
-    */
         launch(args);
     }
     

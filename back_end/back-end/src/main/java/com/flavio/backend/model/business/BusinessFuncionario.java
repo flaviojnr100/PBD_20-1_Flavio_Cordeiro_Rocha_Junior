@@ -68,32 +68,38 @@ public class BusinessFuncionario {
         
         return ResponseEntity.ok(funcionario);
     }
-    public ResponseEntity<Funcionario> buscarCpf(String cpf){
-        Funcionario f = dao.buscarCpf(cpf);
+    public List<Funcionario> buscarCpf(String cpf){
+        List<Funcionario> f = (List<Funcionario>) dao.buscarCpf(cpf);
         
         if(f == null){
             return null;
         }
-        f.setSenha(null);
-        return ResponseEntity.ok(f);
+        for(Funcionario f1:f){
+            f1.setSenha(null);
+        }
+        return f;
     }
-    public ResponseEntity<Funcionario> buscarNome(String nome){
-        Funcionario f = dao.buscarNome(nome);
+    public List<Funcionario> buscarNome(String nome){
+        List<Funcionario> f = (List<Funcionario>) dao.buscarNome(nome);
         
         if(f == null){
             return null;
         }
-        f.setSenha(null);
-        return ResponseEntity.ok(f);
+        for(Funcionario f1:f){
+            f1.setSenha(null);
+        }
+        return f;
     }
-    public ResponseEntity<Funcionario> buscarLogin(String login){
-        Funcionario f = dao.buscarLogin(login);
+    public List<Funcionario> buscarLogin(String login){
+       List<Funcionario> f = (List<Funcionario>) dao.buscarLogin(login);
         
         if(f == null){
             return null;
         }
-        f.setSenha(null);
-        return ResponseEntity.ok(f);
+        for(Funcionario f1:f){
+            f1.setSenha(null);
+        }
+        return f;
     }
    
 }

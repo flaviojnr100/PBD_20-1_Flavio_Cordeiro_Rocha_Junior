@@ -61,6 +61,7 @@ public class Controller {
     }
     
     @PostMapping("/funcionario")
+    
     public Funcionario salvar(@Validated Funcionario funcionario){
         return bf.salvar(funcionario);
     }
@@ -75,15 +76,15 @@ public class Controller {
     }
     
     @GetMapping("/funcionario/buscarCpf/{cpf}")
-    public ResponseEntity<Funcionario> buscarCpf(@PathVariable("cpf")String cpf){
+    public List<Funcionario> buscarCpf(@PathVariable("cpf")String cpf){
         return bf.buscarCpf(cpf);
     }
     @GetMapping("/funcionario/buscarNome/{nome}")
-    public ResponseEntity<Funcionario> buscarNome(@PathVariable("nome")String nome){
+    public List<Funcionario> buscarNome(@PathVariable("nome")String nome){
         return bf.buscarNome(nome);
     }
     @GetMapping("/funcionario/buscarLogin/{login}")
-    public ResponseEntity<Funcionario> buscarLogin(@PathVariable("login")String login){
+    public List<Funcionario> buscarLogin(@PathVariable("login")String login){
         return bf.buscarLogin(login);
     }
     

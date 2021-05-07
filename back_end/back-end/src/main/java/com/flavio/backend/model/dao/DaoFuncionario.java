@@ -26,4 +26,7 @@ public interface DaoFuncionario extends JpaRepository<Funcionario, Integer> {
     @Query(value = "select * from Funcionario f where f.login LIKE CONCAT('%',:login,'%')",nativeQuery = true)
     public List<Funcionario> buscarLogin(@Param("login") String nome);
     
+    @Query(value = "select f.* from Funcionario f where f.login = :login",nativeQuery = true)
+    public Funcionario autenticar(@Param("login")String login);
+    
 }

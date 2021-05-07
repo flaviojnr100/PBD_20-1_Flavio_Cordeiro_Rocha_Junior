@@ -9,10 +9,12 @@ import com.flavio.backend.model.business.BusinessCardapio;
 import com.flavio.backend.model.business.BusinessFuncionario;
 import com.flavio.backend.model.business.BusinessMesa;
 import com.flavio.backend.model.business.BusinessPedido;
+import com.flavio.backend.model.business.BusinessSenhaReset;
 import com.flavio.backend.model.object.Funcionario;
 import com.flavio.backend.model.object.ItemCardapio;
 import com.flavio.backend.model.object.Mesa;
 import com.flavio.backend.model.object.Pedido;
+import com.flavio.backend.model.object.SenhaReset;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +23,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,6 +52,9 @@ public class Controller {
     
     @Autowired
     BusinessPedido bp;
+    
+    @Autowired
+    BusinessSenhaReset bsr;
     
     @GetMapping("/funcionario")
     public List<Funcionario> buscarTodos(){
@@ -87,6 +93,16 @@ public class Controller {
     public List<Funcionario> buscarLogin(@PathVariable("login")String login){
         return bf.buscarLogin(login);
     }
+    @PostMapping("/funcionario/autenticar")
+    public Funcionario autenticar(@Validated String login, @Validated String senha){
+        return bf.autenticar(login, senha);
+    }
+    
+    @PostMapping("/funcionario/logout")
+    public Funcionario logout(@Validated String login){
+        return bf.logout(login);
+    }
+    
     
     @PostMapping("/cardapio")
     public ItemCardapio salvar(@Validated ItemCardapio item){
@@ -172,6 +188,20 @@ public class Controller {
     @GetMapping("/pedido/pendente")
     public List<Pedido> buscarPendente(){
         return bp.buscarPendente();
+    }
+    
+    @GetMapping("/senhaReset")
+    public List<SenhaReset> buscarTodosResets(){
+        return bsr.buscarTodos();
+    }
+    @PostMapping("/senhaReset")
+    public SenhaReset salvarReset(@Validated int id){
+        return bsr.salvar(id);
+    }
+    
+    @DeleteMapping("/senhaReset")
+    public void resetar(@Validated int id){
+        bsr.resetar(id);
     }
     
 }

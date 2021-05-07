@@ -7,6 +7,7 @@ package com.flavio.backend.model.business;
 
 import com.flavio.backend.model.dao.DaoFuncionario;
 import com.flavio.backend.model.object.Funcionario;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.BeanUtils;
@@ -100,6 +101,44 @@ public class BusinessFuncionario {
             f1.setSenha(null);
         }
         return f;
+    }
+    
+    public Funcionario autenticar(String login,String senha){
+        Funcionario funcionario = dao.autenticar(login);
+        
+        if(funcionario ==null){
+            return new Funcionario();
+        }
+        if(funcionario.getSenha().equals(senha) && funcionario.isIsPermissao() && !funcionario.isIsLogado()){
+            if(funcionario.isIsReset()){
+                funcionario.setIsReset(false);
+            }
+            funcionario.setUltimoAcesso(new Date());
+            funcionario.setIsLogado(true);
+            dao.save(funcionario);
+            return funcionario;
+        }else{
+             funcionario.setCpf(null);
+             funcionario.setSenha(null);
+             funcionario.setId(0);
+             funcionario.setTelefone(null);
+             funcionario.setTipoAcesso(null);
+             funcionario.setUltimoAcesso(null);
+             funcionario.setNome(null);
+             funcionario.setSobrenome(null);
+             
+               
+            return funcionario;
+            
+        }
+        
+        
+    }
+    public Funcionario logout(String login){
+        Funcionario funcionario = dao.autenticar(login);
+        funcionario.setIsLogado(false);
+        funcionario.setUltimoAcesso(new Date());
+        return dao.save(funcionario);
     }
    
 }

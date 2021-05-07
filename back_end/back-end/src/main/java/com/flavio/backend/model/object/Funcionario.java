@@ -6,13 +6,20 @@
 package com.flavio.backend.model.object;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,7 +50,9 @@ public class Funcionario implements Serializable {
     private String tipoAcesso;
     @Temporal(TemporalType.TIMESTAMP)
     private Date ultimoAcesso;
-
+    private boolean isReset;
+    private boolean isLogado;
+  
     public int getId() {
         return id;
     }
@@ -124,19 +133,37 @@ public class Funcionario implements Serializable {
         this.ultimoAcesso = ultimoAcesso;
     }
 
+    public boolean isIsReset() {
+        return isReset;
+    }
+
+    public void setIsReset(boolean isReset) {
+        this.isReset = isReset;
+    }
+
+    public boolean isIsLogado() {
+        return isLogado;
+    }
+
+    public void setIsLogado(boolean isLogado) {
+        this.isLogado = isLogado;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 17 * hash + this.id;
-        hash = 17 * hash + Objects.hashCode(this.nome);
-        hash = 17 * hash + Objects.hashCode(this.sobrenome);
-        hash = 17 * hash + Objects.hashCode(this.telefone);
-        hash = 17 * hash + Objects.hashCode(this.cpf);
-        hash = 17 * hash + Objects.hashCode(this.login);
-        hash = 17 * hash + Objects.hashCode(this.senha);
-        hash = 17 * hash + (this.isPermissao ? 1 : 0);
-        hash = 17 * hash + Objects.hashCode(this.tipoAcesso);
-        hash = 17 * hash + Objects.hashCode(this.ultimoAcesso);
+        int hash = 7;
+        hash = 31 * hash + this.id;
+        hash = 31 * hash + Objects.hashCode(this.nome);
+        hash = 31 * hash + Objects.hashCode(this.sobrenome);
+        hash = 31 * hash + Objects.hashCode(this.telefone);
+        hash = 31 * hash + Objects.hashCode(this.cpf);
+        hash = 31 * hash + Objects.hashCode(this.login);
+        hash = 31 * hash + Objects.hashCode(this.senha);
+        hash = 31 * hash + (this.isPermissao ? 1 : 0);
+        hash = 31 * hash + Objects.hashCode(this.tipoAcesso);
+        hash = 31 * hash + Objects.hashCode(this.ultimoAcesso);
+        hash = 31 * hash + (this.isReset ? 1 : 0);
+        hash = 31 * hash + (this.isLogado ? 1 : 0);
         return hash;
     }
 
@@ -156,6 +183,12 @@ public class Funcionario implements Serializable {
             return false;
         }
         if (this.isPermissao != other.isPermissao) {
+            return false;
+        }
+        if (this.isReset != other.isReset) {
+            return false;
+        }
+        if (this.isLogado != other.isLogado) {
             return false;
         }
         if (!Objects.equals(this.nome, other.nome)) {
@@ -184,6 +217,13 @@ public class Funcionario implements Serializable {
         }
         return true;
     }
+
+   
+
+ 
+   
+
+    
 
    
    

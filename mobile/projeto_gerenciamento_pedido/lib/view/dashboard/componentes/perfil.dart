@@ -29,10 +29,12 @@ class Perfil extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 10, left: 140, bottom: 50),
-          child: Text(
-            "Usuario",
-            style: TextStyle(fontSize: 40),
+          padding: const EdgeInsets.only(top: 10, bottom: 50),
+          child: Center(
+            child: Text(
+              "${Dashboard.repositoryFuncionario.funcionario.nome != null ? Dashboard.repositoryFuncionario.funcionario.nome : ""} ${Dashboard.repositoryFuncionario.funcionario.sobrenome != null ? Dashboard.repositoryFuncionario.funcionario.sobrenome : ""} ",
+              style: TextStyle(fontSize: 40),
+            ),
           ),
         ),
         Divider(
@@ -46,7 +48,9 @@ class Perfil extends StatelessWidget {
             height: mediaQuery.height * 0.1,
             color: Colors.white,
             child: FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed('editar');
+                },
                 child: Text(
                   "Editar informações",
                   style: TextStyle(fontSize: 30),
@@ -82,8 +86,7 @@ class Perfil extends StatelessWidget {
                                           .repositoryFuncionario.statusCode ==
                                       200) {
                                     Dashboard.repositoryFuncionario = null;
-                                    Navigator.pushReplacementNamed(
-                                        context, 'login');
+                                    Navigator.popAndPushNamed(context, "login");
                                   }
                                 });
                               },

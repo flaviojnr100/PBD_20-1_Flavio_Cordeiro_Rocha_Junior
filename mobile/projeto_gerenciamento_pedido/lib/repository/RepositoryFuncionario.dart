@@ -6,6 +6,7 @@ import 'package:projeto_gerenciamento_pedido/shared/urls.dart';
 class RepositoryFuncionario {
   int statusCode;
   Funcionario funcionario;
+  int id;
   static BaseOptions options = new BaseOptions(
       baseUrl: "${RepositoryUtils.URL}",
       connectTimeout: 5000,
@@ -34,6 +35,20 @@ class RepositoryFuncionario {
     FormData form = new FormData.fromMap(funcionario.toJson());
     Response response =
         await dio.put("${Urls.editar}/${funcionario.id}", data: form);
+    statusCode = response.statusCode;
+  }
+
+  Future buscarLoginUnico(String login) async {
+    FormData form = new FormData.fromMap({'login': login});
+    Response response = await dio.post("${Urls.buscarLoginUnico}", data: form);
+    statusCode = response.statusCode;
+
+    id = response.data['id'];
+  }
+
+  Future reset(int id) async {
+    FormData form = new FormData.fromMap({'id': id});
+    Response response = await dio.post("${Urls.reset}", data: form);
     statusCode = response.statusCode;
   }
 }

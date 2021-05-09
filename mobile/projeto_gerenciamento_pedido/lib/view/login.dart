@@ -95,7 +95,52 @@ class Login extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 15),
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        repositoryFuncionario
+                            .buscarLoginUnico(login.text)
+                            .whenComplete(() {
+                          print(repositoryFuncionario.statusCode);
+                          if (repositoryFuncionario.statusCode == 202) {
+                            repositoryFuncionario
+                                .reset(repositoryFuncionario.id);
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("Aviso"),
+                                    content: Text(
+                                        "Aguarde o administrador resetar a senha!"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Ok"),
+                                      ),
+                                    ],
+                                  );
+                                });
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("Aviso"),
+                                    content: Text(
+                                        "Não existe esse usuário na base de dados!"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Ok"),
+                                      ),
+                                    ],
+                                  );
+                                });
+                          }
+                        });
+                      },
                       child: Text(
                         "Esqueçeu a senha ?",
                         style: TextStyle(
@@ -118,6 +163,27 @@ class Login extends StatelessWidget {
                           repositoryFuncionario
                               .autenticar(login.text.trim(), senha.text.trim())
                               .whenComplete(() {
+                            if (repositoryFuncionario.funcionario != null &&
+                                repositoryFuncionario.funcionario.isReset ==
+                                    true) {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Aviso"),
+                                      content: Text(
+                                          "A senha desse usuário for resetado para o modo padrão!"),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Ok"),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            }
                             if (repositoryFuncionario.statusCode == 202 &&
                                 repositoryFuncionario.funcionario.senha !=
                                     null) {
@@ -132,8 +198,9 @@ class Login extends StatelessWidget {
 
                               Dashboard.repositoryFuncionario =
                                   repositoryFuncionario;
-                              Navigator.pushReplacementNamed(
-                                  context, 'dashboard');
+
+                              Navigator.of(context)
+                                  .popAndPushNamed('dashboard');
                             } else if (repositoryFuncionario.statusCode ==
                                 403) {
                               //usuario logado
@@ -176,7 +243,7 @@ class Login extends StatelessWidget {
                                     );
                                   });
                             } else if (repositoryFuncionario.statusCode ==
-                                500) {
+                                400) {
                               //usuario sem permissao
                               showDialog(
                                   context: context,
@@ -185,6 +252,26 @@ class Login extends StatelessWidget {
                                       title: Text("Aviso"),
                                       content: Text(
                                           "Usuário sem permissão de acessar o sistema!"),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Ok"),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            } else if (repositoryFuncionario.statusCode ==
+                                500) {
+                              //usuario nao cadastrado
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Aviso"),
+                                      content: Text(
+                                          "Usuário não cadastrado no sistema!"),
                                       actions: <Widget>[
                                         FlatButton(
                                           onPressed: () {

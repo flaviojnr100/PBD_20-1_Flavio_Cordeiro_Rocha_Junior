@@ -6,4 +6,7 @@ class Urls {
   static const String funcionarios = "${RepositoryUtils.URL}/funcionario";
   static const String logout = "${RepositoryUtils.URL}/funcionario/logout";
   static const String editar = "${RepositoryUtils.URL}/funcionario";
+  static const String buscarLoginUnico =
+      "${RepositoryUtils.URL}/funcionario/login";
+  static const String reset = "${RepositoryUtils.URL}/senhaReset";
 }

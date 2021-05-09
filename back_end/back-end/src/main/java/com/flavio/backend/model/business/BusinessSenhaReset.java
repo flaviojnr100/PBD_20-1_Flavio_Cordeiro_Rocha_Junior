@@ -39,6 +39,7 @@ public class BusinessSenhaReset {
             if(reset == null){
                 Funcionario f1 = funcionario.get();
                 f1.setIsPermissao(false);
+                daoF.save(f1);
                 senha.setFuncionario(f1);
                 senha.setData(new Date());
         
@@ -54,7 +55,7 @@ public class BusinessSenhaReset {
     }
     //retorna null
     public void resetar(int id){
-       SenhaReset reset = dao.findById(6);
+       SenhaReset reset = dao.findById(id);
        
        if(reset != null){
            Funcionario funcionario = reset.getFuncionario();
@@ -64,6 +65,16 @@ public class BusinessSenhaReset {
            daoF.save(funcionario);
            dao.delete(reset);
        }
+    }
+    
+    public SenhaReset buscarLogin(String login){
+        Funcionario f = daoF.findByLogin(login);
+        if(f==null){
+            return null;
+        }else{
+            f.setSenha(null);
+            return dao.findByFuncionario(f);
+        }
     }
     
 }

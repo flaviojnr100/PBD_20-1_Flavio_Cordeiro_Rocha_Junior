@@ -23,8 +23,8 @@ public interface DaoSenhaReset extends JpaRepository<SenhaReset, Long>{
     public SenhaReset findById(@Param("id")int id);
     
     public SenhaReset findByFuncionario(Funcionario funcionario);
-
-   
+    
+ 
     
 
 }

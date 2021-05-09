@@ -19,14 +19,20 @@ import org.springframework.data.repository.query.Param;
  */
 public interface DaoFuncionario extends JpaRepository<Funcionario, Integer> {
     
-    @Query(value = "select * from Funcionario f where f.cpf LIKE CONCAT('%',:cpf,'%')",nativeQuery = true)
+    @Query(value = "select * from Funcionario f where f.tipo_acesso = 'funcionario' and f.cpf LIKE CONCAT('%',:cpf,'%')",nativeQuery = true)
     public List<Funcionario> buscarCpf(@Param("cpf") String cpf);
-    @Query(value = "select * from Funcionario f where f.nome LIKE CONCAT('%',:nome,'%')",nativeQuery = true)
+    @Query(value = "select * from Funcionario f where f.tipo_acesso = 'funcionario' and f.nome LIKE CONCAT('%',:nome,'%')",nativeQuery = true)
     public List<Funcionario> buscarNome(@Param("nome") String nome);
-    @Query(value = "select * from Funcionario f where f.login LIKE CONCAT('%',:login,'%')",nativeQuery = true)
-    public List<Funcionario> buscarLogin(@Param("login") String nome);
+    @Query(value = "select * from Funcionario f where f.tipo_acesso = 'funcionario' and f.login LIKE CONCAT('%',:login,'%')",nativeQuery = true)
+    public List<Funcionario> buscarLogin(@Param("login") String login);
     
     @Query(value = "select f.* from Funcionario f where f.login = :login",nativeQuery = true)
     public Funcionario autenticar(@Param("login")String login);
+    
+    @Query(value = "select f from Funcionario f where f.tipoAcesso = 'funcionario'")
+    public List<Funcionario> findAll();
+    
+    @Query(value = "select f.* from Funcionario f where f.login = :login",nativeQuery = true)
+    public Funcionario findByLogin(@Param("login")String login);
     
 }

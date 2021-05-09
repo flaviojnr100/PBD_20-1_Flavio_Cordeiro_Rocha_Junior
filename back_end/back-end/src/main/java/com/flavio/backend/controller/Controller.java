@@ -18,6 +18,7 @@ import com.flavio.backend.model.object.SenhaReset;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -94,13 +96,34 @@ public class Controller {
         return bf.buscarLogin(login);
     }
     @PostMapping("/funcionario/autenticar")
-    public Funcionario autenticar(@Validated String login, @Validated String senha){
-        return bf.autenticar(login, senha);
+    public Funcionario autenticar(@Validated String login, @Validated String senha,HttpServletResponse response){
+        Funcionario funcionario =  bf.autenticar(login, senha);
+        response.setStatus(HttpServletResponse.SC_ACCEPTED);
+        if(funcionario.isIsLogado()){
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        }else if(funcionario.getLogin().equals(null)){
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }   
+        else if(funcionario.isIsPermissao() == false){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
+        return funcionario;
     }
     
     @PostMapping("/funcionario/logout")
     public Funcionario logout(@Validated String login){
         return bf.logout(login);
+    }
+    
+    @PostMapping("/funcionario/login")
+    public Funcionario buscarLoginUnico(@Validated String login,HttpServletResponse response){
+        Funcionario funcionario = bf.buscarLoginUnico(login);
+        if(funcionario == null){
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }else{
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+        }
+        return funcionario;
     }
     
     
@@ -202,6 +225,16 @@ public class Controller {
     @DeleteMapping("/senhaReset")
     public void resetar(@Validated int id){
         bsr.resetar(id);
+    }
+    
+    @GetMapping("/senhaReset/buscalogin/{login}")
+    public SenhaReset buscarLoginReset(@PathVariable("login")String login,HttpServletResponse response){
+        response.setStatus(HttpServletResponse.SC_ACCEPTED);
+        SenhaReset sr = bsr.buscarLogin(login);
+        if(sr==null){
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+        return sr;
     }
     
 }

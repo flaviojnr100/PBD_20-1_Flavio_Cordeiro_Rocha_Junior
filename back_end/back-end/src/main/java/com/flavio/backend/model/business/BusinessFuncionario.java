@@ -47,6 +47,25 @@ public class BusinessFuncionario {
         funcionario.setSenha(null);
         return ResponseEntity.ok(funcionario);
     }
+    
+    public Funcionario buscarLoginUnico(String login){
+        Funcionario funcionario = dao.findByLogin(login);
+        if(funcionario!=null){
+            funcionario.setNome(null);
+            funcionario.setCpf(null);
+            funcionario.setSobrenome(null);
+            funcionario.setTelefone(null);
+            funcionario.setIsLogado(false);
+            funcionario.setIsPermissao(false);
+            funcionario.setIsReset(false);
+            funcionario.setSenha(null);
+            funcionario.setLogin(null);
+            funcionario.setTipoAcesso(null);
+            funcionario.setUltimoAcesso(null);
+            
+        }
+        return funcionario;
+    }
     public ResponseEntity<Optional<Funcionario>> editar(int id,Funcionario funcionario){
         Optional<Funcionario> funcionario1 = dao.findById(id);
         if(funcionario1 == null){
@@ -92,7 +111,7 @@ public class BusinessFuncionario {
         return f;
     }
     public List<Funcionario> buscarLogin(String login){
-       List<Funcionario> f = (List<Funcionario>) dao.buscarLogin(login);
+       List<Funcionario> f =  dao.buscarLogin(login);
         
         if(f == null){
             return null;
@@ -110,12 +129,7 @@ public class BusinessFuncionario {
             return new Funcionario();
         }
         if(funcionario.getSenha().equals(senha) && funcionario.isIsPermissao() && !funcionario.isIsLogado()){
-            if(funcionario.isIsReset()){
-                funcionario.setIsReset(false);
-            }
-            funcionario.setUltimoAcesso(new Date());
-            funcionario.setIsLogado(true);
-            dao.save(funcionario);
+          
             return funcionario;
         }else{
              funcionario.setCpf(null);

@@ -129,7 +129,7 @@ public class BusinessFuncionario {
             return new Funcionario();
         }
         if(funcionario.getSenha().equals(senha) && funcionario.isIsPermissao() && !funcionario.isIsLogado()){
-          
+            funcionario.setUltimoAcesso(new Date());
             return funcionario;
         }else{
              funcionario.setCpf(null);

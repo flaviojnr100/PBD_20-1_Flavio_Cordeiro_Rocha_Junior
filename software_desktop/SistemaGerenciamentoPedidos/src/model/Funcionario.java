@@ -22,6 +22,8 @@ public class Funcionario {
     private boolean isPermissao;
     private String tipoAcesso;
     private Date ultimoAcesso;
+    private boolean isLogado;
+    private boolean isReset;
     
     public Funcionario(){
 }
@@ -104,6 +106,22 @@ public class Funcionario {
 
     public void setUltimoAcesso(Date ultimoAcesso) {
         this.ultimoAcesso = ultimoAcesso;
+    }
+
+    public boolean isIsLogado() {
+        return isLogado;
+    }
+
+    public void setIsLogado(boolean isLogado) {
+        this.isLogado = isLogado;
+    }
+
+    public boolean isIsReset() {
+        return isReset;
+    }
+
+    public void setIsReset(boolean isReset) {
+        this.isReset = isReset;
     }
     
     

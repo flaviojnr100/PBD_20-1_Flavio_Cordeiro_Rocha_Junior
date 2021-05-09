@@ -55,7 +55,7 @@
                         </Label>
                         <TextField fx:id="loginTxt" onKeyReleased="#keyReleasedEntrar" prefHeight="39.0" prefWidth="183.0" promptText="Login" styleClass="campoLogin" stylesheets="@style.css" GridPane.rowIndex="1" />
                         <PasswordField fx:id="senhaTxt" onKeyReleased="#keyReleasedEntrar" prefHeight="39.0" prefWidth="183.0" promptText="Senha" styleClass="campoLogin" stylesheets="@style.css" GridPane.rowIndex="2" />
-                        <Label fx:id="lblEsqueceu" onKeyReleased="#keyReleasedEntrar" text="Esqueçeu a senha ?" textFill="#1403ff" underline="true" GridPane.rowIndex="3">
+                        <Label fx:id="lblEsqueceu" onKeyReleased="#keyReleasedEntrar" onMouseClicked="#esqueceuSenha" text="Esqueçeu a senha ?" textFill="#1403ff" underline="true" GridPane.rowIndex="3">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

@@ -20,24 +20,13 @@ import java.util.logging.Logger;
 import model.Funcionario;
 import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
-import java.io.DataOutputStream;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.apache.http.Consts;
-import org.apache.http.HttpException;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
+import model.BaseDados;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 /**
  *
  * @author Flavio
@@ -107,7 +96,57 @@ public class RepositoryFuncionario {
         }
             return null;
     }
-    public void salvar(Funcionario funcionario){
+    public Funcionario autenticar(String login,String senha){
+        try {
+            URL url = new URL(this.url+"/autenticar");
+            Map<String,Object> params = new LinkedHashMap<>();
+            params.put("login", login);
+            params.put("senha", senha);
+            
+            StringBuilder postData = new StringBuilder();
+            for (Map.Entry<String,Object> param : params.entrySet()) {
+                if (postData.length() != 0) postData.append('&');
+                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+                postData.append('=');
+                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+            }
+            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.getOutputStream().write(postDataBytes);
+            BaseDados.setStatus(conn.getResponseCode());
+            System.out.println(""+conn.getResponseCode());
+            if(conn.getResponseCode() == 202){
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            String output = "";
+            String line;
+            
+            while((line = in.readLine()) != null){
+                output += line;
+            }
+            
+            
+            conn.disconnect();
+            
+            
+            Funcionario f = gson.fromJson(new String(output.getBytes()), Funcionario.class);
+            
+            return f;
+            }
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public boolean salvar(Funcionario funcionario){
         
         try {
             URL url = new URL(this.url);
@@ -120,6 +159,97 @@ public class RepositoryFuncionario {
             params.put("senha", funcionario.getSenha());
             params.put("isPermessao", funcionario.isIsPermissao());
             params.put("tipoAcesso", funcionario.getTipoAcesso());
+            params.put("isLogado", funcionario.isIsLogado());
+            params.put("isReset", funcionario.isIsReset());
+            
+            StringBuilder postData = new StringBuilder();
+            for (Map.Entry<String,Object> param : params.entrySet()) {
+                if (postData.length() != 0) postData.append('&');
+                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+                postData.append('=');
+                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+            }
+            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+            
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+            conn.setDoOutput(true);
+            conn.getOutputStream().write(postDataBytes);
+            
+            Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            if(conn.getResponseCode()==200){
+                return true;
+            }else{
+                return false;
+            }
+            
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean editar(int id,Funcionario funcionario){
+         try {
+            URL url = new URL(this.url+"/"+funcionario.getId());
+            Map<String,Object> params = new LinkedHashMap<>();
+            params.put("nome", funcionario.getNome());
+            params.put("sobrenome", funcionario.getSobrenome());
+            params.put("cpf", funcionario.getCpf());
+            params.put("telefone", funcionario.getTelefone());
+            params.put("login", funcionario.getLogin());
+            params.put("senha", funcionario.getSenha());
+            params.put("isPermissao", funcionario.isIsPermissao());
+            params.put("tipoAcesso", funcionario.getTipoAcesso());
+            params.put("isLogado", funcionario.isIsLogado());
+            params.put("isReset", funcionario.isIsReset());
+            //params.put("ultimoAcesso", funcionario.getUltimoAcesso());
+            
+            StringBuilder postData = new StringBuilder();
+            for (Map.Entry<String,Object> param : params.entrySet()) {
+                if (postData.length() != 0) postData.append('&');
+                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+                postData.append('=');
+                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+            }
+            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+            
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+            conn.setDoOutput(true);
+            conn.getOutputStream().write(postDataBytes);
+            
+            Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            if(conn.getResponseCode()==200){
+                return true;
+            }else{
+                return false;
+            }
+            
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    public void logout(String login){
+         try {
+            URL url = new URL(this.url+"/logout");
+            Map<String,Object> params = new LinkedHashMap<>();
+            
+            params.put("login", login);
+           
             
             StringBuilder postData = new StringBuilder();
             for (Map.Entry<String,Object> param : params.entrySet()) {
@@ -146,8 +276,8 @@ public class RepositoryFuncionario {
         } catch (IOException ex) {
             Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
-   
     
     public Funcionario alterarEstado(int id){
         try {
@@ -251,6 +381,60 @@ public class RepositoryFuncionario {
             return funcionarios;
             
         } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+     
+     
+      public Funcionario buscarLoginUnico(String login){
+        
+        try {
+            URL url = new URL(this.url+"/login");
+            Map<String,Object> params = new LinkedHashMap<>();
+            params.put("login", login);
+            
+            StringBuilder postData = new StringBuilder();
+            for (Map.Entry<String,Object> param : params.entrySet()) {
+                if (postData.length() != 0) postData.append('&');
+                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+                postData.append('=');
+                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+            }
+            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+            
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+            conn.setDoOutput(true);
+            conn.getOutputStream().write(postDataBytes);
+            BaseDados.setStatus(conn.getResponseCode());
+            if(conn.getResponseCode() == 202){
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            
+                String output = "";
+                String line;
+            
+                while((line = in.readLine()) != null){
+                    output += line;
+                }
+            
+            
+            
+                conn.disconnect();
+            
+            
+                Funcionario f = gson.fromJson(new String(output.getBytes()), Funcionario.class);
+            
+                return f;
+            }
+            
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);

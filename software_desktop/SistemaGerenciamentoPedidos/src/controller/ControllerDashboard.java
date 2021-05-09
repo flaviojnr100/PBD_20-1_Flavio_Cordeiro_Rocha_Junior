@@ -19,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
+import model.BaseDados;
 
 public class ControllerDashboard implements Initializable {
 
@@ -47,7 +49,7 @@ public class ControllerDashboard implements Initializable {
 
     @FXML
     void configuracao(ActionEvent event) {
-
+        acessarTela("Editar", "view/FXMLEditarFuncionario.fxml");
     }
 
     @FXML
@@ -76,7 +78,7 @@ public class ControllerDashboard implements Initializable {
             Stage stage = new Stage();
             stage.setTitle(nome);
             stage.setScene(scene);
-            stage.setResizable(true);
+            stage.setResizable(false);
             stage.initOwner((Stage) btnCardapio.getScene().getWindow());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
@@ -87,7 +89,7 @@ public class ControllerDashboard implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        
     }
 
 }

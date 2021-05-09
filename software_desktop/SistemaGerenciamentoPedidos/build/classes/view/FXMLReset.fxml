@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(118,226,244);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerReset">
+   <children>
+      <Pane layoutX="14.0" layoutY="131.0" prefHeight="252.0" prefWidth="570.0">
+         <children>
+            <TableView fx:id="tableReset" prefHeight="252.0" prefWidth="570.0" styleClass="table" stylesheets="@style.css">
+              <columns>
+                <TableColumn fx:id="colId" prefWidth="54.4000244140625" text="Código" />
+                <TableColumn fx:id="colNome" prefWidth="96.0" text="Nome" />
+                  <TableColumn fx:id="colSobrenome" prefWidth="122.4000244140625" text="Sobrenome" />
+                  <TableColumn fx:id="colLogin" prefWidth="138.39996337890625" text="Login" />
+                  <TableColumn fx:id="colData" prefWidth="158.4000244140625" text="Data" />
+              </columns>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#resetar" text="Reset" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+         </children>
+      </Pane>
+      <Pane layoutX="30.0" layoutY="21.0" prefHeight="95.0" prefWidth="538.0">
+         <children>
+            <TextField fx:id="buscaTxt" layoutX="23.0" layoutY="35.0" onKeyReleased="#keyPressed" prefHeight="27.0" prefWidth="416.0" promptText="Digite o nome de login" styleClass="campoTexto" stylesheets="@style.css" />
+            <Button fx:id="btnBusca" layoutX="463.0" layoutY="35.0" mnemonicParsing="false" onAction="#buscar" style="-fx-border-color: black; -fx-border-radius: 10px;" styleClass="botaoMesa" stylesheets="@style.css" text="Buscar">
+               <font>
+                  <Font name="Century Gothic" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

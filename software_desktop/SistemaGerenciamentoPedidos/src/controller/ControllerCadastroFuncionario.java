@@ -1,17 +1,28 @@
 package controller;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import javax.swing.JOptionPane;
 import model.BaseDados;
 import model.Funcionario;
 
-public class ControllerCadastroFuncionario {
+public class ControllerCadastroFuncionario implements Initializable {
 
     @FXML
     private TextField nomeTxt;
@@ -36,10 +47,29 @@ public class ControllerCadastroFuncionario {
 
     @FXML
     private Button btnCancelar;
+    
+    @FXML
+    private Label lblTipo;
+
+    @FXML
+    private ComboBox<?> comboTipo;
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
+            String [] tipos = {"gerente","funcionario"};
+            ObservableList items = FXCollections.observableArrayList(tipos);
+            comboTipo.setItems(items);
+            lblTipo.setVisible(true);
+            comboTipo.setVisible(true);
+        }
+        
+    }
 
     @FXML
     void cancelar(ActionEvent event) {
         Stage stage = (Stage) btnCancelar.getScene().getWindow();
+        stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         stage.close();
     }
 
@@ -59,12 +89,25 @@ public class ControllerCadastroFuncionario {
         funcionario.setTelefone(telefoneTxt.getText());
         funcionario.setLogin(loginTxt.getText());
         funcionario.setSenha(senhaTxt.getText());
-        funcionario.setTipoAcesso("funcionario");
         funcionario.setIsPermissao(true);
+        if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
+            funcionario.setTipoAcesso((String) comboTipo.getSelectionModel().getSelectedItem());
+        }else{
+            funcionario.setTipoAcesso("funcionario");
+        }
         
-        BaseDados.getRepositoryFuncionario().salvar(funcionario);
-        btnCancelar.fire();
         
+        if(JOptionPane.showConfirmDialog(null, "Deseja salvar o registro ?","Aviso",JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION){
+            if(BaseDados.getRepositoryFuncionario().salvar(funcionario)){
+                JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
+                BaseDados.atualizarFuncionarios();
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro, contate o administrador!","Aviso",JOptionPane.YES_OPTION);
+            }
+            btnCancelar.fire();
+        }
     }
+
+
 
 }

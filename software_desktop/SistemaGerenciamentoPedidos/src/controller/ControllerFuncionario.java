@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +24,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.BaseDados;
 import model.Funcionario;
 import repository.RepositoryFuncionario;
@@ -72,6 +74,9 @@ public class ControllerFuncionario implements Initializable {
     private Button btnAdicionar;
     
     @FXML
+    private Button btnReset;
+    
+    @FXML
     void adicionarFuncionario(ActionEvent event) {
          try {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLCadastrarFuncionario.fxml"));
@@ -79,9 +84,15 @@ public class ControllerFuncionario implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Funcionário");
             stage.setScene(scene);
-            stage.setResizable(true);
+            stage.setResizable(false);
             stage.initOwner((Stage) btnAdicionar.getScene().getWindow());
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    atualizar();
+                }
+            });
             stage.showAndWait();
         } catch (IOException ex) {
             Logger.getLogger(ControllerDashboard.class.getName()).log(Level.SEVERE, null, ex);
@@ -120,7 +131,7 @@ public class ControllerFuncionario implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Informações");
             stage.setScene(scene);
-            stage.setResizable(true);
+            stage.setResizable(false);
             stage.initOwner((Stage) btnAdicionar.getScene().getWindow());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
@@ -131,6 +142,9 @@ public class ControllerFuncionario implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
+            btnReset.setVisible(true);
+        }
         BaseDados.atualizarFuncionarios();
         atualizar();
     }
@@ -158,6 +172,24 @@ public class ControllerFuncionario implements Initializable {
             atualizar();
          }
         
+    }
+    
+    @FXML
+    void reset(ActionEvent event) {
+         try {
+            ControllerInformacoesFuncionario.setFuncionario(tableFuncionario.getSelectionModel().getSelectedItem());
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLReset.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Reset");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initOwner((Stage) btnAdicionar.getScene().getWindow());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

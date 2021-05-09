@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="584.0" prefWidth="1037.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerDashboard">
+<AnchorPane id="AnchorPane" prefHeight="584.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerDashboard">
    <children>
       <HBox layoutX="-1.0" prefHeight="584.0" prefWidth="1038.0">
          <children>
@@ -107,7 +107,7 @@
                      </cursor></Button>
                </children>
             </Pane>
-            <Pane prefHeight="536.0" prefWidth="649.0" style="-fx-background-color: white;">
+            <Pane prefHeight="555.0" prefWidth="623.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fitHeight="221.0" fitWidth="659.0" layoutX="75.0" layoutY="-41.0" pickOnBounds="true" preserveRatio="true">
                      <image>

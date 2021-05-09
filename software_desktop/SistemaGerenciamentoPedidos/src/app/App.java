@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Funcionario;
 import model.Mesa;
+import model.SenhaReset;
 import repository.RepositoryFuncionario;
+import repository.RepositoryReset;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,7 +28,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLDashBoard.fxml"));
+        Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLLogin.fxml"));
         Scene scene = new Scene(login);
         primaryStage.setScene(scene);
         primaryStage.show();

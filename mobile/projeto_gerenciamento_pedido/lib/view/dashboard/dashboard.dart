@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_gerenciamento_pedido/repository/RepositoryFuncionario.dart';
 import 'package:projeto_gerenciamento_pedido/view/dashboard/componentes/inicio.dart';
 import 'package:projeto_gerenciamento_pedido/view/dashboard/componentes/pedido.dart';
 import 'package:projeto_gerenciamento_pedido/view/dashboard/componentes/perfil.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key key}) : super(key: key);
+  static RepositoryFuncionario repositoryFuncionario;
 
   @override
   _DashboardState createState() => _DashboardState();

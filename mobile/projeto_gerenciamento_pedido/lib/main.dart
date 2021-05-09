@@ -8,6 +8,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Map<String, WidgetBuilder> rotas = {
+      'dashboard': (_) => Dashboard(),
+      'login': (_) => Login()
+    };
     return MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
@@ -23,6 +27,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: Dashboard());
+        routes: rotas,
+        home: Login());
   }
 }

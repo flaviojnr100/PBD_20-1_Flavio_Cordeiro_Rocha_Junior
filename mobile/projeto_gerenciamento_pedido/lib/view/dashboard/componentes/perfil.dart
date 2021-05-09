@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_gerenciamento_pedido/repository/RepositoryFuncionario.dart';
+import 'package:projeto_gerenciamento_pedido/view/dashboard/dashboard.dart';
 
 class Perfil extends StatelessWidget {
   const Perfil({Key key}) : super(key: key);
@@ -62,7 +64,41 @@ class Perfil extends StatelessWidget {
             height: mediaQuery.height * 0.1,
             color: Colors.white,
             child: FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("Aviso"),
+                          content: Text("Deseja sair do sistema ?"),
+                          actions: <Widget>[
+                            FlatButton(
+                              onPressed: () {
+                                Dashboard.repositoryFuncionario
+                                    .logout(Dashboard.repositoryFuncionario
+                                        .funcionario.login)
+                                    .whenComplete(() {
+                                  if (Dashboard
+                                          .repositoryFuncionario.statusCode ==
+                                      200) {
+                                    Dashboard.repositoryFuncionario = null;
+                                    Navigator.pushReplacementNamed(
+                                        context, 'login');
+                                  }
+                                });
+                              },
+                              child: Text("Sim"),
+                            ),
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("Não"),
+                            ),
+                          ],
+                        );
+                      });
+                },
                 child: Text(
                   "Encerrar sessão",
                   style: TextStyle(fontSize: 30),

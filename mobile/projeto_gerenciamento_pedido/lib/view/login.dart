@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:projeto_gerenciamento_pedido/repository/RepositoryFuncionario.dart';
+import 'package:projeto_gerenciamento_pedido/view/dashboard/dashboard.dart';
 
 class Login extends StatelessWidget {
   Login({Key key}) : super(key: key);
   TextEditingController login = TextEditingController();
   TextEditingController senha = TextEditingController();
+  RepositoryFuncionario repositoryFuncionario = new RepositoryFuncionario();
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +114,90 @@ class Login extends StatelessWidget {
                           color: Color.fromRGBO(129, 126, 240, 0.8),
                           borderRadius: BorderRadius.all(Radius.circular(30))),
                       child: FlatButton(
-                        onPressed: () => {},
+                        onPressed: () => {
+                          repositoryFuncionario
+                              .autenticar(login.text.trim(), senha.text.trim())
+                              .whenComplete(() {
+                            if (repositoryFuncionario.statusCode == 202 &&
+                                repositoryFuncionario.funcionario.senha !=
+                                    null) {
+                              repositoryFuncionario.funcionario.isLogado = true;
+                              if (repositoryFuncionario.funcionario.isReset) {
+                                repositoryFuncionario.funcionario.isReset =
+                                    false;
+                              }
+
+                              repositoryFuncionario
+                                  .editar(repositoryFuncionario.funcionario);
+
+                              Dashboard.repositoryFuncionario =
+                                  repositoryFuncionario;
+                              Navigator.pushReplacementNamed(
+                                  context, 'dashboard');
+                            } else if (repositoryFuncionario.statusCode ==
+                                403) {
+                              //usuario logado
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Aviso"),
+                                      content: Text(
+                                          "Esse usuário já esta logado no sistema!"),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Ok"),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            } else if (repositoryFuncionario.statusCode ==
+                                    202 &&
+                                repositoryFuncionario.funcionario.senha ==
+                                    null) {
+                              //usuario invalido
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Aviso"),
+                                      content: Text("Usuário invalido!"),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Ok"),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            } else if (repositoryFuncionario.statusCode ==
+                                500) {
+                              //usuario sem permissao
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Aviso"),
+                                      content: Text(
+                                          "Usuário sem permissão de acessar o sistema!"),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Ok"),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            }
+                          })
+                        },
                         child: Text(
                           "Entrar",
                           style: TextStyle(fontSize: 22, color: Colors.white),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:projeto_gerenciamento_pedido/main.dart';
 import 'package:projeto_gerenciamento_pedido/repository/RepositoryFuncionario.dart';
 import 'package:projeto_gerenciamento_pedido/view/dashboard/dashboard.dart';
 
@@ -198,9 +199,10 @@ class Login extends StatelessWidget {
 
                               Dashboard.repositoryFuncionario =
                                   repositoryFuncionario;
-
-                              Navigator.of(context)
-                                  .popAndPushNamed('dashboard');
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) => Dashboard()),
+                                  (Route<dynamic> route) => false);
                             } else if (repositoryFuncionario.statusCode ==
                                 403) {
                               //usuario logado

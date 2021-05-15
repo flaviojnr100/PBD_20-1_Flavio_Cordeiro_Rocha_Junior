@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javax.swing.JOptionPane;
 import model.BaseDados;
+import model.Criptografia;
 import model.Funcionario;
 
 public class ControllerCadastroFuncionario implements Initializable {
@@ -62,6 +63,7 @@ public class ControllerCadastroFuncionario implements Initializable {
             comboTipo.setItems(items);
             lblTipo.setVisible(true);
             comboTipo.setVisible(true);
+            Criptografia.getMd();
         }
         
     }
@@ -88,7 +90,7 @@ public class ControllerCadastroFuncionario implements Initializable {
         funcionario.setCpf(cpfTxt.getText());
         funcionario.setTelefone(telefoneTxt.getText());
         funcionario.setLogin(loginTxt.getText());
-        funcionario.setSenha(senhaTxt.getText());
+        funcionario.setSenha(Criptografia.criptografar(senhaTxt.getText()));
         funcionario.setIsPermissao(true);
         if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
             funcionario.setTipoAcesso((String) comboTipo.getSelectionModel().getSelectedItem());

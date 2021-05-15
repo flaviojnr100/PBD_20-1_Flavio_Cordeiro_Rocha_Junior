@@ -218,7 +218,8 @@ public class Controller {
         return bsr.buscarTodos();
     }
     @PostMapping("/senhaReset")
-    public SenhaReset salvarReset(@Validated int id){
+    public SenhaReset salvarReset(@Validated int id,HttpServletResponse response){
+        response.setStatus(HttpServletResponse.SC_ACCEPTED);
         return bsr.salvar(id);
     }
     

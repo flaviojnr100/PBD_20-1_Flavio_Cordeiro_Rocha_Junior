@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_gerenciamento_pedido/view/dashboard/dashboard.dart';
 
@@ -243,7 +246,11 @@ class EditarPerfil extends StatelessWidget {
                                     Dashboard.repositoryFuncionario.funcionario
                                         .login = loginC.text;
                                     Dashboard.repositoryFuncionario.funcionario
-                                        .senha = senhaC.text;
+                                            .senha =
+                                        md5
+                                            .convert(utf8.encode(senhaC.text))
+                                            .toString()
+                                            .toUpperCase();
                                     Dashboard.repositoryFuncionario
                                         .editar(Dashboard
                                             .repositoryFuncionario.funcionario)

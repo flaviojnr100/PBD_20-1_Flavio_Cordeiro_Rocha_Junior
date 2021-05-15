@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projeto_gerenciamento_pedido/main.dart';
@@ -162,7 +165,12 @@ class Login extends StatelessWidget {
                       child: FlatButton(
                         onPressed: () => {
                           repositoryFuncionario
-                              .autenticar(login.text.trim(), senha.text.trim())
+                              .autenticar(
+                                  login.text.trim(),
+                                  md5
+                                      .convert(utf8.encode(senha.text))
+                                      .toString()
+                                      .toUpperCase())
                               .whenComplete(() {
                             if (repositoryFuncionario.funcionario != null &&
                                 repositoryFuncionario.funcionario.isReset ==

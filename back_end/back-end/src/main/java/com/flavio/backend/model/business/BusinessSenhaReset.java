@@ -7,6 +7,7 @@ package com.flavio.backend.model.business;
 
 import com.flavio.backend.model.dao.DaoFuncionario;
 import com.flavio.backend.model.dao.DaoSenhaReset;
+import com.flavio.backend.model.object.Criptografia;
 import com.flavio.backend.model.object.Funcionario;
 import com.flavio.backend.model.object.SenhaReset;
 import java.util.Date;
@@ -56,10 +57,10 @@ public class BusinessSenhaReset {
     //retorna null
     public void resetar(int id){
        SenhaReset reset = dao.findById(id);
-       
+        Criptografia.getMd();
        if(reset != null){
            Funcionario funcionario = reset.getFuncionario();
-           funcionario.setSenha(funcionario.getCpf());
+           funcionario.setSenha(Criptografia.criptografar(funcionario.getCpf()));
            funcionario.setIsPermissao(true);
            funcionario.setIsReset(true);
            daoF.save(funcionario);

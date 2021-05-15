@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javax.swing.JOptionPane;
 import model.BaseDados;
+import model.Criptografia;
 
 public class ControllerLogin {
 
@@ -39,10 +40,11 @@ public class ControllerLogin {
     
     @FXML
     void Entrar(ActionEvent event) {
+        Criptografia.getMd();
         String nome,senha;
         nome =  loginTxt.getText();
         senha = senhaTxt.getText();
-        BaseDados.setAutenticado(BaseDados.getRepositoryFuncionario().autenticar(nome, senha));
+        BaseDados.setAutenticado(BaseDados.getRepositoryFuncionario().autenticar(nome, Criptografia.criptografar(senha)));
         if(BaseDados.getStatus() == 202){
             if((BaseDados.getAutenticado().getTipoAcesso().equals("gerente") || BaseDados.getAutenticado().getTipoAcesso().equals("superusuario"))){
             try {

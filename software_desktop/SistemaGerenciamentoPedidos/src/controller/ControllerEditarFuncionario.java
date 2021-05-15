@@ -13,6 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import model.BaseDados;
+import model.Criptografia;
 
 public class ControllerEditarFuncionario implements Initializable{
 
@@ -48,13 +49,14 @@ public class ControllerEditarFuncionario implements Initializable{
 
     @FXML
     void editar(ActionEvent event) {
+        Criptografia.getMd();
         if(JOptionPane.showConfirmDialog(null, "Deseja editar o registro ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             BaseDados.getAutenticado().setNome(nomeTxt.getText());
             BaseDados.getAutenticado().setSobrenome(sobrenomeTxt.getText());
             BaseDados.getAutenticado().setTelefone(telefoneTxt.getText());
             BaseDados.getAutenticado().setCpf(cpfTxt.getText());
             BaseDados.getAutenticado().setLogin(loginTxt.getText());
-            BaseDados.getAutenticado().setSenha(senhaTxt.getText());
+            BaseDados.getAutenticado().setSenha(Criptografia.criptografar(senhaTxt.getText()));
             if(BaseDados.getRepositoryFuncionario().editar(BaseDados.getAutenticado().getId(), BaseDados.getAutenticado())){
                 JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
                 btnCancelar.fire();

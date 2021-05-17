@@ -7,5 +7,5 @@ main(List<String> args) {
   //RepositoryFuncionario rf = new RepositoryFuncionario();
   /// rf.autenticar("flavio123", "123");
   //print(rf.statusCode);
-  // print(md5.convert(utf8.encode("123")).toString().toUpperCase());
+  print(md5.convert(utf8.encode("adm")).toString().toUpperCase());
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projeto_gerenciamento_pedido/view/EditarPerfil.dart';
 import 'package:projeto_gerenciamento_pedido/view/dashboard/dashboard.dart';
 import 'package:projeto_gerenciamento_pedido/view/login.dart';
+import 'package:projeto_gerenciamento_pedido/view/pedido/EditarPedido.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
     Map<String, WidgetBuilder> rotas = {
       'dashboard': (context) => Dashboard(),
       'login': (context) => Login(),
-      'editar': (context) => EditarPerfil()
+      'editar': (context) => EditarPerfil(),
+      'pedido': (context) => EditarPedido()
     };
     return MaterialApp(
       title: 'Flutter Demo',

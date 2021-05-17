@@ -2,6 +2,7 @@ package controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -90,8 +91,9 @@ public class ControllerCadastroFuncionario implements Initializable {
         funcionario.setCpf(cpfTxt.getText());
         funcionario.setTelefone(telefoneTxt.getText());
         funcionario.setLogin(loginTxt.getText());
-        funcionario.setSenha(Criptografia.criptografar(senhaTxt.getText()));
+        funcionario.setSenha(senhaTxt.getText());
         funcionario.setIsPermissao(true);
+        funcionario.setUltimoAcesso(new Date());
         if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
             funcionario.setTipoAcesso((String) comboTipo.getSelectionModel().getSelectedItem());
         }else{
@@ -100,13 +102,20 @@ public class ControllerCadastroFuncionario implements Initializable {
         
         
         if(JOptionPane.showConfirmDialog(null, "Deseja salvar o registro ?","Aviso",JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION){
-            if(BaseDados.getRepositoryFuncionario().salvar(funcionario)){
-                JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
-                BaseDados.atualizarFuncionarios();
-            }else{
-                JOptionPane.showMessageDialog(null, "Erro, contate o administrador!","Aviso",JOptionPane.YES_OPTION);
+            if(Criptografia.validarSenha(funcionario.getSenha())){
+                funcionario.setSenha(Criptografia.criptografar(senhaTxt.getText()));
+                if(BaseDados.getRepositoryFuncionario().salvar(funcionario)){
+                    JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
+                    if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
+                        BaseDados.atualizarFuncionariosSU();
+                    }else{
+                        BaseDados.atualizarFuncionarios();
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Erro, contate o administrador!","Aviso",JOptionPane.YES_OPTION);
+                }
+                btnCancelar.fire();
             }
-            btnCancelar.fire();
         }
     }
 

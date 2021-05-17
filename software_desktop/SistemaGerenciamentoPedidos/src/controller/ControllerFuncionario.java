@@ -102,24 +102,41 @@ public class ControllerFuncionario implements Initializable {
     @FXML
     void mudarAcesso(ActionEvent event) {
         BaseDados.getRepositoryFuncionario().alterarEstado(tableFuncionario.getSelectionModel().getSelectedItem().getId());
-        BaseDados.atualizarFuncionarios();
+        if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
+            BaseDados.atualizarFuncionariosSU();
+        }else{
+            BaseDados.atualizarFuncionarios();
+        }
         atualizar();
     }
 
     @FXML
     void pesquisar(ActionEvent event) {
         
-        if(rbtNome.isSelected()){
-            BaseDados.atualizarFuncionariosNome(buscaTxt.getText());
-            atualizar();
-        }else if(rbtCpf.isSelected()){
-            BaseDados.atualizarFuncionariosCpf(buscaTxt.getText());
-            atualizar();
-        }else if(rbtLogin.isSelected()){
-            BaseDados.atualizarFuncionariosLogin(buscaTxt.getText());
-            atualizar();
+        if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
+            if(rbtNome.isSelected()){
+                BaseDados.atualizarFuncionariosNomeSU(buscaTxt.getText());
+                atualizar();
+            }else if(rbtCpf.isSelected()){
+                BaseDados.atualizarFuncionariosCpfSU(buscaTxt.getText());
+                atualizar();
+            }else if(rbtLogin.isSelected()){
+                BaseDados.atualizarFuncionariosLoginSU(buscaTxt.getText());
+                atualizar();
+            }
+        }else{
+        
+            if(rbtNome.isSelected()){
+                BaseDados.atualizarFuncionariosNome(buscaTxt.getText());
+                atualizar();
+            }else if(rbtCpf.isSelected()){
+                BaseDados.atualizarFuncionariosCpf(buscaTxt.getText());
+                atualizar();
+            }else if(rbtLogin.isSelected()){
+                BaseDados.atualizarFuncionariosLogin(buscaTxt.getText());atualizar();
+            }
         }
-
+        
     }
 
     @FXML
@@ -144,8 +161,11 @@ public class ControllerFuncionario implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
             btnReset.setVisible(true);
+            BaseDados.atualizarFuncionariosSU();
+        }else{
+            BaseDados.atualizarFuncionarios();
         }
-        BaseDados.atualizarFuncionarios();
+        
         atualizar();
     }
     
@@ -168,7 +188,11 @@ public class ControllerFuncionario implements Initializable {
         
         if(KeyCode.BACK_SPACE == event.getCode() || KeyCode.DELETE == event.getCode()){
             buscaTxt.setText("");
-            BaseDados.atualizarFuncionarios();
+            if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
+                BaseDados.atualizarFuncionariosSU();
+            }else{
+                BaseDados.atualizarFuncionarios();
+            }
             atualizar();
          }
         

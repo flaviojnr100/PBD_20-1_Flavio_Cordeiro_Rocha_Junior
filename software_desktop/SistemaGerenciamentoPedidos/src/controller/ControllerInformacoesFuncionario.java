@@ -63,8 +63,13 @@ public class ControllerInformacoesFuncionario implements Initializable {
         lblCpf.setText(funcionario.getCpf());
         lblTelefone.setText(funcionario.getTelefone());
         lblLogin.setText(funcionario.getLogin());
-      //  SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-       // lblAcesso.setText(sdf.format(funcionario.getUltimoAcesso()));
+        if(funcionario.getUltimoAcesso() != null){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+            lblAcesso.setText(sdf.format(funcionario.getUltimoAcesso()));
+        }else{
+            lblAcesso.setText("Nenhum");
+        }
+
     }
 
 }

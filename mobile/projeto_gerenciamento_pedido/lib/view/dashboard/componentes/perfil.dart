@@ -173,8 +173,11 @@ class Perfil extends StatelessWidget {
                                   width:
                                       MediaQuery.of(context).size.height * 0.2,
                                   decoration: BoxDecoration(
-                                    color: Color.fromRGBO(129, 126, 240, 0.8),
-                                  ),
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: Color.fromRGBO(
+                                              129, 126, 240, 0.8),
+                                          width: 1)),
                                   child: FlatButton(
                                       onPressed: () {
                                         Navigator.pop(context);
@@ -182,7 +185,9 @@ class Perfil extends StatelessWidget {
                                       child: Text(
                                         "Não",
                                         style: TextStyle(
-                                            fontSize: 20, color: Colors.white),
+                                            fontSize: 20,
+                                            color: Color.fromRGBO(
+                                                129, 126, 240, 0.8)),
                                       ))),
                             )
                           ],

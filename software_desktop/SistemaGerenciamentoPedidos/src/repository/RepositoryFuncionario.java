@@ -33,6 +33,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
  */
 public class RepositoryFuncionario {
     private String url = RepositoryUtil.url+"/funcionario";
+    private String urlSU = RepositoryUtil.url+"/funcionarioSU";
     private Gson gson;
     private final DefaultHttpClient client = new DefaultHttpClient();
 
@@ -70,6 +71,37 @@ public class RepositoryFuncionario {
         try {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+            
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String output = "";
+            String line;
+            
+            while((line = br.readLine()) != null){
+                output += line;
+            }
+            
+            conn.disconnect();
+
+            Type listType = new TypeToken<ArrayList<Funcionario>>(){}.getType();
+            List<Funcionario> funcionarios = gson.fromJson(output, listType);
+            return funcionarios;
+        
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ProtocolException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return null;
+    }
+    
+        public List<Funcionario> buscarTodosSU(){
+        try {
+            
+            HttpURLConnection conn = (HttpURLConnection) new URL(urlSU).openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
             
@@ -157,10 +189,11 @@ public class RepositoryFuncionario {
             params.put("telefone", funcionario.getTelefone());
             params.put("login", funcionario.getLogin());
             params.put("senha", funcionario.getSenha());
-            params.put("isPermessao", funcionario.isIsPermissao());
+            params.put("isPermissao", funcionario.isIsPermissao());
             params.put("tipoAcesso", funcionario.getTipoAcesso());
             params.put("isLogado", funcionario.isIsLogado());
             params.put("isReset", funcionario.isIsReset());
+            
             
             StringBuilder postData = new StringBuilder();
             for (Map.Entry<String,Object> param : params.entrySet()) {
@@ -333,6 +366,34 @@ public class RepositoryFuncionario {
         }
         return null;
     }
+    
+    public List<Funcionario> buscarNomeSU(String nome){
+        try {
+            URL url = new URL(this.urlSU+"/buscarNome/"+nome);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setRequestProperty("Accept", "application/json");
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            String output = "";
+            String line;
+            
+            while((line = br.readLine()) != null){
+                output += line;
+            }
+            
+            httpURLConnection.disconnect();
+            
+            Type listType = new TypeToken<ArrayList<Funcionario>>(){}.getType();
+            List<Funcionario> funcionarios = gson.fromJson(output, listType);
+            return funcionarios;
+            
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public List<Funcionario> buscarCpf(String cpf){
         try {
             URL url = new URL(this.url+"/buscarCpf/"+cpf);
@@ -360,9 +421,63 @@ public class RepositoryFuncionario {
         }
         return null;
     }
+    public List<Funcionario> buscarCpfSU(String cpf){
+        try {
+            URL url = new URL(this.urlSU+"/buscarCpf/"+cpf);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setRequestProperty("Accept", "application/json");
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            String output = "";
+            String line;
+            
+            while((line = br.readLine()) != null){
+                output += line;
+            }
+            
+            httpURLConnection.disconnect();
+            
+            Type listType = new TypeToken<ArrayList<Funcionario>>(){}.getType();
+            List<Funcionario> funcionarios = gson.fromJson(output, listType);
+            return funcionarios;
+            
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
      public List<Funcionario> buscarLogin(String login){
         try {
             URL url = new URL(this.url+"/buscarLogin/"+login);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setRequestProperty("Accept", "application/json");
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            String output = "";
+            String line;
+            
+            while((line = br.readLine()) != null){
+                output += line;
+            }
+            
+            httpURLConnection.disconnect();
+            
+            Type listType = new TypeToken<ArrayList<Funcionario>>(){}.getType();
+            List<Funcionario> funcionarios = gson.fromJson(output, listType);
+            return funcionarios;
+            
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+     public List<Funcionario> buscarLoginSU(String login){
+        try {
+            URL url = new URL(this.urlSU+"/buscarLogin/"+login);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setRequestProperty("Accept", "application/json");

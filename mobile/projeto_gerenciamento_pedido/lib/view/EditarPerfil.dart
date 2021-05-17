@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_gerenciamento_pedido/model/Validador.dart';
 import 'package:projeto_gerenciamento_pedido/view/dashboard/dashboard.dart';
 
 class EditarPerfil extends StatelessWidget {
@@ -235,29 +236,80 @@ class EditarPerfil extends StatelessWidget {
                               FlatButton(
                                 onPressed: () {
                                   if (senhaC.text == senhaDC.text) {
-                                    Dashboard.repositoryFuncionario.funcionario
-                                        .nome = nomeC.text;
-                                    Dashboard.repositoryFuncionario.funcionario
-                                        .sobrenome = sobrenomeC.text;
-                                    Dashboard.repositoryFuncionario.funcionario
-                                        .telefone = telefoneC.text;
-                                    Dashboard.repositoryFuncionario.funcionario
-                                        .cpf = cpfC.text;
-                                    Dashboard.repositoryFuncionario.funcionario
-                                        .login = loginC.text;
-                                    Dashboard.repositoryFuncionario.funcionario
-                                            .senha =
-                                        md5
-                                            .convert(utf8.encode(senhaC.text))
-                                            .toString()
-                                            .toUpperCase();
-                                    Dashboard.repositoryFuncionario
-                                        .editar(Dashboard
-                                            .repositoryFuncionario.funcionario)
-                                        .whenComplete(() {
-                                      Navigator.pop(context);
-                                      Navigator.pop(context);
-                                    });
+                                    if (senhaC.text.length >= 6 &&
+                                        senhaC.text.length <= 11) {
+                                      if (Validador.verificarLetras(
+                                              senhaC.text) &&
+                                          Validador.verificarNumero(
+                                              senhaC.text)) {
+                                        Dashboard.repositoryFuncionario
+                                            .funcionario.nome = nomeC.text;
+                                        Dashboard
+                                            .repositoryFuncionario
+                                            .funcionario
+                                            .sobrenome = sobrenomeC.text;
+                                        Dashboard
+                                            .repositoryFuncionario
+                                            .funcionario
+                                            .telefone = telefoneC.text;
+                                        Dashboard.repositoryFuncionario
+                                            .funcionario.cpf = cpfC.text;
+                                        Dashboard.repositoryFuncionario
+                                            .funcionario.login = loginC.text;
+                                        Dashboard.repositoryFuncionario
+                                                .funcionario.senha =
+                                            md5
+                                                .convert(
+                                                    utf8.encode(senhaC.text))
+                                                .toString()
+                                                .toUpperCase();
+                                        Dashboard.repositoryFuncionario
+                                            .editar(Dashboard
+                                                .repositoryFuncionario
+                                                .funcionario)
+                                            .whenComplete(() {
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                        });
+                                      } else {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text("Aviso"),
+                                                content: Text(
+                                                    "A senha deve conter numeros e letras!"),
+                                                actions: <Widget>[
+                                                  FlatButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text("ok"),
+                                                  ),
+                                                ],
+                                              );
+                                            });
+                                      }
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text("Aviso"),
+                                              content: Text(
+                                                  "A senha deve ter de 6 a 11 digitos!"),
+                                              actions: <Widget>[
+                                                FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text("ok"),
+                                                ),
+                                              ],
+                                            );
+                                          });
+                                    }
                                   } else {
                                     showDialog(
                                         context: context,

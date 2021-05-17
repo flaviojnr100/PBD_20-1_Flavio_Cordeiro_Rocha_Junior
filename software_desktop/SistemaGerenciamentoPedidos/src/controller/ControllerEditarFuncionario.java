@@ -51,19 +51,21 @@ public class ControllerEditarFuncionario implements Initializable{
     void editar(ActionEvent event) {
         Criptografia.getMd();
         if(JOptionPane.showConfirmDialog(null, "Deseja editar o registro ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-            BaseDados.getAutenticado().setNome(nomeTxt.getText());
-            BaseDados.getAutenticado().setSobrenome(sobrenomeTxt.getText());
-            BaseDados.getAutenticado().setTelefone(telefoneTxt.getText());
-            BaseDados.getAutenticado().setCpf(cpfTxt.getText());
-            BaseDados.getAutenticado().setLogin(loginTxt.getText());
-            BaseDados.getAutenticado().setSenha(Criptografia.criptografar(senhaTxt.getText()));
-            if(BaseDados.getRepositoryFuncionario().editar(BaseDados.getAutenticado().getId(), BaseDados.getAutenticado())){
-                JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
-                btnCancelar.fire();
-            }else{
-                JOptionPane.showMessageDialog(null, "Erro, contate o administrador!");
-            }
+            if(Criptografia.validarSenha(senhaTxt.getText())){
+                BaseDados.getAutenticado().setNome(nomeTxt.getText());
+                BaseDados.getAutenticado().setSobrenome(sobrenomeTxt.getText());
+                BaseDados.getAutenticado().setTelefone(telefoneTxt.getText());
+                BaseDados.getAutenticado().setCpf(cpfTxt.getText());
+                BaseDados.getAutenticado().setLogin(loginTxt.getText());
+                BaseDados.getAutenticado().setSenha(Criptografia.criptografar(senhaTxt.getText()));
+                if(BaseDados.getRepositoryFuncionario().editar(BaseDados.getAutenticado().getId(), BaseDados.getAutenticado())){
+                    JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
+                    btnCancelar.fire();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Erro, contate o administrador!");
+                }
             
+            }
         }
     }
 

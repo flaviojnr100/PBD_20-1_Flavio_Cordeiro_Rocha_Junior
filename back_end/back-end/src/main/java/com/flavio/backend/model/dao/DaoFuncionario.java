@@ -26,11 +26,20 @@ public interface DaoFuncionario extends JpaRepository<Funcionario, Integer> {
     @Query(value = "select * from Funcionario f where f.tipo_acesso = 'funcionario' and f.login LIKE CONCAT('%',:login,'%')",nativeQuery = true)
     public List<Funcionario> buscarLogin(@Param("login") String login);
     
+    @Query(value = "select * from Funcionario f where f.tipo_acesso != 'superusuario' and f.cpf LIKE CONCAT('%',:cpf,'%')",nativeQuery = true)
+    public List<Funcionario> buscarCpfSU(@Param("cpf") String cpf);
+    @Query(value = "select * from Funcionario f where f.tipo_acesso != 'superusuario' and f.nome LIKE CONCAT('%',:nome,'%')",nativeQuery = true)
+    public List<Funcionario> buscarNomeSU(@Param("nome") String nome);
+    @Query(value = "select * from Funcionario f where f.tipo_acesso != 'superusuario' and f.login LIKE CONCAT('%',:login,'%')",nativeQuery = true)
+    public List<Funcionario> buscarLoginSU(@Param("login") String login);
+    
     @Query(value = "select f.* from Funcionario f where f.login = :login",nativeQuery = true)
     public Funcionario autenticar(@Param("login")String login);
     
     @Query(value = "select f from Funcionario f where f.tipoAcesso = 'funcionario'")
     public List<Funcionario> findAll();
+    @Query(value = "select f from Funcionario f where f.tipoAcesso = 'funcionario' or  f.tipoAcesso = 'gerente'")
+    public List<Funcionario> findAllSU();
     
     @Query(value = "select f.* from Funcionario f where f.login = :login",nativeQuery = true)
     public Funcionario findByLogin(@Param("login")String login);

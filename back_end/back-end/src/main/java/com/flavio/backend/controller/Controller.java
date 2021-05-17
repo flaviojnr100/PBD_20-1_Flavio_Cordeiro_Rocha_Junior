@@ -62,6 +62,10 @@ public class Controller {
     public List<Funcionario> buscarTodos(){
         return bf.listarTodos();
     }
+    @GetMapping("/funcionarioSU")
+    public List<Funcionario> buscarTodosSU(){
+        return bf.listarTodosSU();
+    }
     
     @GetMapping("/funcionario/{id}")
     public ResponseEntity<Funcionario> buscarId(@PathVariable(value = "id")int id){
@@ -87,14 +91,32 @@ public class Controller {
     public List<Funcionario> buscarCpf(@PathVariable("cpf")String cpf){
         return bf.buscarCpf(cpf);
     }
+    
+    @GetMapping("/funcionarioSU/buscarCpf/{cpf}")
+    public List<Funcionario> buscarCpfSU(@PathVariable("cpf")String cpf){
+        return bf.buscarCpfSU(cpf);
+    }
+    
     @GetMapping("/funcionario/buscarNome/{nome}")
     public List<Funcionario> buscarNome(@PathVariable("nome")String nome){
         return bf.buscarNome(nome);
     }
+    
+    @GetMapping("/funcionarioSU/buscarNome/{nome}")
+    public List<Funcionario> buscarNomeSU(@PathVariable("nome")String nome){
+        return bf.buscarNomeSU(nome);
+    }
+    
     @GetMapping("/funcionario/buscarLogin/{login}")
     public List<Funcionario> buscarLogin(@PathVariable("login")String login){
         return bf.buscarLogin(login);
     }
+    
+    @GetMapping("/funcionarioSU/buscarLogin/{login}")
+    public List<Funcionario> buscarLoginSU(@PathVariable("login")String login){
+        return bf.buscarLoginSU(login);
+    }
+    
     @PostMapping("/funcionario/autenticar")
     public Funcionario autenticar(@Validated String login, @Validated String senha,HttpServletResponse response){
         Funcionario funcionario =  bf.autenticar(login, senha);

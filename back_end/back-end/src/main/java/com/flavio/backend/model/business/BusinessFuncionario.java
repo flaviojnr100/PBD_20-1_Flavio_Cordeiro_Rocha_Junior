@@ -39,6 +39,14 @@ public class BusinessFuncionario {
         
         return all;
     }
+    public List<Funcionario> listarTodosSU(){
+        List<Funcionario> all = dao.findAllSU();
+        for(Funcionario f:all){
+            f.setSenha(null);
+        }
+        
+        return all;
+    }
     public ResponseEntity<Funcionario> buscarId(int id){
         Funcionario funcionario = dao.findById(id).get();
         if(funcionario == null){
@@ -99,6 +107,17 @@ public class BusinessFuncionario {
         }
         return f;
     }
+    public List<Funcionario> buscarCpfSU(String cpf){
+        List<Funcionario> f = (List<Funcionario>) dao.buscarCpfSU(cpf);
+        
+        if(f == null){
+            return null;
+        }
+        for(Funcionario f1:f){
+            f1.setSenha(null);
+        }
+        return f;
+    }
     public List<Funcionario> buscarNome(String nome){
         List<Funcionario> f = (List<Funcionario>) dao.buscarNome(nome);
         
@@ -110,8 +129,30 @@ public class BusinessFuncionario {
         }
         return f;
     }
+    public List<Funcionario> buscarNomeSU(String nome){
+        List<Funcionario> f = (List<Funcionario>) dao.buscarNomeSU(nome);
+        
+        if(f == null){
+            return null;
+        }
+        for(Funcionario f1:f){
+            f1.setSenha(null);
+        }
+        return f;
+    }
     public List<Funcionario> buscarLogin(String login){
        List<Funcionario> f =  dao.buscarLogin(login);
+        
+        if(f == null){
+            return null;
+        }
+        for(Funcionario f1:f){
+            f1.setSenha(null);
+        }
+        return f;
+    }
+    public List<Funcionario> buscarLoginSU(String login){
+       List<Funcionario> f =  dao.buscarLoginSU(login);
         
         if(f == null){
             return null;

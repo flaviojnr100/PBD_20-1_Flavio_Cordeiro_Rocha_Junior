@@ -45,8 +45,6 @@ public class ControllerPedido {
     @FXML
     private ToggleGroup grupo;
 
-    @FXML
-    private RadioButton rbtnLogin;
 
     @FXML
     private RadioButton rbtnData;

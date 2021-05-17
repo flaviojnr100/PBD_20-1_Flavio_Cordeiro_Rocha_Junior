@@ -24,6 +24,9 @@ public class BaseDados {
     public static void atualizarFuncionarios(){
         funcionarios = getRepositoryFuncionario().buscarTodos();
     }
+    public static void atualizarFuncionariosSU(){
+       funcionarios = getRepositoryFuncionario().buscarTodosSU();
+    }
     public static void atualizarFuncionariosNome(String nome){
         funcionarios = getRepositoryFuncionario().buscarNome(nome);
     }
@@ -32,6 +35,16 @@ public class BaseDados {
     }
     public static void atualizarFuncionariosLogin(String login){
         funcionarios = getRepositoryFuncionario().buscarLogin(login);
+    }
+    
+    public static void atualizarFuncionariosNomeSU(String nome){
+        funcionarios = getRepositoryFuncionario().buscarNomeSU(nome);
+    }
+    public static void atualizarFuncionariosCpfSU(String cpf){
+        funcionarios = getRepositoryFuncionario().buscarCpfSU(cpf);
+    }
+    public static void atualizarFuncionariosLoginSU(String login){
+        funcionarios = getRepositoryFuncionario().buscarLoginSU(login);
     }
     
     public static void atualizarResets(){

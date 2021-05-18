@@ -20,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
@@ -85,6 +86,7 @@ public class ControllerFuncionario implements Initializable {
             stage.setTitle("Funcionário");
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
             stage.initOwner((Stage) btnAdicionar.getScene().getWindow());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -148,6 +150,7 @@ public class ControllerFuncionario implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Informações");
             stage.setScene(scene);
+            stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
             stage.setResizable(false);
             stage.initOwner((Stage) btnAdicionar.getScene().getWindow());
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -206,6 +209,7 @@ public class ControllerFuncionario implements Initializable {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("Reset");
+            stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
             stage.setScene(scene);
             stage.setResizable(false);
             stage.initOwner((Stage) btnAdicionar.getScene().getWindow());

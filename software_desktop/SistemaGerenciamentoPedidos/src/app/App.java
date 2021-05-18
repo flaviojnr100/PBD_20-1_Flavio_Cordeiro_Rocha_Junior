@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Funcionario;
 import model.Mesa;
@@ -31,6 +32,7 @@ public class App extends Application {
         Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLLogin.fxml"));
         Scene scene = new Scene(login);
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
         primaryStage.show();
         
 

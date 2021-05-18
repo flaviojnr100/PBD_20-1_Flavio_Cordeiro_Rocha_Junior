@@ -202,10 +202,7 @@ public class Controller {
     public Pedido salvarPedido(Pedido pedido){
         return bp.salvar(pedido);
     }
-  /*  @PutMapping("/pedido/adicionarItem?id_pedido={id_pedido}&ïd_item={id_item}")
-    public ResponseEntity<Pedido> adicionarItem(@PathVariable("id_pedido")int idPedido,@PathVariable("id_item")int idItem){
-        return bp.adicionarItem(idPedido, idItem);
-    }*/
+ 
     @GetMapping("/pedido")
     public List<Pedido> buscarTodosPedido(){
         return bp.buscarTodos();
@@ -233,6 +230,10 @@ public class Controller {
     @GetMapping("/pedido/pendente")
     public List<Pedido> buscarPendente(){
         return bp.buscarPendente();
+    }
+    @GetMapping("/pedido/buscarMesa/{numero}")
+    public List<Pedido> buscarMesaPedido(@PathVariable("numero")int numero){
+        return bp.buscarMesa(numero);
     }
     
     @GetMapping("/senhaReset")

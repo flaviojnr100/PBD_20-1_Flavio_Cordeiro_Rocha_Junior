@@ -34,6 +34,9 @@ public class ControllerEditarFuncionario implements Initializable{
 
     @FXML
     private PasswordField senhaTxt;
+    
+    @FXML
+    private PasswordField confirmarSenha;
 
     @FXML
     private Button btnEditar;
@@ -51,6 +54,7 @@ public class ControllerEditarFuncionario implements Initializable{
     void editar(ActionEvent event) {
         Criptografia.getMd();
         if(JOptionPane.showConfirmDialog(null, "Deseja editar o registro ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(senhaTxt.getText().equals(confirmarSenha.getText())){
             if(Criptografia.validarSenha(senhaTxt.getText())){
                 BaseDados.getAutenticado().setNome(nomeTxt.getText());
                 BaseDados.getAutenticado().setSobrenome(sobrenomeTxt.getText());
@@ -65,6 +69,9 @@ public class ControllerEditarFuncionario implements Initializable{
                     JOptionPane.showMessageDialog(null, "Erro, contate o administrador!");
                 }
             
+            }
+            }else{
+                JOptionPane.showMessageDialog(null, "As senhas são diferentes, digite novamente!","Aviso",JOptionPane.YES_OPTION);
             }
         }
     }

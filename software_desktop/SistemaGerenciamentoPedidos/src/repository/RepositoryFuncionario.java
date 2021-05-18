@@ -151,7 +151,7 @@ public class RepositoryFuncionario {
             conn.setDoInput(true);
             conn.getOutputStream().write(postDataBytes);
             BaseDados.setStatus(conn.getResponseCode());
-            System.out.println(""+conn.getResponseCode());
+            
             if(conn.getResponseCode() == 202){
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             String output = "";

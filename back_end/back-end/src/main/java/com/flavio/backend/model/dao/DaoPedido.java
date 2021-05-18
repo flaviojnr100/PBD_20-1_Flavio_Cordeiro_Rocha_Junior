@@ -5,6 +5,7 @@
  */
 package com.flavio.backend.model.dao;
 
+import com.flavio.backend.model.object.Mesa;
 import com.flavio.backend.model.object.Pedido;
 import java.util.Date;
 import java.util.List;
@@ -22,4 +23,7 @@ public interface DaoPedido extends JpaRepository<Pedido, Integer> {
     
     @Query(value = "select * from Pedido where status=:pendente",nativeQuery = true)
     public List<Pedido> buscarPendente(@Param("pendente") String pendente);
+    
+    @Query(value = "select p from Pedido p where p.mesa.numero = :numero")
+    public List<Pedido> buscarMesa(@Param("numero") int numero);
 }

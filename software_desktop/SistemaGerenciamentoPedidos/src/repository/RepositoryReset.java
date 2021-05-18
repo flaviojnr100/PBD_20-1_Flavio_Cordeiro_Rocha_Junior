@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.BaseDados;
-import model.Funcionario;
 import model.SenhaReset;
 import org.apache.http.impl.client.DefaultHttpClient;
 

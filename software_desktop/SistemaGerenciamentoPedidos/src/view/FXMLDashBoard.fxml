@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="584.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerDashboard">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerDashboard">
    <children>
       <HBox layoutX="-1.0" prefHeight="584.0" prefWidth="1038.0">
          <children>
-            <Pane prefHeight="478.0" prefWidth="228.0" styleClass="abaMenu" stylesheets="@style.css">
+            <Pane prefHeight="570.0" prefWidth="210.0" styleClass="abaMenu" stylesheets="@style.css">
                <children>
                   <Button fx:id="btnMesa" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="36.0" layoutY="393.0" mnemonicParsing="false" onAction="#mesa" prefHeight="84.0" prefWidth="127.0" styleClass="botaoDashLado" stylesheets="@style.css" text="Mesa">
                      <graphic>
@@ -107,7 +107,7 @@
                      </cursor></Button>
                </children>
             </Pane>
-            <Pane prefHeight="555.0" prefWidth="623.0" style="-fx-background-color: white;">
+            <Pane prefHeight="584.0" prefWidth="638.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fitHeight="221.0" fitWidth="659.0" layoutX="75.0" layoutY="-41.0" pickOnBounds="true" preserveRatio="true">
                      <image>

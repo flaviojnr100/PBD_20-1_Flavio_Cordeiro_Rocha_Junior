@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -45,7 +46,7 @@ public class ControllerLogin {
         nome =  loginTxt.getText();
         senha = senhaTxt.getText();
         BaseDados.setAutenticado(BaseDados.getRepositoryFuncionario().autenticar(nome, Criptografia.criptografar(senha)));
-        if(BaseDados.getStatus() == 202){
+        if(BaseDados.getStatus() == 202 && BaseDados.getAutenticado().getSenha() != null){
             if((BaseDados.getAutenticado().getTipoAcesso().equals("gerente") || BaseDados.getAutenticado().getTipoAcesso().equals("superusuario"))){
             try {
                 if(BaseDados.getAutenticado().isIsReset()){
@@ -70,6 +71,7 @@ public class ControllerLogin {
                 stage.setTitle("Dashboard");
                 stage.setScene(scene);
                 stage.setResizable(false);
+                stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
                 Stage atual = (Stage) btnEntrar.getScene().getWindow();
                 atual.close();
                 stage.show();
@@ -86,7 +88,7 @@ public class ControllerLogin {
                 JOptionPane.showMessageDialog(null, "Usuário já está logado no sistema!","Aviso",JOptionPane.YES_OPTION);
             }else if(BaseDados.getStatus() == 400){
                 JOptionPane.showMessageDialog(null, "Usuário não tem permissão para acessar o sistema!","Aviso",JOptionPane.YES_OPTION);
-            }else if(BaseDados.getStatus() == 500){
+            }else if(BaseDados.getStatus() == 202 && BaseDados.getAutenticado().getSenha() == null){
                 JOptionPane.showMessageDialog(null, "Usuário invalido!","Aviso",JOptionPane.YES_OPTION);
             }
             /*else if(BaseDados.getStatus() == 302){

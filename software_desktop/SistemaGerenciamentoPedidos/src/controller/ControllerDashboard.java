@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
@@ -44,17 +45,21 @@ public class ControllerDashboard implements Initializable {
 
     @FXML
     void cardapio(ActionEvent event) {
-
+        acessarTela("Cardapio", "view/FXMLCardapio.fxml");
     }
 
     @FXML
     void configuracao(ActionEvent event) {
-        acessarTela("Editar", "view/FXMLEditarFuncionario.fxml");
+        if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
+            acessarTela("Configuracao", "view/FXMLConfiguracao.fxml");
+        }else{
+            acessarTela("Editar", "view/FXMLEditarFuncionario.fxml");
+        }
     }
 
     @FXML
     void financia(ActionEvent event) {
-
+        acessarTela("Financia", "view/FXMLFinancia.fxml");
     }
 
     @FXML
@@ -64,12 +69,12 @@ public class ControllerDashboard implements Initializable {
 
     @FXML
     void mesa(ActionEvent event) {
-
+        
     }
 
     @FXML
     void pedido(ActionEvent event) {
-
+        acessarTela("Pedido", "view/FXMLPedido.fxml");
     }
     private void acessarTela(String nome,String caminho){
         try {
@@ -81,6 +86,7 @@ public class ControllerDashboard implements Initializable {
             stage.setResizable(false);
             stage.initOwner((Stage) btnCardapio.getScene().getWindow());
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
             stage.showAndWait();
         } catch (IOException ex) {
             Logger.getLogger(ControllerDashboard.class.getName()).log(Level.SEVERE, null, ex);

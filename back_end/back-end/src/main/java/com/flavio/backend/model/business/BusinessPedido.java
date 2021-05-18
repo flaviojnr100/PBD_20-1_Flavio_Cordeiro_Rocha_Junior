@@ -80,4 +80,8 @@ public class BusinessPedido {
         return dao.buscarPendente("pendente");
     }
     
+    public List<Pedido> buscarMesa(int numero){
+        return dao.buscarMesa(numero);
+    }
+    
 }

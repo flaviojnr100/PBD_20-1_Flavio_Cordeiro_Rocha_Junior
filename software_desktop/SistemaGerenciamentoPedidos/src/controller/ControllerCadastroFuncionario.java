@@ -56,6 +56,9 @@ public class ControllerCadastroFuncionario implements Initializable {
     @FXML
     private ComboBox<?> comboTipo;
     
+    @FXML
+    private PasswordField confirmarSenha;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
@@ -102,6 +105,7 @@ public class ControllerCadastroFuncionario implements Initializable {
         
         
         if(JOptionPane.showConfirmDialog(null, "Deseja salvar o registro ?","Aviso",JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION){
+            if(senhaTxt.getText().equals(confirmarSenha.getText())){
             if(Criptografia.validarSenha(funcionario.getSenha())){
                 funcionario.setSenha(Criptografia.criptografar(senhaTxt.getText()));
                 if(BaseDados.getRepositoryFuncionario().salvar(funcionario)){
@@ -115,6 +119,9 @@ public class ControllerCadastroFuncionario implements Initializable {
                     JOptionPane.showMessageDialog(null, "Erro, contate o administrador!","Aviso",JOptionPane.YES_OPTION);
                 }
                 btnCancelar.fire();
+            }
+            }else{
+                JOptionPane.showMessageDialog(null, "As senhas são diferentes, digite novamente","Aviso",JOptionPane.YES_OPTION);
             }
         }
     }

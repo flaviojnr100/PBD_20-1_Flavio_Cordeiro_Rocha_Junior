@@ -1,8 +1,12 @@
 back_end(servidor da aplicação)
 	IDE: netbeans
 	SGBD: POSTGRESQL
+	versão do SGBD: Postgresql 12
 	bibliotecas: MAVEN gerencia as dependências	
-
+	configuração banco de dados:
+			Usuario:postgres
+			senha:postgres
+			nome do banco de dados: SGPedido
 
 software
 	IDE: netbeans

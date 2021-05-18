@@ -7,6 +7,9 @@ back_end(servidor da aplicação)
 			Usuario:postgres
 			senha:postgres
 			nome do banco de dados: SGPedido
+	credenciais do administrador:
+		login:adm
+		senha:adm
 
 software
 	IDE: netbeans

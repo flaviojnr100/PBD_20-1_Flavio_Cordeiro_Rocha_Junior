@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="463.0" prefWidth="600.0" style="-fx-background-color: rgb(118,226,244);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMesa">
+   <children>
+      <Pane layoutX="21.0" layoutY="186.0" prefHeight="244.0" prefWidth="558.0">
+         <children>
+            <TableView fx:id="tableMesa" prefHeight="244.0" prefWidth="558.0" styleClass="table" stylesheets="@style.css">
+              <columns>
+                <TableColumn fx:id="colNumero" prefWidth="278.4000244140625" text="Numero" />
+                <TableColumn fx:id="colDisponibilidade" prefWidth="279.20001220703125" text="Disponibilidade" />
+              </columns>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+                      <MenuItem mnemonicParsing="false" onAction="#informacoes" text="Ver informações" />
+                      <MenuItem mnemonicParsing="false" onAction="#mudarEstado" text="Habilitar/Desabilitar" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+         </children>
+      </Pane>
+      <Pane layoutY="111.0" prefHeight="59.0" prefWidth="600.0">
+         <children>
+            <TextField fx:id="buscarTxt" layoutX="27.0" layoutY="17.0" prefHeight="31.0" prefWidth="461.0" promptText="Digite o número da mesa" styleClass="campoTexto" stylesheets="@style.css" />
+            <Button fx:id="btnBuscar" layoutX="502.0" layoutY="17.0" mnemonicParsing="false" onAction="#buscar" prefHeight="31.0" prefWidth="77.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Buscar">
+               <font>
+                  <Font name="Century Gothic" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <Button fx:id="btnAdicionar" contentDisplay="TOP" layoutX="224.0" layoutY="14.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="98.0" prefWidth="151.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Adicionar mesa">
+         <graphic>
+            <ImageView fitHeight="44.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/mesa.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

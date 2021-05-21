@@ -54,4 +54,15 @@ public class BusinessCardapio {
         
         return ResponseEntity.ok(item);
     }
+    
+    public List<ItemCardapio> buscarNome(String nome){
+        return dao.buscarNome(nome);
+    }
+    public ItemCardapio buscarNomeUnico(String nome){
+        ItemCardapio item = dao.buscarNomeUnico(nome);
+        if(item !=null){
+            return item;
+        }
+        return null;
+    }
 }

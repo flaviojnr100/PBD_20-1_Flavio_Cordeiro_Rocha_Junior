@@ -45,7 +45,7 @@
             <TextField fx:id="descricaoTxt" onKeyPressed="#keyCadastrar" styleClass="campoTexto" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="btnCadastrar" layoutX="50.0" layoutY="223.0" mnemonicParsing="false" onAction="#cadastrar" onKeyPressed="#keyCadastrar" prefHeight="35.0" prefWidth="92.0" styleClass="botaoCardapio" stylesheets="@style.css" text="Cadastar">
+      <Button fx:id="btnCadastrar" layoutX="50.0" layoutY="223.0" mnemonicParsing="false" onAction="#cadastrar" onKeyPressed="#keyCadastrar" prefHeight="35.0" prefWidth="92.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Cadastar">
          <font>
             <Font name="Century Gothic" size="14.0" />
          </font>
@@ -53,7 +53,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnCancelar" layoutX="193.0" layoutY="223.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="35.0" prefWidth="92.0" styleClass="botaoCardapio" stylesheets="@style.css" text="Cancelar">
+      <Button fx:id="btnCancelar" layoutX="193.0" layoutY="223.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="35.0" prefWidth="92.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Cancelar">
          <font>
             <Font name="Century Gothic" size="14.0" />
          </font>

@@ -32,7 +32,7 @@
                       <MenuItem mnemonicParsing="false" onAction="#informacoes" text="Ver informações" />
                       <MenuItem mnemonicParsing="false" onAction="#editar" text="Editar" />
                       <MenuItem mnemonicParsing="false" onAction="#mudarStatus" text="Habilitar/Desabilitar" />
-                      <MenuItem mnemonicParsing="false" onAction="#sair" text="Sair" />
+                      
                     </items>
                   </ContextMenu>
                </contextMenu>

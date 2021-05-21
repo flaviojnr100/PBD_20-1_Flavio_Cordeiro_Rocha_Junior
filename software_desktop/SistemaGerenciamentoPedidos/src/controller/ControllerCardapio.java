@@ -5,33 +5,53 @@
  */
 package controller;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import model.BaseDados;
+import model.ItemCardapio;
 
-public class ControllerCardapio {
-
-    @FXML
-    private TableView<?> tableCardapio;
-
-    @FXML
-    private TableColumn<?, ?> colId;
-
-    @FXML
-    private TableColumn<?, ?> colNome;
+public class ControllerCardapio implements Initializable {
 
     @FXML
-    private TableColumn<?, ?> colPreco;
+    private TableView<ItemCardapio> tableCardapio;
 
     @FXML
-    private TableColumn<?, ?> colDescricao;
+    private TableColumn<ItemCardapio, Integer> colId;
 
     @FXML
-    private TableColumn<?, ?> colStatus;
+    private TableColumn<ItemCardapio, String> colNome;
+
+    @FXML
+    private TableColumn<ItemCardapio, Double> colPreco;
+
+    @FXML
+    private TableColumn<ItemCardapio, String> colDescricao;
+
+    @FXML
+    private TableColumn<ItemCardapio, Boolean> colStatus;
 
     @FXML
     private TextField buscarTxt;
@@ -44,37 +64,116 @@ public class ControllerCardapio {
 
     @FXML
     void buscar(ActionEvent event) {
-
+        if(!"".equals(buscarTxt.getText().trim())){
+            BaseDados.atualizarCardapioNome(buscarTxt.getText().trim());
+            atualizar();
+        }
     }
 
     @FXML
     void cadastrar(ActionEvent event) {
-
+        try {
+            Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLCadastrarCardapio.fxml"));
+            Scene scene = new Scene(login);
+            Stage stage = new Stage();
+            stage.setTitle("Cardápio");
+            stage.setScene(scene);
+            stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner((Stage)btnCadastrar.getScene().getWindow());
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    BaseDados.atualizarCardapio();
+                    atualizar();
+                }
+            });
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerCardapio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     void editar(ActionEvent event) {
-
+        try {
+            ControllerEditarCardapio.setItem(tableCardapio.getSelectionModel().getSelectedItem());
+            Parent editar = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLEditarCardapio.fxml"));
+            Scene scene = new Scene(editar);
+            Stage stage = new Stage();
+            stage.setTitle("Editar");
+            stage.setScene(scene);
+            stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner((Stage)btnCadastrar.getScene().getWindow());
+            stage.setResizable(false);
+             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    BaseDados.atualizarCardapio();
+                    atualizar();
+                }
+            });
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerCardapio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     void informacoes(ActionEvent event) {
-
+        try {
+            ControllerInformacoesCardapio.setItem(tableCardapio.getSelectionModel().getSelectedItem());
+            Parent informacoes = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLInformacoesCardapio.fxml"));
+            Scene scene = new Scene(informacoes);
+            Stage stage = new Stage();
+            stage.setTitle("Informações");
+            stage.setScene(scene);
+            stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner((Stage)btnCadastrar.getScene().getWindow());
+            stage.setResizable(false);
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerCardapio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     void mudarStatus(ActionEvent event) {
-
+        BaseDados.getRepositoryCardapio().alterarEstado(tableCardapio.getSelectionModel().getSelectedItem().getId());
+        BaseDados.atualizarCardapio();
+        atualizar();
     }
 
-    @FXML
-    void sair(ActionEvent event) {
 
-    }
     
     @FXML
     void keyBuscar(KeyEvent event) {
+        if(KeyCode.ENTER == event.getCode()){
+            btnBuscar.fire();
+        }
+        if(KeyCode.BACK_SPACE == event.getCode() || KeyCode.DELETE == event.getCode() ){
+            BaseDados.atualizarCardapio();
+            atualizar();
+            buscarTxt.setText("");
+        }
+    }
+    
+    private void atualizar(){
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+        colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("isAtivo"));
+        
+        tableCardapio.setItems(FXCollections.observableArrayList(BaseDados.getCardapio()));
+    }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        BaseDados.atualizarCardapio();
+        atualizar();
     }
 
 }

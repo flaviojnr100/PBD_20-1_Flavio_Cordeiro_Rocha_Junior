@@ -153,6 +153,14 @@ public class Controller {
     public ItemCardapio salvar(@Validated ItemCardapio item){
         return bc.salvar(item);
     }
+    @GetMapping("/cardapio/buscarNome/{nome}")
+    public List<ItemCardapio> buscarNomeItem(@PathVariable("nome")String nome){
+        return bc.buscarNome(nome);
+    }
+    @GetMapping("/cardapio/buscarNomeUnico/{nome}")
+    public ItemCardapio buscarNomeUnico(@PathVariable("nome")String nome){
+        return bc.buscarNomeUnico(nome);
+    }
     
     @GetMapping("/cardapio/{id}")
     public Optional<ItemCardapio> buscarIdCardapio(@PathVariable("id")int id){

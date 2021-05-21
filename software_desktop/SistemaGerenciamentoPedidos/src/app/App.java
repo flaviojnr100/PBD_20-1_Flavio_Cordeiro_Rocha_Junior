@@ -9,8 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Funcionario;
+import model.ItemCardapio;
 import model.Mesa;
 import model.SenhaReset;
+import repository.RepositoryCardapio;
 import repository.RepositoryFuncionario;
 import repository.RepositoryReset;
 
@@ -33,6 +35,7 @@ public class App extends Application {
         Scene scene = new Scene(login);
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
+        primaryStage.setResizable(false);
         primaryStage.show();
         
 
@@ -40,6 +43,7 @@ public class App extends Application {
     
     public static void main(String[] args) {
         launch(args);
+        
     }
     
 }

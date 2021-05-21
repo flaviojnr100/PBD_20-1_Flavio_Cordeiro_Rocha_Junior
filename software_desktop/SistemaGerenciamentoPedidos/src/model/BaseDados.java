@@ -6,6 +6,7 @@
 package model;
 
 import java.util.List;
+import repository.RepositoryCardapio;
 import repository.RepositoryFuncionario;
 import repository.RepositoryReset;
 
@@ -16,8 +17,10 @@ import repository.RepositoryReset;
 public class BaseDados {
     private static Funcionario autenticado;
     private static RepositoryFuncionario repositoryFuncionario;
+    private static RepositoryCardapio repositoryCardapio;
     private static RepositoryReset repositoryReset;
     private static List<Funcionario> funcionarios;
+    private static List<ItemCardapio> cardapio;
     private static List<SenhaReset> resets;
     private static int status;
     
@@ -60,6 +63,13 @@ public class BaseDados {
         
     }        
     
+    public static void atualizarCardapio(){
+        cardapio = getRepositoryCardapio().buscarTodos();
+    }
+    public static void atualizarCardapioNome(String nome){
+        cardapio = getRepositoryCardapio().buscarNome(nome);
+    }
+    
     public static List<Funcionario> getFuncionarios(){
         if(funcionarios==null){
             atualizarFuncionarios();
@@ -73,12 +83,24 @@ public class BaseDados {
         }
         return resets;
     }
+    public static List<ItemCardapio> getCardapio(){
+        if(cardapio==null){
+            atualizarCardapio();
+        }
+        return cardapio;
+    }
 
     public static RepositoryFuncionario getRepositoryFuncionario() {
         if(repositoryFuncionario==null){
             repositoryFuncionario = new RepositoryFuncionario();
         }
         return repositoryFuncionario;
+    }
+    public static RepositoryCardapio getRepositoryCardapio() {
+        if(repositoryCardapio==null){
+            repositoryCardapio = new RepositoryCardapio();
+        }
+        return repositoryCardapio;
     }
 
     public static Funcionario getAutenticado() {

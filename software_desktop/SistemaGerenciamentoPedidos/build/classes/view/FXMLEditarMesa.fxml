@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="131.0" prefWidth="318.0" style="-fx-background-color: rgb(118,226,244);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.ControllerEditarMesa">
+   <children>
+      <GridPane layoutX="56.0" layoutY="21.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Número:">
+               <font>
+                  <Font name="Century Gothic" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="numeroTxt" styleClass="campoTexto" stylesheets="@style.css" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <Button fx:id="btnEditar" layoutX="43.0" layoutY="71.0" mnemonicParsing="false" onAction="#editar" prefHeight="31.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Editar">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnCancelar" layoutX="179.0" layoutY="71.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="31.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Cancelar">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

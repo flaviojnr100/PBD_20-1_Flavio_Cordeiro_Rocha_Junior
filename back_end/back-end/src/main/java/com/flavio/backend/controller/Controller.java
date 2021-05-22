@@ -107,6 +107,15 @@ public class Controller {
         return bf.buscarNomeSU(nome);
     }
     
+    @GetMapping("/funcionario/buscarLoginUnico/{login}")
+    public Funcionario buscarLoginUnico(@PathVariable String login){
+        return bf.buscarLoginUnico(login);
+    }
+    @GetMapping("/funcionario/buscarCpfUnico/{cpf}")
+    public Funcionario buscarCpfUnico(@PathVariable String cpf){
+        return bf.buscarCpfUnico(cpf);
+    }
+    
     @GetMapping("/funcionario/buscarLogin/{login}")
     public List<Funcionario> buscarLogin(@PathVariable("login")String login){
         return bf.buscarLogin(login);

@@ -74,6 +74,24 @@ public class BusinessFuncionario {
         }
         return funcionario;
     }
+    public Funcionario buscarCpfUnico(String cpf){
+        Funcionario funcionario = dao.findByCpf(cpf);
+        if(funcionario!=null){
+            funcionario.setNome(null);
+            funcionario.setCpf(null);
+            funcionario.setSobrenome(null);
+            funcionario.setTelefone(null);
+            funcionario.setIsLogado(false);
+            funcionario.setIsPermissao(false);
+            funcionario.setIsReset(false);
+            funcionario.setSenha(null);
+            funcionario.setLogin(null);
+            funcionario.setTipoAcesso(null);
+            funcionario.setUltimoAcesso(null);
+            
+        }
+        return funcionario;
+    }
     public ResponseEntity<Optional<Funcionario>> editar(int id,Funcionario funcionario){
         Optional<Funcionario> funcionario1 = dao.findById(id);
         if(funcionario1 == null){

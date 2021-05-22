@@ -556,5 +556,59 @@ public class RepositoryFuncionario {
         }
         return null;
     }
+      
+      public Funcionario buscarLoginUnicoValidacao(String login){
+        try {
+            URL url = new URL(this.url+"/buscarLoginUnico/"+login);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setRequestProperty("Accept", "application/json");
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            String output = "";
+            String line;
+            
+            while((line = br.readLine()) != null){
+                output += line;
+            }
+            
+            httpURLConnection.disconnect();
+            
+            Funcionario funcionario = gson.fromJson(output, Funcionario.class);
+            return funcionario;
+            
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+      
+       public Funcionario buscarCpfUnicoValidacao(String cpf){
+        try {
+            URL url = new URL(this.url+"/buscarCpfUnico/"+cpf);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setRequestProperty("Accept", "application/json");
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            String output = "";
+            String line;
+            
+            while((line = br.readLine()) != null){
+                output += line;
+            }
+            
+            httpURLConnection.disconnect();
+            
+            Funcionario funcionario = gson.fromJson(output, Funcionario.class);
+            return funcionario;
+            
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
 }

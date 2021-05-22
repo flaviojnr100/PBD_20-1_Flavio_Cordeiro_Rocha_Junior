@@ -67,8 +67,10 @@ public class ControllerCadastroFuncionario implements Initializable {
             comboTipo.setItems(items);
             lblTipo.setVisible(true);
             comboTipo.setVisible(true);
-            Criptografia.getMd();
+            comboTipo.getSelectionModel().selectFirst();
+            
         }
+        Criptografia.getMd();
         
     }
 
@@ -105,23 +107,31 @@ public class ControllerCadastroFuncionario implements Initializable {
         
         
         if(JOptionPane.showConfirmDialog(null, "Deseja salvar o registro ?","Aviso",JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION){
-            if(senhaTxt.getText().equals(confirmarSenha.getText())){
-            if(Criptografia.validarSenha(funcionario.getSenha())){
-                funcionario.setSenha(Criptografia.criptografar(senhaTxt.getText()));
-                if(BaseDados.getRepositoryFuncionario().salvar(funcionario)){
-                    JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
-                    if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
-                        BaseDados.atualizarFuncionariosSU();
-                    }else{
-                        BaseDados.atualizarFuncionarios();
+            if(BaseDados.getRepositoryFuncionario().buscarCpfUnicoValidacao(cpfTxt.getText()) == null){
+            if(BaseDados.getRepositoryFuncionario().buscarLoginUnicoValidacao(loginTxt.getText()) == null){
+                if(senhaTxt.getText().equals(confirmarSenha.getText())){
+                    if(Criptografia.validarSenha(funcionario.getSenha())){
+                        funcionario.setSenha(Criptografia.criptografar(senhaTxt.getText()));
+                        if(BaseDados.getRepositoryFuncionario().salvar(funcionario)){
+                            JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
+                            if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
+                                 BaseDados.atualizarFuncionariosSU();
+                            }else{
+                                BaseDados.atualizarFuncionarios();
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Erro, contate o administrador!","Aviso",JOptionPane.YES_OPTION);
+                        }
+                        btnCancelar.fire();
                     }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Erro, contate o administrador!","Aviso",JOptionPane.YES_OPTION);
-                }
-                btnCancelar.fire();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "As senhas são diferentes, digite novamente","Aviso",JOptionPane.YES_OPTION);
             }
             }else{
-                JOptionPane.showMessageDialog(null, "As senhas são diferentes, digite novamente","Aviso",JOptionPane.YES_OPTION);
+                JOptionPane.showMessageDialog(null, "Esse login já está cadastrado no sistema, digite outro !");
+            }
+            }else{
+                JOptionPane.showMessageDialog(null, "Esse cpf já foi cadastrado no sistema, digite outro !");
             }
         }
     }

@@ -44,4 +44,7 @@ public interface DaoFuncionario extends JpaRepository<Funcionario, Integer> {
     @Query(value = "select f.* from Funcionario f where f.login = :login",nativeQuery = true)
     public Funcionario findByLogin(@Param("login")String login);
     
+    @Query(value = "select f from Funcionario f where f.cpf = :cpf")
+    public Funcionario findByCpf(@Param("cpf") String cpf);
+    
 }

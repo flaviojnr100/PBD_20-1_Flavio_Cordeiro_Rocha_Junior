@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -30,6 +31,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Callback;
 import model.BaseDados;
 import model.ItemCardapio;
 
@@ -45,7 +47,7 @@ public class ControllerCardapio implements Initializable {
     private TableColumn<ItemCardapio, String> colNome;
 
     @FXML
-    private TableColumn<ItemCardapio, Double> colPreco;
+    private TableColumn<ItemCardapio, String> colPreco;
 
     @FXML
     private TableColumn<ItemCardapio, String> colDescricao;
@@ -163,9 +165,23 @@ public class ControllerCardapio implements Initializable {
     private void atualizar(){
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+        colPreco.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ItemCardapio, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ItemCardapio, String> param) {
+                final ItemCardapio item = param.getValue();
+                final SimpleObjectProperty sop = new SimpleObjectProperty("R$ "+String.format("%.2f", item.getPreco()));
+                return sop;
+            }
+        });
         colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("isAtivo"));
+        colStatus.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ItemCardapio, Boolean>, ObservableValue<Boolean>>() {
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ItemCardapio, Boolean> param) {
+                final ItemCardapio item = param.getValue();
+                final SimpleObjectProperty sop = new SimpleObjectProperty(item.isIsAtivo()?"Ativo":"Não ativo");
+                return sop;
+            }
+        });
         
         tableCardapio.setItems(FXCollections.observableArrayList(BaseDados.getCardapio()));
     }

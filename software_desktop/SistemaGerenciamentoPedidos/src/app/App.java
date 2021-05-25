@@ -11,9 +11,11 @@ import javafx.stage.Stage;
 import model.Funcionario;
 import model.ItemCardapio;
 import model.Mesa;
+import model.Pedido;
 import model.SenhaReset;
 import repository.RepositoryCardapio;
 import repository.RepositoryFuncionario;
+import repository.RepositoryPedido;
 import repository.RepositoryReset;
 
 /*
@@ -43,6 +45,15 @@ public class App extends Application {
     
     public static void main(String[] args) {
         launch(args);
+     /*  RepositoryPedido rp = new RepositoryPedido();
+       for(Pedido pedido:rp.buscarTodos()){
+           System.out.println("Funcionario: "+pedido.getFuncionario().getNome());
+           System.out.println("Data: "+pedido.getDataPedido());
+           for(ItemCardapio cardapio:pedido.getItens()){
+               System.out.println("Nome item: "+cardapio.getNome());
+           }
+           System.out.println("-------------------");
+       }*/
         
     }
     

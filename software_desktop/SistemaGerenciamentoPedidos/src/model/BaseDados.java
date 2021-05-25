@@ -8,6 +8,7 @@ package model;
 import java.util.List;
 import repository.RepositoryCardapio;
 import repository.RepositoryFuncionario;
+import repository.RepositoryPedido;
 import repository.RepositoryReset;
 
 /**
@@ -18,10 +19,12 @@ public class BaseDados {
     private static Funcionario autenticado;
     private static RepositoryFuncionario repositoryFuncionario;
     private static RepositoryCardapio repositoryCardapio;
+    private static RepositoryPedido repositoryPedido;
     private static RepositoryReset repositoryReset;
     private static List<Funcionario> funcionarios;
     private static List<ItemCardapio> cardapio;
     private static List<SenhaReset> resets;
+    private static List<Pedido> pedidos;
     private static int status;
     
     public static void atualizarFuncionarios(){
@@ -68,6 +71,10 @@ public class BaseDados {
     }
     public static void atualizarCardapioNome(String nome){
         cardapio = getRepositoryCardapio().buscarNome(nome);
+    }
+    
+    public static void atualizarPedido(){
+        pedidos = getRepositoryPedido().buscarTodos();
     }
     
     public static List<Funcionario> getFuncionarios(){
@@ -124,6 +131,17 @@ public class BaseDados {
 
     public static void setStatus(int status) {
         BaseDados.status = status;
+    }
+
+    public static RepositoryPedido getRepositoryPedido() {
+        if(repositoryPedido == null){
+            repositoryPedido = new RepositoryPedido();
+        }
+        return repositoryPedido;
+    }
+
+    public static List<Pedido> getPedidos() {
+        return pedidos;
     }
     
     

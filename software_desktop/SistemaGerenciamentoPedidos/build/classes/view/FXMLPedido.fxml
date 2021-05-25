@@ -26,7 +26,7 @@
                 <TableColumn fx:id="colMesa" prefWidth="51.19995880126953" text="Mesa" />
                   <TableColumn fx:id="colFuncionario" prefWidth="145.60003662109375" text="Funcionario" />
                   <TableColumn fx:id="colData" prefWidth="93.60003662109375" text="Data" />
-                  <TableColumn fx:id="colTotal" prefWidth="91.20001220703125" text="Total" />
+                  <TableColumn fx:id="colTotal" prefWidth="91.20001220703125" text="(R$) Total" />
                   <TableColumn fx:id="colStatus" prefWidth="136.80001831054688" text="Status" />
               </columns>
                <contextMenu>

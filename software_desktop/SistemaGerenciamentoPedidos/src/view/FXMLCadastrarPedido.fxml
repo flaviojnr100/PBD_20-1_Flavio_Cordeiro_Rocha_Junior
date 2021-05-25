@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="475.0" prefWidth="600.0" style="-fx-background-color: rgb(118,226,244);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.ControllerCadastrarPedido">
+<AnchorPane id="AnchorPane" prefHeight="475.0" prefWidth="600.0" style="-fx-background-color: rgb(118,226,244);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCadastrarPedido">
    <children>
       <GridPane layoutX="14.0" layoutY="25.0">
         <columnConstraints>
@@ -78,7 +77,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnCancelar" layoutX="270.0" layoutY="409.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="86.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Cancelar">
+      <Button fx:id="btnCancelar" layoutX="270.0" layoutY="409.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="94.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Cancelar">
          <font>
             <Font name="Century Gothic" size="14.0" />
          </font>

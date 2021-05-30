@@ -5,6 +5,7 @@
  */
 package com.flavio.backend.model.object;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "item_cardapio")
-public class ItemCardapio {
+public class ItemCardapio{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

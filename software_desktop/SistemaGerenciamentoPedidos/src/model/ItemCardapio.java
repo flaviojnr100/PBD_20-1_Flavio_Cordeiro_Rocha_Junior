@@ -5,11 +5,12 @@
  */
 package model;
 
+
 /**
  *
  * @author Flavio
  */
-public class ItemCardapio {
+public class ItemCardapio{
     private int id;
     private String nome;
     private double preco;
@@ -60,5 +61,12 @@ public class ItemCardapio {
     public void setIsAtivo(boolean isAtivo) {
         this.isAtivo = isAtivo;
     }
+
+    @Override
+    public String toString() {
+        return id+"";
+    }
+
+
     
 }

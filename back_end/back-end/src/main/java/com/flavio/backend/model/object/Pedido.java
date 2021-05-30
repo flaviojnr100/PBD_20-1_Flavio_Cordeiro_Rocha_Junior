@@ -33,7 +33,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "pedido")
-public class Pedido implements Serializable {
+public class Pedido{
     
     private static final long serialVersionUID = 1L;
     

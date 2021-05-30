@@ -11,6 +11,7 @@ import com.flavio.backend.model.object.ItemCardapio;
 import com.flavio.backend.model.object.Pedido;
 import com.flavio.backend.model.object.Pedido_Cardapio;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -32,10 +33,22 @@ public class BusinessPedido {
     @Autowired
     DaoItemCardapio daoC;
     
-    public Pedido salvar(Pedido pedido){
+    public Pedido salvar(Pedido pedido,String cardapio){
         Date date = new Date();
         pedido.setDataPedido(date);
+        
+        pedido.setItens(criarListaItem(cardapio));
+        
         return dao.save(pedido);
+    }
+    
+    private List<ItemCardapio> criarListaItem(String cardapio){
+        List<ItemCardapio> itens = new ArrayList<>();
+        String [] lista = cardapio.split(",");
+        for(int i=0;i<lista.length;i++){
+            itens.add(daoC.findById(Integer.parseInt(lista[i])).get());
+        }
+        return itens;
     }
 
     public List<Pedido> buscarTodos(){

@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,6 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import model.BaseDados;
 import model.Mesa;
@@ -79,6 +82,15 @@ public class ControllerPedido implements Initializable {
 
     @FXML
     private Button btnAdiciionar;
+    
+    @FXML
+    private MenuItem contextMenuPendente;
+
+    @FXML
+    private MenuItem contextMenuConcluido;
+
+    @FXML
+    private MenuItem contextMenuCancelado;
 
     @FXML
     void buscar(ActionEvent event) {
@@ -98,6 +110,12 @@ public class ControllerPedido implements Initializable {
             stage.setResizable(false);
             stage.initOwner((Stage) btnAdiciionar.getScene().getWindow());
             stage.initModality(Modality.APPLICATION_MODAL);
+             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    atualizar();
+                }
+            });
             stage.showAndWait();
         } catch (IOException ex) {
             Logger.getLogger(ControllerPedido.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,7 +134,16 @@ public class ControllerPedido implements Initializable {
 
     @FXML
     void mudarStatus(ActionEvent event) {
-
+        if(event.getSource().equals(contextMenuPendente)){
+            tablePedido.getSelectionModel().getSelectedItem().setStatus("pendente");
+        }else if(event.getSource().equals(contextMenuConcluido)){
+            tablePedido.getSelectionModel().getSelectedItem().setStatus("concluido");
+        }else{
+            tablePedido.getSelectionModel().getSelectedItem().setStatus("cancelado");
+        }
+        BaseDados.getRepositoryPedido().mudarStatus(tablePedido.getSelectionModel().getSelectedItem());
+        BaseDados.atualizarPedido();
+        atualizar();
     }
 
     @FXML

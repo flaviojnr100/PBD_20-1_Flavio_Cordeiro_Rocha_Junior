@@ -12,20 +12,27 @@ import com.flavio.backend.model.business.BusinessPedido;
 import com.flavio.backend.model.business.BusinessSenhaReset;
 import com.flavio.backend.model.object.Funcionario;
 import com.flavio.backend.model.object.ItemCardapio;
+import com.flavio.backend.model.object.ListCardapio;
 import com.flavio.backend.model.object.Mesa;
 import com.flavio.backend.model.object.Pedido;
 import com.flavio.backend.model.object.SenhaReset;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -215,9 +222,10 @@ public class Controller {
         return bm.alterarEstado(id);
     }
     
+    
     @PostMapping("/pedido")
-    public Pedido salvarPedido(Pedido pedido){
-        return bp.salvar(pedido);
+    public Pedido salvarPedido(Pedido pedido,@RequestParam("cardapio") String cardapio){
+        return bp.salvar(pedido,cardapio);
     }
  
     @GetMapping("/pedido")

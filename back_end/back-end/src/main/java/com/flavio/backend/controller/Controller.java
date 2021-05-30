@@ -12,7 +12,6 @@ import com.flavio.backend.model.business.BusinessPedido;
 import com.flavio.backend.model.business.BusinessSenhaReset;
 import com.flavio.backend.model.object.Funcionario;
 import com.flavio.backend.model.object.ItemCardapio;
-import com.flavio.backend.model.object.ListCardapio;
 import com.flavio.backend.model.object.Mesa;
 import com.flavio.backend.model.object.Pedido;
 import com.flavio.backend.model.object.SenhaReset;

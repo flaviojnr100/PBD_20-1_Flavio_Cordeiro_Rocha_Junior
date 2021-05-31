@@ -135,15 +135,12 @@ public class RepositoryPedido {
      
      public List<Pedido> buscarData(int dia,int mes,int ano){
            
-        try {
+                try {
             URL url = new URL(this.url+"/buscarData");
             Map<String,Object> params = new LinkedHashMap<>();
-            
             params.put("dia", dia);
             params.put("mes", mes);
             params.put("ano", ano);
-
-            System.out.println("Formato: "+params.toString());
             
             StringBuilder postData = new StringBuilder();
             for (Map.Entry<String,Object> param : params.entrySet()) {
@@ -153,36 +150,36 @@ public class RepositoryPedido {
                 postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
             }
             byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-            
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-            conn.setRequestMethod("GET");
+            conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
             conn.setDoOutput(true);
+            conn.setDoInput(true);
             conn.getOutputStream().write(postDataBytes);
             
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             String output = "";
             String line;
             
-            while((line = br.readLine()) != null){
+            while((line = in.readLine()) != null){
                 output += line;
             }
             
             conn.disconnect();
-
             Type listType = new TypeToken<ArrayList<Pedido>>(){}.getType();
             List<Pedido> pedidos = gson.fromJson(output, listType);
             return pedidos;
+           
             
         } catch (MalformedURLException ex) {
-            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RepositoryFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+                return null;
     }
     public boolean salvar(Pedido pedido){
         

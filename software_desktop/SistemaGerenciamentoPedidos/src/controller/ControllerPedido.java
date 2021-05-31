@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -109,7 +110,8 @@ public class ControllerPedido implements Initializable {
             BaseDados.atualizarPedidoId(Integer.parseInt(buscarTxt.getText()));
             atualizar();
         }else if(rbtnData.isSelected()){
-            
+            BaseDados.atualizarPedidoData(dateData.getValue().getDayOfMonth(), dateData.getValue().getMonthValue(), dateData.getValue().getYear());
+            atualizar();
         }
     }
 
@@ -141,7 +143,13 @@ public class ControllerPedido implements Initializable {
 
     @FXML
     void colocarCampo(ActionEvent event) {
-
+        if(event.getSource() == rbtnData){
+            dateData.setVisible(true);
+            buscarTxt.setVisible(false);
+        }else{
+            dateData.setVisible(false);
+        buscarTxt.setVisible(true);
+        }
     }
     @FXML
     void update(ActionEvent event) {
@@ -248,13 +256,15 @@ public class ControllerPedido implements Initializable {
                 return sop;
              }
          });;
-         BaseDados.atualizarPedido();
+         
          tablePedido.setItems(FXCollections.observableArrayList(BaseDados.getPedidos()));
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        BaseDados.atualizarPedido();
         atualizar();
+        dateData.setValue(LocalDate.now());
     }
     @FXML
     void keyBuscar(KeyEvent event) {
@@ -265,6 +275,17 @@ public class ControllerPedido implements Initializable {
             BaseDados.atualizarPedido();
             atualizar();
             buscarTxt.setText("");
+        }
+    }
+    @FXML
+    void KeyBuscarData(KeyEvent event) {
+        if(event.getCode() == KeyCode.ENTER){
+            btnBuscar.fire();
+        }
+        if(event.getCode() == KeyCode.BACK_SPACE || event.getCode() == KeyCode.DELETE){
+            BaseDados.atualizarPedido();
+            atualizar();
+            dateData.setValue(LocalDate.now());
         }
     }
 }

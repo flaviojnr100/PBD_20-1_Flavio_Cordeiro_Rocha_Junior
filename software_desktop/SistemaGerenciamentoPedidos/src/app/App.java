@@ -45,7 +45,7 @@ public class App extends Application {
     
     public static void main(String[] args) {
         launch(args);
-    /*   RepositoryPedido rp = new RepositoryPedido();
+      /* RepositoryPedido rp = new RepositoryPedido();
        for(Pedido pedido:rp.buscarData(17, 05, 2021)){
            System.out.println("Funcionario: "+pedido.getFuncionario().getNome());
            System.out.println("Data: "+pedido.getDataPedido());

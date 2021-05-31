@@ -250,7 +250,7 @@ public class Controller {
         return bp.alterarEstado(id, status);
     }
     
-    @GetMapping("/pedido/buscarData")
+    @PostMapping("/pedido/buscarData")
     public List<Pedido> buscarData(@RequestParam("dia") int dia,@RequestParam("mes") int mes,@RequestParam("ano") int ano){
         return bp.buscarData(dia,mes,ano);
     }

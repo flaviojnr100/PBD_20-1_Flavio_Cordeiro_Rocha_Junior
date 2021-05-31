@@ -57,7 +57,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <RadioButton fx:id="rbtnMesa" layoutX="247.0" layoutY="26.0" mnemonicParsing="false" text="Mesa">
+            <RadioButton fx:id="rbtnMesa" layoutX="247.0" layoutY="26.0" mnemonicParsing="false" onAction="#colocarCampo" text="Mesa">
                <toggleGroup>
                   <ToggleGroup fx:id="grupo" />
                </toggleGroup>
@@ -76,7 +76,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </RadioButton>
-            <RadioButton fx:id="rbtnCodigo" layoutX="34.0" layoutY="26.0" mnemonicParsing="false" selected="true" text="Código" toggleGroup="$grupo">
+            <RadioButton fx:id="rbtnCodigo" layoutX="34.0" layoutY="26.0" mnemonicParsing="false" onAction="#colocarCampo" selected="true" text="Código" toggleGroup="$grupo">
                <font>
                   <Font name="Century Gothic" size="14.0" />
                </font>
@@ -84,7 +84,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </RadioButton>
-            <DatePicker fx:id="dateData" layoutX="24.0" layoutY="66.0" prefHeight="30.0" prefWidth="492.0" styleClass="campoTexto" stylesheets="@style.css" visible="false" />
+            <DatePicker fx:id="dateData" layoutX="24.0" layoutY="66.0" onKeyReleased="#KeyBuscarData" prefHeight="30.0" prefWidth="492.0" styleClass="campoTexto" stylesheets="@style.css" visible="false" />
          </children>
       </Pane>
       <Button fx:id="btnAdiciionar" contentDisplay="TOP" layoutX="238.0" layoutY="14.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="94.0" prefWidth="143.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Adicionar pedido">

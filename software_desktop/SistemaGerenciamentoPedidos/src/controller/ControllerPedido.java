@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
@@ -27,10 +28,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
+import javax.swing.JOptionPane;
 import model.BaseDados;
 import model.Mesa;
 import model.Pedido;
@@ -81,7 +85,11 @@ public class ControllerPedido implements Initializable {
     private DatePicker dateData;
 
     @FXML
-    private Button btnAdiciionar;
+    private Button btnAdiciionar;    
+    
+    @FXML
+    private ContextMenu contextMenu;
+    
     
     @FXML
     private MenuItem contextMenuPendente;
@@ -94,7 +102,15 @@ public class ControllerPedido implements Initializable {
 
     @FXML
     void buscar(ActionEvent event) {
-
+        if(rbtnMesa.isSelected()){
+            BaseDados.atualizarPedidoMesa(Integer.parseInt(buscarTxt.getText()));
+            atualizar();
+        }else if(rbtnCodigo.isSelected()){
+            BaseDados.atualizarPedidoId(Integer.parseInt(buscarTxt.getText()));
+            atualizar();
+        }else if(rbtnData.isSelected()){
+            
+        }
     }
 
     @FXML
@@ -113,6 +129,7 @@ public class ControllerPedido implements Initializable {
              stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
+                    BaseDados.atualizarPedido();
                     atualizar();
                 }
             });
@@ -126,10 +143,40 @@ public class ControllerPedido implements Initializable {
     void colocarCampo(ActionEvent event) {
 
     }
+    @FXML
+    void update(ActionEvent event) {
+         try {
+            ControllerEditarPedido.setPedido(tablePedido.getSelectionModel().getSelectedItem());
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLEditarPedido.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Editar");
+            stage.setScene(scene);
+            stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
+            stage.setResizable(false);
+            stage.initOwner((Stage) btnAdiciionar.getScene().getWindow());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    BaseDados.atualizarCardapio();
+                    atualizar();
+                }
+            });
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @FXML
     void excluir(ActionEvent event) {
-
+        contextMenu.hide();
+        if(JOptionPane.showConfirmDialog(null, "Deseja excluir o pedido ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            BaseDados.getRepositoryPedido().deletar(tablePedido.getSelectionModel().getSelectedItem().getId());
+            BaseDados.atualizarPedido();
+            atualizar();
+        }
     }
 
     @FXML
@@ -209,5 +256,15 @@ public class ControllerPedido implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         atualizar();
     }
-
+    @FXML
+    void keyBuscar(KeyEvent event) {
+        if(event.getCode() == KeyCode.ENTER){
+            btnBuscar.fire();
+        }
+        if(event.getCode() == KeyCode.BACK_SPACE || event.getCode() == KeyCode.DELETE){
+            BaseDados.atualizarPedido();
+            atualizar();
+            buscarTxt.setText("");
+        }
+    }
 }

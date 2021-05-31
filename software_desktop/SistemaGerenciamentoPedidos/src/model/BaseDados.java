@@ -76,6 +76,13 @@ public class BaseDados {
     public static void atualizarPedido(){
         pedidos = getRepositoryPedido().buscarTodos();
     }
+    public static void atualizarPedidoMesa(int mesa){
+        pedidos = getRepositoryPedido().buscarMesa(mesa);
+    }
+    public static void atualizarPedidoId(int id){
+        pedidos.clear();
+        pedidos.add(getRepositoryPedido().buscarId(id));
+    }
     
     public static List<Funcionario> getFuncionarios(){
         if(funcionarios==null){

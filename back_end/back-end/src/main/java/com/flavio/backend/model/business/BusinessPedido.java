@@ -58,12 +58,14 @@ public class BusinessPedido {
         return dao.findById(id);
         
     }
-    public ResponseEntity<Pedido> editar(int id,Pedido pedido){
+    public ResponseEntity<Pedido> editar(int id,Pedido pedido,String cardapio){
         Pedido pedido1 = dao.getOne(id);
         
         if(pedido1==null){
             return ResponseEntity.noContent().build();
         }
+        pedido.setItens(criarListaItem(cardapio));
+        pedido.setDataPedido(new Date());
         BeanUtils.copyProperties(pedido, pedido1,"id");
         pedido1 = dao.save(pedido1);
         return ResponseEntity.ok(pedido1);
@@ -82,8 +84,8 @@ public class BusinessPedido {
         return ResponseEntity.ok(pedido);
     }
     
-    public Pedido buscarData(int dia,int mes,int ano){
-        Pedido pedido = dao.buscarData(dia,mes,ano);
+    public List<Pedido> buscarData(int dia,int mes,int ano){
+        List<Pedido> pedido = dao.buscarData(dia,mes,ano);
         if(pedido ==null){
             return null;
         }
@@ -95,6 +97,9 @@ public class BusinessPedido {
     
     public List<Pedido> buscarMesa(int numero){
         return dao.buscarMesa(numero);
+    }
+    public void excluirPedido(int id){
+        dao.deleteById(id);
     }
     
 }

@@ -226,6 +226,10 @@ public class Controller {
     public Pedido salvarPedido(Pedido pedido,@RequestParam("cardapio") String cardapio){
         return bp.salvar(pedido,cardapio);
     }
+    @DeleteMapping("/pedido")
+    public void deletarPedido(@RequestParam("id") int id){
+        bp.excluirPedido(id);
+    }
  
     @GetMapping("/pedido")
     public List<Pedido> buscarTodosPedido(){
@@ -237,8 +241,8 @@ public class Controller {
     }
     
     @PutMapping("/pedido/{id}")
-    public ResponseEntity<Pedido> editarPedido(@PathVariable("id") int id,@Validated Pedido pedido){
-        return bp.editar(id, pedido);
+    public ResponseEntity<Pedido> editarPedido(@PathVariable("id") int id,@Validated Pedido pedido,String cardapio){
+        return bp.editar(id, pedido,cardapio);
     }
     
     @PutMapping("/pedido/alterarEstado/{id}")
@@ -247,7 +251,7 @@ public class Controller {
     }
     
     @GetMapping("/pedido/buscarData")
-    public Pedido buscarData(@Validated int dia,@Validated int mes,@Validated int ano){
+    public List<Pedido> buscarData(@RequestParam("dia") int dia,@RequestParam("mes") int mes,@RequestParam("ano") int ano){
         return bp.buscarData(dia,mes,ano);
     }
     

@@ -30,14 +30,16 @@
                   <TableColumn fx:id="colStatus" prefWidth="136.80001831054688" text="Status" />
               </columns>
                <contextMenu>
-                  <ContextMenu>
+                  <ContextMenu fx:id="contextMenu">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+                      <MenuItem mnemonicParsing="false" onAction="#update" text="Editar" />
                       <MenuItem mnemonicParsing="false" onAction="#verInformacoes" text="Ver informações" />
+
                       <MenuItem mnemonicParsing="false" onAction="#excluir" text="Excluir" />
                       <MenuItem fx:id="contextMenuPendente" mnemonicParsing="false" onAction="#mudarStatus" text="Mudar status para pendente" />
-                      <MenuItem fx:id="contextMenuConcluido"  mnemonicParsing="false" onAction="#mudarStatus" text="Mudar status para concluido" />
-                      <MenuItem fx:id="contextMenuCancelado"  mnemonicParsing="false" onAction="#mudarStatus" text="Mudar status para cancelado" />
+                      <MenuItem fx:id="contextMenuConcluido" mnemonicParsing="false" onAction="#mudarStatus" text="Mudar status para concluido" />
+                      <MenuItem fx:id="contextMenuCancelado" mnemonicParsing="false" onAction="#mudarStatus" text="Mudar status para cancelado" />
                     </items>
                   </ContextMenu>
                </contextMenu>
@@ -46,7 +48,7 @@
       </Pane>
       <Pane layoutY="117.0" prefHeight="114.0" prefWidth="620.0" style="-fx-background-color: rgb(118,226,244);">
          <children>
-            <TextField fx:id="buscarTxt" layoutX="20.0" layoutY="66.0" prefHeight="25.0" prefWidth="492.0" styleClass="campoTexto" stylesheets="@style.css" />
+            <TextField fx:id="buscarTxt" layoutX="20.0" layoutY="66.0" onKeyReleased="#keyBuscar" prefHeight="25.0" prefWidth="492.0" styleClass="campoTexto" stylesheets="@style.css" />
             <Button fx:id="btnBuscar" layoutX="532.0" layoutY="65.0" mnemonicParsing="false" onAction="#buscar" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Buscar">
                <font>
                   <Font name="Century Gothic" size="14.0" />

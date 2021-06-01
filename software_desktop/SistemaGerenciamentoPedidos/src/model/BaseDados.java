@@ -8,6 +8,7 @@ package model;
 import java.util.List;
 import repository.RepositoryCardapio;
 import repository.RepositoryFuncionario;
+import repository.RepositoryMesa;
 import repository.RepositoryPedido;
 import repository.RepositoryReset;
 
@@ -21,10 +22,12 @@ public class BaseDados {
     private static RepositoryCardapio repositoryCardapio;
     private static RepositoryPedido repositoryPedido;
     private static RepositoryReset repositoryReset;
+    private static RepositoryMesa repositoryMesa;
     private static List<Funcionario> funcionarios;
     private static List<ItemCardapio> cardapio;
     private static List<SenhaReset> resets;
     private static List<Pedido> pedidos;
+    private static List<Mesa> mesas;
     private static int status;
     
     public static void atualizarFuncionarios(){
@@ -85,6 +88,13 @@ public class BaseDados {
     public static void atualizarPedidoId(int id){
         pedidos.clear();
         pedidos.add(getRepositoryPedido().buscarId(id));
+    }
+    public static void atualizarMesa(){
+        mesas = getRepositoryMesa().buscarTodos();
+    }
+    public static void atualizarMesaNumero(int numero){
+        mesas.clear();
+        mesas.add(getRepositoryMesa().buscarMesaNumero(numero));
     }
     
     public static List<Funcionario> getFuncionarios(){
@@ -152,6 +162,19 @@ public class BaseDados {
 
     public static List<Pedido> getPedidos() {
         return pedidos;
+    }
+
+    public static RepositoryMesa getRepositoryMesa() {
+        if(repositoryMesa == null){
+            repositoryMesa = new RepositoryMesa();
+        }
+        return repositoryMesa;
+    }
+    
+    
+
+    public static List<Mesa> getMesas() {
+        return mesas;
     }
     
     

@@ -10,7 +10,7 @@ package model;
  * @author Flavio
  */
 public class Mesa {
-     private int id;
+    private int id;
     private int numero;
     private boolean isLivre;
 

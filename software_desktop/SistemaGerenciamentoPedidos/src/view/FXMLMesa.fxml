@@ -36,7 +36,7 @@
       </Pane>
       <Pane layoutY="111.0" prefHeight="59.0" prefWidth="600.0">
          <children>
-            <TextField fx:id="buscarTxt" layoutX="27.0" layoutY="17.0" prefHeight="31.0" prefWidth="461.0" promptText="Digite o número da mesa" styleClass="campoTexto" stylesheets="@style.css" />
+            <TextField fx:id="buscarTxt" layoutX="27.0" layoutY="17.0" onKeyReleased="#KeyBusca" prefHeight="31.0" prefWidth="461.0" promptText="Digite o número da mesa" styleClass="campoTexto" stylesheets="@style.css" />
             <Button fx:id="btnBuscar" layoutX="502.0" layoutY="17.0" mnemonicParsing="false" onAction="#buscar" prefHeight="31.0" prefWidth="77.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Buscar">
                <font>
                   <Font name="Century Gothic" size="15.0" />

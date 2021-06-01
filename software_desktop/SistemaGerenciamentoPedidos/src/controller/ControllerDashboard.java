@@ -69,7 +69,7 @@ public class ControllerDashboard implements Initializable {
 
     @FXML
     void mesa(ActionEvent event) {
-        
+        acessarTela("Mesa", "view/FXMLMesa.fxml");
     }
 
 

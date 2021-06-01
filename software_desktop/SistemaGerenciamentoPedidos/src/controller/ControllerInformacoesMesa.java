@@ -7,7 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+import model.Mesa;
 
 public class ControllerInformacoesMesa implements Initializable {
 
@@ -22,19 +25,31 @@ public class ControllerInformacoesMesa implements Initializable {
 
     @FXML
     private Button btnOk;
+    
+    private static Mesa mesa;
 
     @FXML
     void KeyOk(KeyEvent event) {
-
+        if(event.getCode() == KeyCode.ENTER){
+            btnOk.fire();
+        }
     }
 
     @FXML
     void ok(ActionEvent event) {
-
+        Stage stage = (Stage)btnOk.getScene().getWindow();
+        stage.close();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        lblCodigo.setText(mesa.getId()+"");
+        lblNumero.setText(mesa.getNumero()+"");
+        lblDisponibilidade.setText(mesa.isIsLivre()?"Disponível":"Indísponivel");
+    }
+
+    public static void setMesa(Mesa mesa) {
+        ControllerInformacoesMesa.mesa = mesa;
     }
 
 }

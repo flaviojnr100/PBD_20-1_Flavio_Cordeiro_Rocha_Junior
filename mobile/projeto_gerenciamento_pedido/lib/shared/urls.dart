@@ -9,4 +9,8 @@ class Urls {
   static const String buscarLoginUnico =
       "${RepositoryUtils.URL}/funcionario/login";
   static const String reset = "${RepositoryUtils.URL}/senhaReset";
+  static const String cardapio = "${RepositoryUtils.URL}/cardapio";
+  static const String pedidoFuncionario =
+      "${RepositoryUtils.URL}/pedidosFuncionario";
+  static const String pedido = "${RepositoryUtils.URL}/pedido";
 }

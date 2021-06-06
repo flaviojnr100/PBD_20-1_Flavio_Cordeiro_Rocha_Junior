@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+import 'package:projeto_gerenciamento_pedido/model/Mesa.dart';
+import 'package:projeto_gerenciamento_pedido/model/Pedido.dart';
+import 'package:projeto_gerenciamento_pedido/repository/RepositoryPedido.dart';
+import 'package:projeto_gerenciamento_pedido/view/dashboard/componentes/inicio.dart';
+import 'package:projeto_gerenciamento_pedido/view/dashboard/dashboard.dart';
 
 class EditarPedido extends StatefulWidget {
-  EditarPedido({Key key}) : super(key: key);
-
+  PedidoModel pedido;
+  EditarPedido({Key key, this.pedido}) : super(key: key);
+  TextEditingController controllerMesa = TextEditingController();
+  RepositoryPedido repositoryPedido = RepositoryPedido();
   @override
   _EditarPedidoState createState() => _EditarPedidoState();
 }
@@ -10,6 +19,20 @@ class EditarPedido extends StatefulWidget {
 class _EditarPedidoState extends State<EditarPedido> {
   var itemSelecionado = "pendente";
   var _lista = ["pendente", "cancelado", "concluido"];
+  @override
+  void initState() {
+    widget.controllerMesa.text = widget.pedido.mesa.numero.toString();
+
+    Inicio.controller.precoEditar = widget.pedido.total;
+    Inicio.controller.itensEditar = ObservableList.of(widget.pedido.itens);
+    for (var item in _lista) {
+      if (item == widget.pedido.status) {
+        itemSelecionado = item;
+      }
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +49,74 @@ class _EditarPedidoState extends State<EditarPedido> {
                 style: TextStyle(fontSize: 40),
               ),
             ),
+            Positioned(
+                top: 50,
+                left: 4,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.98,
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  color: Colors.white,
+                  child: Observer(
+                      builder: (_) => ListView.builder(
+                            itemCount: Inicio.controller.itensEditar.length,
+                            itemBuilder: (context, index) => Padding(
+                                padding: const EdgeInsets.only(top: 5),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext bc) {
+                                          return AlertDialog(
+                                            title: Text("Aviso"),
+                                            content: Text(
+                                                "Deseja excluir esse item do pedido ?"),
+                                            actions: <Widget>[
+                                              FlatButton(
+                                                  onPressed: () {
+                                                    Inicio.controller
+                                                            .precoEditar -=
+                                                        Inicio
+                                                            .controller
+                                                            .itensEditar[index]
+                                                            .preco;
+                                                    Inicio
+                                                        .controller.itensEditar
+                                                        .removeAt(index);
+
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text("Sim")),
+                                              FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text("Não"))
+                                            ],
+                                          );
+                                        });
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.95,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.08,
+                                    color: Colors.black12,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Text(
+                                          "Nome: ${Inicio.controller.itensEditar[index].nome}",
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        Text(
+                                            "R\$ ${Inicio.controller.itensEditar[index].preco.toStringAsFixed(2)}")
+                                      ],
+                                    ),
+                                  ),
+                                )),
+                          )),
+                )),
             Positioned(
                 bottom: 10,
                 left: 10,
@@ -71,6 +162,7 @@ class _EditarPedidoState extends State<EditarPedido> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 8),
                               child: TextFormField(
+                                controller: widget.controllerMesa,
                                 decoration:
                                     InputDecoration(border: InputBorder.none),
                               ),
@@ -82,10 +174,11 @@ class _EditarPedidoState extends State<EditarPedido> {
                         padding: const EdgeInsets.only(top: 30),
                         child: Row(
                           children: <Widget>[
-                            Text(
-                              "Total: 0,00",
-                              style: TextStyle(fontSize: 40),
-                            ),
+                            Observer(
+                                builder: (_) => Text(
+                                      "Total: R\$${Inicio.controller.precoEditar.toStringAsFixed(2)}",
+                                      style: TextStyle(fontSize: 40),
+                                    ))
                           ],
                         ),
                       ),
@@ -99,7 +192,94 @@ class _EditarPedidoState extends State<EditarPedido> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30))),
                           child: FlatButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext bc) {
+                                      return AlertDialog(
+                                        title: Text("Aviso"),
+                                        content:
+                                            Text("Deseja alterar o pedido ?"),
+                                        actions: <Widget>[
+                                          FlatButton(
+                                              onPressed: () {
+                                                widget.pedido.itens = Inicio
+                                                    .controller.itensEditar
+                                                    .toList();
+                                                Mesa mesa = Mesa();
+                                                mesa.numero = int.parse(
+                                                    widget.controllerMesa.text);
+                                                widget.pedido.mesa = mesa;
+                                                widget.pedido.status =
+                                                    this.itemSelecionado;
+                                                widget.pedido.total = Inicio
+                                                    .controller.precoEditar;
+                                                widget.repositoryPedido
+                                                    .editar(widget.pedido)
+                                                    .whenComplete(() {
+                                                  if (widget.repositoryPedido
+                                                          .statusCode ==
+                                                      200) {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder:
+                                                            (BuildContext bc) {
+                                                          return AlertDialog(
+                                                            title:
+                                                                Text("Aviso"),
+                                                            content: Text(
+                                                                "Pedido alterado com sucesso!"),
+                                                            actions: <Widget>[
+                                                              FlatButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
+                                                                  child: Text(
+                                                                      "Ok"))
+                                                            ],
+                                                          );
+                                                        });
+                                                  } else {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder:
+                                                            (BuildContext bc) {
+                                                          return AlertDialog(
+                                                            title:
+                                                                Text("Aviso"),
+                                                            content: Text(
+                                                                "Erro ao alterar o pedido"),
+                                                            actions: <Widget>[
+                                                              FlatButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
+                                                                  child: Text(
+                                                                      "Ok"))
+                                                            ],
+                                                          );
+                                                        });
+                                                  }
+                                                });
+                                              },
+                                              child: Text("sim")),
+                                          FlatButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text("não"))
+                                        ],
+                                      );
+                                    });
+                              },
                               child: Text(
                                 "Salvar",
                                 style: TextStyle(

@@ -50,7 +50,10 @@ public class BusinessPedido {
         }
         return itens;
     }
-
+    
+    public List<Pedido> buscarPedidoFuncionario(int id){
+        return dao.buscarPedidoFuncionario(id);
+    }
     public List<Pedido> buscarTodos(){
         return dao.findAll();
     }

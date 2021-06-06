@@ -235,6 +235,12 @@ public class Controller {
     public List<Pedido> buscarTodosPedido(){
         return bp.buscarTodos();
     }
+    
+    @GetMapping("/pedidosFuncionario/{id}")
+    public List<Pedido> buscarPedidosFuncionario(@PathVariable("id") int id){
+        return bp.buscarPedidoFuncionario(id);
+    }
+    
     @GetMapping("/pedido/{id}")
     public Optional<Pedido> buscarIdPedido(@PathVariable("id") int id){
         return bp.buscarId(id);

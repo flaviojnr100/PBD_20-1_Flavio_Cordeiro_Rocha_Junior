@@ -8,12 +8,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.BaseDados;
+import model.FinanciaMensal;
 import model.Funcionario;
 import model.ItemCardapio;
 import model.Mesa;
 import model.Pedido;
 import model.SenhaReset;
 import repository.RepositoryCardapio;
+import repository.RepositoryFinancia;
 import repository.RepositoryFuncionario;
 import repository.RepositoryPedido;
 import repository.RepositoryReset;
@@ -45,16 +48,14 @@ public class App extends Application {
     
     public static void main(String[] args) {
         launch(args);
-      /* RepositoryPedido rp = new RepositoryPedido();
-       for(Pedido pedido:rp.buscarData(17, 05, 2021)){
-           System.out.println("Funcionario: "+pedido.getFuncionario().getNome());
-           System.out.println("Data: "+pedido.getDataPedido());
-           for(ItemCardapio cardapio:pedido.getItens()){
-               System.out.println("Nome item: "+cardapio.getNome());
-           }
+     /*   RepositoryFinancia rp = new RepositoryFinancia();
+       for(FinanciaMensal pedido:rp.buscarTodos()){
+           
+           System.out.println("Data: "+pedido.getTotal());
            System.out.println("-------------------");
-       }*/
-        
+       }
+        */
+       // System.out.println(""+BaseDados.getMeses().get(1));
     }
     
 }

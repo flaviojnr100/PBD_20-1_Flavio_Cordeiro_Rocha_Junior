@@ -5,8 +5,13 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import repository.RepositoryCardapio;
+import repository.RepositoryFinancia;
 import repository.RepositoryFuncionario;
 import repository.RepositoryMesa;
 import repository.RepositoryPedido;
@@ -23,13 +28,39 @@ public class BaseDados {
     private static RepositoryPedido repositoryPedido;
     private static RepositoryReset repositoryReset;
     private static RepositoryMesa repositoryMesa;
+    private static RepositoryFinancia repositoryFinancia;
     private static List<Funcionario> funcionarios;
     private static List<ItemCardapio> cardapio;
     private static List<SenhaReset> resets;
     private static List<Pedido> pedidos;
     private static List<Mesa> mesas;
+    private static List<FinanciaMensal> financia;
+    private static List<FinanciaMensal> financiaMensal;
+    private static List<String> meses;
+    private static List<String> anos;
+    private static ObservableList mesesFx;
+    private static ObservableList anosFx;
     private static int status;
     
+    public static void atualizarMeses(){
+        meses.add("Janeiro");
+        meses.add("Fevereiro");
+        meses.add("Março");
+        meses.add("Abril");
+        meses.add("Maio");
+        meses.add("Junho");
+        meses.add("Julho");
+        meses.add("Agosto");
+        meses.add("Setembro");
+        meses.add("Outubro");
+        meses.add("Novembro");
+        meses.add("Dezembro");
+        mesesFx = FXCollections.observableArrayList(getMeses());
+    }
+    public static void atualizarAnos(){
+        anos.add("2021");
+        anosFx = FXCollections.observableArrayList(anos);
+    }
     public static void atualizarFuncionarios(){
         funcionarios = getRepositoryFuncionario().buscarTodos();
     }
@@ -96,7 +127,12 @@ public class BaseDados {
         mesas.clear();
         mesas.add(getRepositoryMesa().buscarMesaNumero(numero));
     }
-    
+    public static void atualizarFinanciaMensal(int mes,int ano){
+        financiaMensal = getRepositoryFinancia().buscarMes(mes, ano);
+    }
+    public static void atualizarFinancia(){
+        financia = getRepositoryFinancia().buscarTodos();
+    }
     public static List<Funcionario> getFuncionarios(){
         if(funcionarios==null){
             atualizarFuncionarios();
@@ -175,6 +211,46 @@ public class BaseDados {
 
     public static List<Mesa> getMesas() {
         return mesas;
+    }
+
+    public static RepositoryFinancia getRepositoryFinancia() {
+        if(repositoryFinancia == null){
+            repositoryFinancia = new RepositoryFinancia();
+        }
+        return repositoryFinancia;
+    }
+
+    public static List<FinanciaMensal> getFinanciaMensal() {
+        return financiaMensal;
+    }
+
+    public static List<FinanciaMensal> getFinancia() {
+        
+        return financia;
+    }
+
+    public static List<String> getMeses() {
+        if(meses == null){
+            meses = new ArrayList<>();
+            atualizarMeses();
+        }
+        return meses;
+    }
+
+    public static ObservableList getMesesFx() {
+        return mesesFx;
+    }
+
+    public static List<String> getAnos() {
+        if(anos == null){
+            anos = new ArrayList<>();
+            atualizarAnos();
+        }
+        return anos;
+    }
+
+    public static ObservableList getAnosFx() {
+        return anosFx;
     }
     
     

@@ -48,13 +48,17 @@ public class App extends Application {
     
     public static void main(String[] args) {
         launch(args);
-     /*   RepositoryFinancia rp = new RepositoryFinancia();
+       /* RepositoryFinancia rp = new RepositoryFinancia();
        for(FinanciaMensal pedido:rp.buscarTodos()){
            
-           System.out.println("Data: "+pedido.getTotal());
+           System.out.println("Data: "+pedido.getDataPedido());
            System.out.println("-------------------");
        }
         */
+      /*  RepositoryPedido rp = new RepositoryPedido();
+        for(Pedido p: rp.buscarTodos()){
+            System.out.println("Data: "+p.getDataPedido());
+        }*/
        // System.out.println(""+BaseDados.getMeses().get(1));
     }
     

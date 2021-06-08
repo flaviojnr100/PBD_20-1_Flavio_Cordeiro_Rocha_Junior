@@ -12,19 +12,21 @@ import java.util.Date;
  * @author Flavio
  */
 public class FinanciaMensal {
-    private Date data;
+    private Date dataPedido;
     private double total;
 
     public FinanciaMensal() {
     }
 
-    public Date getData() {
-        return data;
+    public Date getDataPedido() {
+        return dataPedido;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataPedido(Date dataPedido) {
+        this.dataPedido = dataPedido;
     }
+
+   
 
     public double getTotal() {
         return total;

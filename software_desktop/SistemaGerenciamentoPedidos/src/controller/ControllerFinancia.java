@@ -86,7 +86,7 @@ public class ControllerFinancia implements Initializable {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<FinanciaMensal, String> param) {
                 final FinanciaMensal financia = param.getValue();
-                final SimpleObjectProperty sop = new SimpleObjectProperty(sdf.format(financia.getData()));
+                final SimpleObjectProperty sop = new SimpleObjectProperty(sdf.format(financia.getDataPedido()));
                 return sop;
             }
         });

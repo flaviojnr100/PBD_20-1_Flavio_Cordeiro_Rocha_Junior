@@ -90,14 +90,14 @@ public class ControllerFinanciaMensal implements Initializable {
     }
     
     private void atualizar(){
-        //bug da data null
+        
         SimpleDateFormat sdf =new SimpleDateFormat("dd/MM/yyyy");
         colData.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FinanciaMensal, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<FinanciaMensal, String> param) {
                final FinanciaMensal financia = param.getValue();
                
-                final SimpleObjectProperty sop = new SimpleObjectProperty(sdf.format(financia.getData()));
+                final SimpleObjectProperty sop = new SimpleObjectProperty(sdf.format(financia.getDataPedido()));
                 return sop;
             }
         });

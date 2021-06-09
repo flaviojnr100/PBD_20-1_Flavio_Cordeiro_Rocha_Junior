@@ -51,7 +51,21 @@ public class ControllerFinancia implements Initializable {
 
     @FXML
     void anual(ActionEvent event) {
-
+        try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLFinanciaAnual.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Financia anual");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
+            stage.initOwner((Stage) btnAnual.getScene().getWindow());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

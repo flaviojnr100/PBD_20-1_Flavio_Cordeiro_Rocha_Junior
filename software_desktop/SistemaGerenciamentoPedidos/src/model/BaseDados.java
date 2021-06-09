@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import repository.RepositoryCardapio;
 import repository.RepositoryFinancia;
+import repository.RepositoryFinanciaAnual;
 import repository.RepositoryFuncionario;
 import repository.RepositoryMesa;
 import repository.RepositoryPedido;
@@ -29,6 +30,7 @@ public class BaseDados {
     private static RepositoryReset repositoryReset;
     private static RepositoryMesa repositoryMesa;
     private static RepositoryFinancia repositoryFinancia;
+    private static RepositoryFinanciaAnual repositoryFinanciaAnual;
     private static List<Funcionario> funcionarios;
     private static List<ItemCardapio> cardapio;
     private static List<SenhaReset> resets;
@@ -36,8 +38,9 @@ public class BaseDados {
     private static List<Mesa> mesas;
     private static List<FinanciaMensal> financia;
     private static List<FinanciaMensal> financiaMensal;
+    private static List<FinanciaAnual> financiaAnual;
     private static List<String> meses;
-    private static List<String> anos;
+    private static List<String> anos = new ArrayList<>();
     private static ObservableList mesesFx;
     private static ObservableList anosFx;
     private static int status;
@@ -58,8 +61,15 @@ public class BaseDados {
         mesesFx = FXCollections.observableArrayList(getMeses());
     }
     public static void atualizarAnos(){
-        anos.add("2021");
-        anosFx = FXCollections.observableArrayList(anos);
+        List<FinanciaAnual>tempList = getRepositoryFinanciaAnual().buscarTodos();
+        int i=0;
+        for(FinanciaAnual fa:tempList){
+            if(getAnos().size()==0 || !getAnos().get(i-1).equals(fa.getAno()+"")){
+                getAnos().add(fa.getAno()+"");
+            }
+            i++;
+        }
+        anosFx = FXCollections.observableArrayList(getAnos());
     }
     public static void atualizarFuncionarios(){
         funcionarios = getRepositoryFuncionario().buscarTodos();
@@ -132,6 +142,10 @@ public class BaseDados {
     }
     public static void atualizarFinancia(){
         financia = getRepositoryFinancia().buscarTodos();
+    }
+    
+    public static void atualizarFinanciaAnual(int ano){
+        financiaAnual = getRepositoryFinanciaAnual().buscarPorAno(ano);
     }
     public static List<Funcionario> getFuncionarios(){
         if(funcionarios==null){
@@ -242,15 +256,25 @@ public class BaseDados {
     }
 
     public static List<String> getAnos() {
-        if(anos == null){
-            anos = new ArrayList<>();
-            atualizarAnos();
-        }
         return anos;
     }
 
     public static ObservableList getAnosFx() {
+        if(anosFx == null){
+            atualizarAnos();
+        }
         return anosFx;
+    }
+
+    public static RepositoryFinanciaAnual getRepositoryFinanciaAnual() {
+        if(repositoryFinanciaAnual==null){
+            repositoryFinanciaAnual = new RepositoryFinanciaAnual();
+        }
+        return repositoryFinanciaAnual;
+    }
+
+    public static List<FinanciaAnual> getFinanciaAnual() {
+        return financiaAnual;
     }
     
     

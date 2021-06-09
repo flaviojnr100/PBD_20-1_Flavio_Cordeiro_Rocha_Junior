@@ -7,6 +7,7 @@ package controller;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -58,7 +59,9 @@ public class ControllerFinanciaMensal implements Initializable {
 
     @FXML
     void mudarAno(ActionEvent event) {
-
+         BaseDados.atualizarFinanciaMensal(comboMes.getSelectionModel().getSelectedIndex()+1, Integer.parseInt(BaseDados.getAnos().get(comboAno.getSelectionModel().getSelectedIndex())));
+        atualizar();
+        lblTotal.setText("R$"+String.format("%.2f", total(BaseDados.getFinanciaMensal())));
     }
 
     @FXML
@@ -76,17 +79,14 @@ public class ControllerFinanciaMensal implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Date date = new Date();
-        GregorianCalendar gc = new GregorianCalendar();
-        BaseDados.atualizarFinanciaMensal(date.getMonth(),gc.toZonedDateTime().getYear());
-        atualizar();
-        lblTotal.setText("R$"+String.format("%.2f", total(BaseDados.getFinanciaMensal())));
         BaseDados.getMeses();
         comboMes.setItems(BaseDados.getMesesFx());
-        comboMes.getSelectionModel().select(date.getMonth()-1);
-        BaseDados.getAnos();
+        comboMes.getSelectionModel().select(LocalDate.now().getMonthValue()-1);
         comboAno.setItems(BaseDados.getAnosFx());
-        comboAno.getSelectionModel().select(0);
+        comboAno.getSelectionModel().selectLast();
+        BaseDados.atualizarFinanciaMensal(comboMes.getSelectionModel().getSelectedIndex()+1, Integer.parseInt(BaseDados.getAnos().get(comboAno.getSelectionModel().getSelectedIndex())));
+        atualizar();
+        lblTotal.setText("R$"+String.format("%.2f", total(BaseDados.getFinanciaMensal())));
     }
     
     private void atualizar(){

@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.BaseDados;
+import model.FinanciaAnual;
 import model.FinanciaMensal;
 import model.Funcionario;
 import model.ItemCardapio;
@@ -17,6 +18,7 @@ import model.Pedido;
 import model.SenhaReset;
 import repository.RepositoryCardapio;
 import repository.RepositoryFinancia;
+import repository.RepositoryFinanciaAnual;
 import repository.RepositoryFuncionario;
 import repository.RepositoryPedido;
 import repository.RepositoryReset;
@@ -35,23 +37,23 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        
         Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("view/FXMLLogin.fxml"));
         Scene scene = new Scene(login);
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("asset/icone.png")));
         primaryStage.setResizable(false);
         primaryStage.show();
-        
+        BaseDados.getMeses();
 
     }
     
     public static void main(String[] args) {
         launch(args);
-       /* RepositoryFinancia rp = new RepositoryFinancia();
-       for(FinanciaMensal pedido:rp.buscarTodos()){
+     /*   RepositoryFinanciaAnual rp = new RepositoryFinanciaAnual();
+       for(FinanciaAnual pedido:rp.buscarTodos()){
            
-           System.out.println("Data: "+pedido.getDataPedido());
+           System.out.println("Data: "+pedido.getAno());
            System.out.println("-------------------");
        }
         */

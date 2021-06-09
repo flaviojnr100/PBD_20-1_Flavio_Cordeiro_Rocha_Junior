@@ -6,11 +6,13 @@
 package com.flavio.backend.controller;
 
 import com.flavio.backend.model.business.BusinessCardapio;
+import com.flavio.backend.model.business.BusinessFinanciaAnual;
 import com.flavio.backend.model.business.BusinessFinanciaMensal;
 import com.flavio.backend.model.business.BusinessFuncionario;
 import com.flavio.backend.model.business.BusinessMesa;
 import com.flavio.backend.model.business.BusinessPedido;
 import com.flavio.backend.model.business.BusinessSenhaReset;
+import com.flavio.backend.model.object.FinanciaAnual;
 import com.flavio.backend.model.object.FinanciaMensal;
 import com.flavio.backend.model.object.Funcionario;
 import com.flavio.backend.model.object.ItemCardapio;
@@ -68,6 +70,9 @@ public class Controller {
     
     @Autowired
     BusinessFinanciaMensal bfm;
+    
+    @Autowired
+    BusinessFinanciaAnual bfa;
     
     @GetMapping("/funcionario")
     public List<Funcionario> buscarTodos(){
@@ -307,6 +312,15 @@ public class Controller {
     @GetMapping("/financiaMensal/{mes}/{ano}")
     public List<FinanciaMensal> buscarFinanciaMes(@PathVariable("mes")int mes,@PathVariable("ano")int ano){
         return bfm.buscarMes(mes,ano);
+    }
+    
+    @GetMapping("/financiaAnual")
+    public List<FinanciaAnual> buscarFinanciaAnual(){
+        return bfa.buscarTodos();
+    }
+    @GetMapping("/financiaAnual/{ano}")
+    public List<FinanciaAnual> buscarFinanciaAnualPorAno(@PathVariable("ano") int ano){
+        return bfa.buscarPorAno(ano);
     }
     
     }

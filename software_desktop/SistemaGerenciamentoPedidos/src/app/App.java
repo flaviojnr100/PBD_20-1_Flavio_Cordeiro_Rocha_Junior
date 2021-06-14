@@ -13,6 +13,7 @@ import model.FinanciaAnual;
 import model.FinanciaMensal;
 import model.Funcionario;
 import model.ItemCardapio;
+import model.Log;
 import model.Mesa;
 import model.Pedido;
 import model.SenhaReset;
@@ -20,6 +21,7 @@ import repository.RepositoryCardapio;
 import repository.RepositoryFinancia;
 import repository.RepositoryFinanciaAnual;
 import repository.RepositoryFuncionario;
+import repository.RepositoryLog;
 import repository.RepositoryPedido;
 import repository.RepositoryReset;
 
@@ -50,13 +52,13 @@ public class App extends Application {
     
     public static void main(String[] args) {
         launch(args);
-     /*   RepositoryFinanciaAnual rp = new RepositoryFinanciaAnual();
-       for(FinanciaAnual pedido:rp.buscarTodos()){
+      /*  RepositoryLog rp = new RepositoryLog();
+       for(Log pedido:rp.buscarTodos()){
            
-           System.out.println("Data: "+pedido.getAno());
+           System.out.println("Tabela: "+pedido.getData().toString());
            System.out.println("-------------------");
-       }
-        */
+       }*/
+        
       /*  RepositoryPedido rp = new RepositoryPedido();
         for(Pedido p: rp.buscarTodos()){
             System.out.println("Data: "+p.getDataPedido());

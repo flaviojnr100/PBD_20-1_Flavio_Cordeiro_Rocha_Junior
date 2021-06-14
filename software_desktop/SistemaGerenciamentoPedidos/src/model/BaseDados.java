@@ -14,6 +14,7 @@ import repository.RepositoryCardapio;
 import repository.RepositoryFinancia;
 import repository.RepositoryFinanciaAnual;
 import repository.RepositoryFuncionario;
+import repository.RepositoryLog;
 import repository.RepositoryMesa;
 import repository.RepositoryPedido;
 import repository.RepositoryReset;
@@ -31,6 +32,7 @@ public class BaseDados {
     private static RepositoryMesa repositoryMesa;
     private static RepositoryFinancia repositoryFinancia;
     private static RepositoryFinanciaAnual repositoryFinanciaAnual;
+    private static RepositoryLog repositoryLog;
     private static List<Funcionario> funcionarios;
     private static List<ItemCardapio> cardapio;
     private static List<SenhaReset> resets;
@@ -41,6 +43,7 @@ public class BaseDados {
     private static List<FinanciaAnual> financiaAnual;
     private static List<String> meses;
     private static List<String> anos = new ArrayList<>();
+    private static List<Log> logs;
     private static ObservableList mesesFx;
     private static ObservableList anosFx;
     private static int status;
@@ -146,6 +149,12 @@ public class BaseDados {
     
     public static void atualizarFinanciaAnual(int ano){
         financiaAnual = getRepositoryFinanciaAnual().buscarPorAno(ano);
+    }
+    public static void atualizarLog(){
+        logs = getRepositoryLog().buscarTodos();
+    }
+    public static void atualizarLogData(int dia,int mes,int ano){
+        logs = getRepositoryLog().buscarData(dia, mes, ano);
     }
     public static List<Funcionario> getFuncionarios(){
         if(funcionarios==null){
@@ -275,6 +284,20 @@ public class BaseDados {
 
     public static List<FinanciaAnual> getFinanciaAnual() {
         return financiaAnual;
+    }
+
+    public static RepositoryLog getRepositoryLog() {
+        if(repositoryLog == null){
+            repositoryLog = new RepositoryLog();
+        }
+        return repositoryLog;
+    }
+
+    public static List<Log> getLogs() {
+        if(logs == null){
+            atualizarLog();
+        }
+        return logs;
     }
     
     

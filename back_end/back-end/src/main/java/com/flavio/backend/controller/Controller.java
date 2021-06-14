@@ -9,6 +9,7 @@ import com.flavio.backend.model.business.BusinessCardapio;
 import com.flavio.backend.model.business.BusinessFinanciaAnual;
 import com.flavio.backend.model.business.BusinessFinanciaMensal;
 import com.flavio.backend.model.business.BusinessFuncionario;
+import com.flavio.backend.model.business.BusinessLog;
 import com.flavio.backend.model.business.BusinessMesa;
 import com.flavio.backend.model.business.BusinessPedido;
 import com.flavio.backend.model.business.BusinessSenhaReset;
@@ -16,6 +17,7 @@ import com.flavio.backend.model.object.FinanciaAnual;
 import com.flavio.backend.model.object.FinanciaMensal;
 import com.flavio.backend.model.object.Funcionario;
 import com.flavio.backend.model.object.ItemCardapio;
+import com.flavio.backend.model.object.Log;
 import com.flavio.backend.model.object.Mesa;
 import com.flavio.backend.model.object.Pedido;
 import com.flavio.backend.model.object.SenhaReset;
@@ -73,6 +75,9 @@ public class Controller {
     
     @Autowired
     BusinessFinanciaAnual bfa;
+    
+    @Autowired
+    BusinessLog blo;
     
     @GetMapping("/funcionario")
     public List<Funcionario> buscarTodos(){
@@ -323,4 +328,13 @@ public class Controller {
         return bfa.buscarPorAno(ano);
     }
     
+    @GetMapping("/log")
+    public List<Log> buscarTodosLog(){
+        return blo.buscarTodos();
     }
+    @GetMapping("/log/{dia}/{mes}/{ano}")
+    public List<Log> buscarLogData(@PathVariable("dia")int dia,@PathVariable("mes")int mes,@PathVariable("ano")int ano){
+        return blo.buscarData(dia, mes, ano);
+    }
+    
+}

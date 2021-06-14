@@ -29,26 +29,31 @@ public class BusinessSenhaReset {
     DaoFuncionario daoF;
     
     public SenhaReset salvar(int idFuncionario){
+        try{
         SenhaReset senha = new SenhaReset();
         Optional<Funcionario> funcionario = daoF.findById(idFuncionario);
         
         if(funcionario == null){
             return null;
         }else{
-            SenhaReset reset = dao.findByFuncionario(funcionario.get());
+           // SenhaReset reset = dao.findByFuncionario(funcionario.get());
             
-            if(reset == null){
+          //  if(reset == null){
                 Funcionario f1 = funcionario.get();
                 f1.setIsPermissao(false);
+                
                 daoF.save(f1);
                 senha.setFuncionario(f1);
                 senha.setData(new Date());
         
                 return dao.save(senha);
-            }
+        }}catch(Exception e){
+                
+                return null;
+           // }
         }
         
-        return null;
+      //  return null;
       
     }
     public List<SenhaReset> buscarTodos(){

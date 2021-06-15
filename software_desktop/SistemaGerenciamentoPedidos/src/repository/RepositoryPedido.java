@@ -102,6 +102,90 @@ public class RepositoryPedido {
         }
             return null;
     }
+     
+     public boolean efetuarPagamento(int mesa){
+        
+        try {
+            URL url = new URL(this.url+"/pagamento");
+            Map<String,Object> params = new LinkedHashMap<>();
+            params.put("id", mesa);
+            
+            
+            StringBuilder postData = new StringBuilder();
+            for (Map.Entry<String,Object> param : params.entrySet()) {
+                if (postData.length() != 0) postData.append('&');
+                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+                postData.append('=');
+                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+            }
+            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+            
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+            conn.setDoOutput(true);
+            conn.getOutputStream().write(postDataBytes);
+            
+            Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            if(conn.getResponseCode()==200){
+                return true;
+            }else{
+                return false;
+            }
+            
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+     
+    public boolean efetuarCancelamento(int mesa){
+        
+        try {
+            URL url = new URL(this.url+"/cancelamento");
+            Map<String,Object> params = new LinkedHashMap<>();
+            params.put("id", mesa);
+            
+            
+            StringBuilder postData = new StringBuilder();
+            for (Map.Entry<String,Object> param : params.entrySet()) {
+                if (postData.length() != 0) postData.append('&');
+                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+                postData.append('=');
+                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+            }
+            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+            
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+            conn.setDoOutput(true);
+            conn.getOutputStream().write(postDataBytes);
+            
+            Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            if(conn.getResponseCode()==200){
+                return true;
+            }else{
+                return false;
+            }
+            
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+     
+     
      public Pedido buscarId(int id){
         try {
             

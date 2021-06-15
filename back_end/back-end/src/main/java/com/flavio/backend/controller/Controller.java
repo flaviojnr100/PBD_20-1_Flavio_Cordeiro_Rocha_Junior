@@ -9,6 +9,7 @@ import com.flavio.backend.model.business.BusinessCardapio;
 import com.flavio.backend.model.business.BusinessFinanciaAnual;
 import com.flavio.backend.model.business.BusinessFinanciaMensal;
 import com.flavio.backend.model.business.BusinessFuncionario;
+import com.flavio.backend.model.business.BusinessFuncionarioView;
 import com.flavio.backend.model.business.BusinessLog;
 import com.flavio.backend.model.business.BusinessMesa;
 import com.flavio.backend.model.business.BusinessPedido;
@@ -16,6 +17,7 @@ import com.flavio.backend.model.business.BusinessSenhaReset;
 import com.flavio.backend.model.object.FinanciaAnual;
 import com.flavio.backend.model.object.FinanciaMensal;
 import com.flavio.backend.model.object.Funcionario;
+import com.flavio.backend.model.object.FuncionarioView;
 import com.flavio.backend.model.object.ItemCardapio;
 import com.flavio.backend.model.object.Log;
 import com.flavio.backend.model.object.Mesa;
@@ -79,9 +81,12 @@ public class Controller {
     @Autowired
     BusinessLog blo;
     
+    @Autowired
+    BusinessFuncionarioView bfv;
+    
     @GetMapping("/funcionario")
-    public List<Funcionario> buscarTodos(){
-        return bf.listarTodos();
+    public List<FuncionarioView> buscarTodos(){
+        return bfv.buscarTodos();
     }
     @GetMapping("/funcionarioSU")
     public List<Funcionario> buscarTodosSU(){
@@ -109,8 +114,8 @@ public class Controller {
     }
     
     @GetMapping("/funcionario/buscarCpf/{cpf}")
-    public List<Funcionario> buscarCpf(@PathVariable("cpf")String cpf){
-        return bf.buscarCpf(cpf);
+    public List<FuncionarioView> buscarCpf(@PathVariable("cpf")String cpf){
+        return bfv.buscarCpf(cpf);
     }
     
     @GetMapping("/funcionarioSU/buscarCpf/{cpf}")
@@ -119,8 +124,8 @@ public class Controller {
     }
     
     @GetMapping("/funcionario/buscarNome/{nome}")
-    public List<Funcionario> buscarNome(@PathVariable("nome")String nome){
-        return bf.buscarNome(nome);
+    public List<FuncionarioView> buscarNome(@PathVariable("nome")String nome){
+        return bfv.buscarNome(nome);
     }
     
     @GetMapping("/funcionarioSU/buscarNome/{nome}")
@@ -284,6 +289,17 @@ public class Controller {
     public List<Pedido> buscarMesaPedido(@PathVariable("numero")int numero){
         return bp.buscarMesa(numero);
     }
+    @PostMapping("/pedido/pagamento")
+    public List<Pedido> efetuarPagamento(@RequestParam("id")int mesa){
+        return bp.efetuarPagamento(mesa);
+        
+    }
+    @PostMapping("/pedido/cancelamento")
+    public List<Pedido> efetuarCancelamento(@RequestParam("id")int mesa){
+        return bp.efetuarCancelamento(mesa);
+        
+    }
+    
     
     @GetMapping("/senhaReset")
     public List<SenhaReset> buscarTodosResets(){

@@ -52,6 +52,8 @@ public class Pedido{
     @ManyToMany
     @JoinTable(name = "pedido_cardapio",joinColumns = @JoinColumn(name="pedido_id"),inverseJoinColumns = @JoinColumn(name = "item_cardapio_id"))
     private List<ItemCardapio>itens = new ArrayList<>();
+    
+
 
     public int getId() {
         return id;

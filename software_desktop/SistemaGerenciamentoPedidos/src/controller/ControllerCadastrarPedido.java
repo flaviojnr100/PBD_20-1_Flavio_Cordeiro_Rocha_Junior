@@ -9,12 +9,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -31,8 +33,8 @@ import model.Pedido;
 public class ControllerCadastrarPedido implements Initializable{
 
     @FXML
-    private TextField mesaTxt;
-
+    private ComboBox<Integer> comboMesa;
+    
     @FXML
     private TextArea pedioArea;
 
@@ -61,21 +63,25 @@ public class ControllerCadastrarPedido implements Initializable{
     @FXML
     void finalizar(ActionEvent event) {
         if(JOptionPane.showConfirmDialog(null, "Deseja finalizar o pedido ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-            Pedido pedido = new Pedido();
-            pedido.setFuncionario(BaseDados.getAutenticado());
-            pedido.setItens(itemPedido);
-            Mesa mesa = new Mesa();
-            mesa.setNumero(Integer.parseInt(mesaTxt.getText()));
-            pedido.setMesa(mesa);
-            pedido.setStatus("pendente");
-            pedido.setTotal(total);
+            if(comboMesa.getSelectionModel().getSelectedIndex() != -1){
+                Pedido pedido = new Pedido();
+                pedido.setFuncionario(BaseDados.getAutenticado());
+                pedido.setItens(itemPedido);
+                Mesa mesa = new Mesa();
+                mesa.setNumero(comboMesa.getSelectionModel().getSelectedItem());
+                pedido.setMesa(mesa);
+                pedido.setStatus("pendente");
+                pedido.setTotal(total);
             
             
-            if(BaseDados.getRepositoryPedido().salvar(pedido)){
-                JOptionPane.showMessageDialog(null, "Pedido salvo com sucesso !");
-                btnCancelar.fire();
+                if(BaseDados.getRepositoryPedido().salvar(pedido)){
+                    JOptionPane.showMessageDialog(null, "Pedido salvo com sucesso !");
+                    btnCancelar.fire();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Erro, contate o administrador !");
+                }
             }else{
-                JOptionPane.showMessageDialog(null, "Erro, contate o administrador !");
+                JOptionPane.showMessageDialog(null, "Selecione uma mesa!");
             }
 
         }
@@ -87,14 +93,20 @@ public class ControllerCadastrarPedido implements Initializable{
         total = 0;
         lblTotal.setText(String.format("%.2f", total));
         pedioArea.setText(pedido);
-        mesaTxt.setText("");
         itemPedido.clear();
+        comboMesa.getSelectionModel().select(-1);
     }
     private String pedido="";
     private double total=0;
     List<ItemCardapio> itemPedido = new ArrayList<>();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        List<Integer> m = new ArrayList<>();
+        for(Mesa mesa:BaseDados.getMesas()){
+            m.add(mesa.getNumero());
+        }
+        comboMesa.setItems(FXCollections.observableArrayList(m));
+        
         BaseDados.atualizarCardapio();
         List<ItemCardapio> cardapio = BaseDados.getCardapio();
         GridPane grid = new GridPane();

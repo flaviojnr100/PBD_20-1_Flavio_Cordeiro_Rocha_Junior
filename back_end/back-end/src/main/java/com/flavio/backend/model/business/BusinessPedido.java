@@ -101,6 +101,32 @@ public class BusinessPedido {
     public List<Pedido> buscarMesa(int numero){
         return dao.buscarMesa(numero);
     }
+    public List<Pedido> efetuarPagamento(int mesa){
+        List<Pedido> pedidos = dao.buscarMesa(mesa);
+        try{
+            
+            if(pedidos.size()>0){
+                dao.efetuarPagamento(mesa);
+            }
+            
+        }catch(Exception e){
+            
+        }
+        return pedidos;
+    }
+    public List<Pedido> efetuarCancelamento(int mesa){
+         List<Pedido> pedidos = dao.buscarMesa(mesa);
+        try{
+            
+            if(pedidos.size()>0){
+                dao.efetuarCancelamento(mesa);
+            }
+            
+        }catch(Exception e){
+            
+        }
+        return pedidos;
+    }
     public void excluirPedido(int id){
         dao.deleteById(id);
     }

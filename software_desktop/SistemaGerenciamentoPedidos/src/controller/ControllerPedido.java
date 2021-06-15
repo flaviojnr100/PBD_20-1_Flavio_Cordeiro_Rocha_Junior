@@ -104,6 +104,7 @@ public class ControllerPedido implements Initializable {
     @FXML
     void buscar(ActionEvent event) {
         if(rbtnMesa.isSelected()){
+            //foi modificado a busca de mesas, a busca é de mesas com pedidos não cancelados, criar metodo para buscar tudo
             BaseDados.atualizarPedidoMesa(Integer.parseInt(buscarTxt.getText()));
             atualizar();
         }else if(rbtnCodigo.isSelected()){

@@ -26,6 +26,7 @@ and open the template in the editor.
 
 .botaoMesa{
     -fx-background-color: rgb(118,226,244);
+    
 }
 .botaoMesa:hover{
     -fx-background-color: rgb(173,237,248);
@@ -33,6 +34,19 @@ and open the template in the editor.
 .botaoMesa:pressed{
     -fx-background-color: rgb(46,168,189);
 }
+
+
+.botaoMesa1{
+    -fx-background-color: rgb(118,226,244);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+.botaoMesa1:hover{
+    -fx-background-color: rgb(173,237,248);
+}
+.botaoMesa1:pressed{
+    -fx-background-color: rgb(46,168,189);
+}
+
 
 .abaMenu{
     border-left-color: black;

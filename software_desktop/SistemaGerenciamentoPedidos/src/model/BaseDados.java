@@ -233,6 +233,9 @@ public class BaseDados {
     
 
     public static List<Mesa> getMesas() {
+        if(mesas ==null){
+            atualizarMesa();
+        }
         return mesas;
     }
 

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,7 @@ public class BusinessMesa {
         return ResponseEntity.ok(mesa);
     }
     public List<Mesa> buscarTodos(){
-        return dao.findAll();
+        return dao.findAll(Sort.by(Sort.Direction.ASC,"id"));
     }
     public Mesa buscarNumero(int numero){
         return dao.buscarNumero(numero);

@@ -105,7 +105,7 @@ public class ControllerPedido implements Initializable {
     void buscar(ActionEvent event) {
         if(rbtnMesa.isSelected()){
             //foi modificado a busca de mesas, a busca é de mesas com pedidos não cancelados, criar metodo para buscar tudo
-            BaseDados.atualizarPedidoMesa(Integer.parseInt(buscarTxt.getText()));
+            BaseDados.atualizarPedidoMesaTodos(Integer.parseInt(buscarTxt.getText()));
             atualizar();
         }else if(rbtnCodigo.isSelected()){
             BaseDados.atualizarPedidoId(Integer.parseInt(buscarTxt.getText()));

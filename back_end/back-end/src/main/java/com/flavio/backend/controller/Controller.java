@@ -289,6 +289,11 @@ public class Controller {
     public List<Pedido> buscarMesaPedido(@PathVariable("numero")int numero){
         return bp.buscarMesa(numero);
     }
+    
+    @GetMapping("/pedido/buscarMesaTodos/{numero}")
+    public List<Pedido> buscarMesaPedidoTodos(@PathVariable("numero")int numero){
+        return bp.buscarMesaTodos(numero);
+    }
     @PostMapping("/pedido/pagamento")
     public List<Pedido> efetuarPagamento(@RequestParam("id")int mesa){
         return bp.efetuarPagamento(mesa);

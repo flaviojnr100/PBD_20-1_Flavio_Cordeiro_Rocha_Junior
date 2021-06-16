@@ -126,6 +126,10 @@ public class BaseDados {
     public static void atualizarPedidoMesa(int mesa){
         pedidos = getRepositoryPedido().buscarMesa(mesa);
     }
+    public static void atualizarPedidoMesaTodos(int mesa){
+        pedidos = getRepositoryPedido().buscarMesaTodos(mesa);
+    }
+    
     public static void atualizarPedidoData(int dia,int mes,int ano){
         pedidos = getRepositoryPedido().buscarData(dia, mes, ano);
     }

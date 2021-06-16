@@ -30,6 +30,9 @@ public interface DaoPedido extends JpaRepository<Pedido, Integer> {
     @Query(value = "select p from Pedido p where p.mesa.numero = :numero and (p.status = 'pendente' or p.status = 'concluido') ")
     public List<Pedido> buscarMesa(@Param("numero") int numero);
     
+    @Query(value = "select p from Pedido p where p.mesa.numero = :numero")
+    public List<Pedido> buscarMesaTodos(@Param("numero") int numero);
+    
     @Query(value = "select p from Pedido p where p.funcionario.id = :id")
     public List<Pedido> buscarPedidoFuncionario(@Param("id")int id);
     

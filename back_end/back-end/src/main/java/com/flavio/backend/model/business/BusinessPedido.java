@@ -101,6 +101,9 @@ public class BusinessPedido {
     public List<Pedido> buscarMesa(int numero){
         return dao.buscarMesa(numero);
     }
+    public List<Pedido> buscarMesaTodos(int numero){
+        return dao.buscarMesaTodos(numero);
+    }
     public List<Pedido> efetuarPagamento(int mesa){
         List<Pedido> pedidos = dao.buscarMesa(mesa);
         try{

@@ -6,6 +6,7 @@
 package com.flavio.backend.model.object;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 /**
@@ -27,6 +29,7 @@ public class FinanciaMensal implements Serializable {
     @Id
     @Temporal(TemporalType.DATE)
     @Column(name = "data_pedido")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dataPedido;
     @Column(name = "total")
     private double total;

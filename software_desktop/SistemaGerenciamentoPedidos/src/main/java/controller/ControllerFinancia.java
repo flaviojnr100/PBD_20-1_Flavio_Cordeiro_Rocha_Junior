@@ -49,6 +49,9 @@ public class ControllerFinancia implements Initializable {
 
     @FXML
     private Button btnAnual;
+    
+    @FXML
+    private Button btnDetalhado;
 
     @FXML
     void anual(ActionEvent event) {
@@ -71,10 +74,28 @@ public class ControllerFinancia implements Initializable {
     @FXML
     void mensal(ActionEvent event) {
         try {
-             Parent root = FXMLLoader.load(new File("src/main/java/view/FXMLFinanciaMensal.fxml").toURL());
+            Parent root = FXMLLoader.load(new File("src/main/java/view/FXMLFinanciaMensal.fxml").toURL());
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("Financia mensal");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.getIcons().add(new Image("file:src/main/java/asset/icone.png"));
+            stage.initOwner((Stage) btnAnual.getScene().getWindow());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    void detalhado(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(new File("src/main/java/view/FXMLBalancoDetalhado.fxml").toURL());
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Financia detalhado");
             stage.setScene(scene);
             stage.setResizable(false);
             stage.getIcons().add(new Image("file:src/main/java/asset/icone.png"));

@@ -219,6 +219,10 @@ public class Controller {
     public Mesa salvarMesa(@Validated Mesa mesa){
         return bm.salvar(mesa);
     }
+    @PutMapping("/mesa/{id}")
+    public ResponseEntity<Mesa> editarMesa(int id, @Validated Mesa mesa){
+        return bm.editar(id, mesa);
+    }
     @GetMapping("/mesa")
     public List<Mesa> buscatTodosMesa(){
         return bm.buscarTodos();
@@ -232,10 +236,7 @@ public class Controller {
         return bm.buscarNumero(numero);
     }
     
-    @PutMapping("/mesa/{id}")
-    public ResponseEntity<Mesa> edtiarMesa(@PathVariable("id") int id,@Validated Mesa mesa){
-        return bm.editar(id, mesa);
-    }
+
     @PutMapping("/mesa/alterarEstado/{id}")
     public ResponseEntity<Mesa> alterarEstadoMesa(@PathVariable("id") int id){
         return bm.alterarEstado(id);
@@ -338,6 +339,12 @@ public class Controller {
     @GetMapping("/financiaMensal/{mes}/{ano}")
     public List<FinanciaMensal> buscarFinanciaMes(@PathVariable("mes")int mes,@PathVariable("ano")int ano){
         return bfm.buscarMes(mes,ano);
+    }
+    
+    @GetMapping("financiaMensal/entreDatas/{inicio}/{fim}")
+    public List<FinanciaMensal> buscarEntreDatas(@PathVariable("inicio")String inicio,@PathVariable("fim")String fim){
+        return bfm.buscarEntreDatas(inicio, fim);
+        
     }
     
     @GetMapping("/financiaAnual")

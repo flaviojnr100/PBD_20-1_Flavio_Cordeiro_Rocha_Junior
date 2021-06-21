@@ -22,7 +22,7 @@
             </TableView>
          </children>
       </Pane>
-      <Button fx:id="btnMensal" contentDisplay="TOP" layoutX="87.0" layoutY="14.0" mnemonicParsing="false" onAction="#mensal" prefHeight="112.0" prefWidth="146.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Balanço mensal">
+      <Button fx:id="btnMensal" contentDisplay="TOP" layoutX="35.0" layoutY="14.0" mnemonicParsing="false" onAction="#mensal" prefHeight="112.0" prefWidth="146.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Balanço mensal">
          <font>
             <Font name="Century Gothic" size="14.0" />
          </font>
@@ -36,7 +36,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="btnAnual" contentDisplay="TOP" layoutX="359.0" layoutY="14.0" mnemonicParsing="false" onAction="#anual" prefHeight="112.0" prefWidth="146.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Balanço anual">
+      <Button fx:id="btnAnual" contentDisplay="TOP" layoutX="219.0" layoutY="14.0" mnemonicParsing="false" onAction="#anual" prefHeight="112.0" prefWidth="159.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Balanço anual">
          <font>
             <Font name="Century Gothic" size="14.0" />
          </font>
@@ -50,5 +50,20 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
+      <Button fx:id="btnDetalhado" contentDisplay="TOP" layoutX="413.0" layoutY="14.0" mnemonicParsing="false" onAction="#detalhado" prefHeight="112.0" prefWidth="159.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Balanço detalhado">
+         <font>
+            <Font name="Century Gothic" size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="78.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/financiamento.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

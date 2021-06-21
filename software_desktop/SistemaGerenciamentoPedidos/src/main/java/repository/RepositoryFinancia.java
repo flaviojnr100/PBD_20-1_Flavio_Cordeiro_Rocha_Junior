@@ -99,5 +99,35 @@ public class RepositoryFinancia {
             return null;
     }
     
+     public List<FinanciaMensal> buscarEntreDatas(String inicio,String fim){
+        try {
+            
+            HttpURLConnection conn = (HttpURLConnection) new URL(url+"/entreDatas/"+inicio+"/"+fim).openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+            
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String output = "";
+            String line;
+            
+            while((line = br.readLine()) != null){
+                output += line;
+            }
+            
+            conn.disconnect();
+
+            Type listType = new TypeToken<ArrayList<FinanciaMensal>>(){}.getType();
+            List<FinanciaMensal> financia = gson.fromJson(output, listType);
+            return financia;
+        
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryFinancia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ProtocolException ex) {
+            Logger.getLogger(RepositoryFinancia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryFinancia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return null;
+    }
     
 }

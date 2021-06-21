@@ -40,6 +40,7 @@ public class BaseDados {
     private static List<Mesa> mesas;
     private static List<FinanciaMensal> financia;
     private static List<FinanciaMensal> financiaMensal;
+    private static List<FinanciaMensal> financiaDetalhado;
     private static List<FinanciaAnual> financiaAnual;
     private static List<String> meses;
     private static List<String> anos = new ArrayList<>();
@@ -149,6 +150,12 @@ public class BaseDados {
     }
     public static void atualizarFinancia(){
         financia = getRepositoryFinancia().buscarTodos();
+    }
+    public static void atualizarFinanciaDetalhado(){
+        financiaDetalhado = getRepositoryFinancia().buscarTodos();
+    }
+    public static void atualizarFinanciaDetalhadoEntreDatas(String inicio,String fim){
+        financiaDetalhado = getRepositoryFinancia().buscarEntreDatas(inicio, fim);
     }
     
     public static void atualizarFinanciaAnual(int ano){
@@ -305,6 +312,11 @@ public class BaseDados {
             atualizarLog();
         }
         return logs;
+    }
+
+    public static List<FinanciaMensal> getFinanciaDetalhado() {
+        
+        return financiaDetalhado;
     }
     
     

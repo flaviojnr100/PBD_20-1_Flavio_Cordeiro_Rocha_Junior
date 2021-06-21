@@ -1,5 +1,6 @@
 controller\ControllerCadastrarCardapio.class
 controller\ControllerPedido$1.class
+controller\ControllerBalancoDetalhado$1.class
 controller\ControllerLogin.class
 repository\RepositoryReset.class
 repository\RepositoryFinancia$1.class
@@ -33,6 +34,7 @@ repository\RepositoryFuncionario$8.class
 controller\ControllerMesa.class
 repository\RepositoryFuncionario$1.class
 controller\ControllerEditarMesa.class
+controller\ControllerBalancoDetalhado.class
 controller\ControllerMesa$2.class
 controller\ControllerFinancia$1.class
 repository\RepositoryPedido$1.class
@@ -67,6 +69,7 @@ controller\ControllerInformacoesMesa.class
 repository\RepositoryCardapio.class
 repository\RepositoryUtil.class
 repository\RepositoryFuncionario$7.class
+repository\RepositoryFinancia$3.class
 model\SenhaReset.class
 controller\ControllerMesa$1.class
 controller\ControllerInformacoesFuncionario.class
@@ -86,6 +89,7 @@ controller\ControllerReset.class
 controller\ControllerCardapio$2.class
 controller\ControllerConfiguracao.class
 repository\RepositoryLog.class
+controller\ControllerBalancoDetalhado$2.class
 model\Pedido.class
 controller\ControllerReset$3.class
 controller\ControllerPedido$5.class

@@ -76,6 +76,7 @@ public class ControllerCadastrarPedido implements Initializable{
             
                 if(BaseDados.getRepositoryPedido().salvar(pedido)){
                     JOptionPane.showMessageDialog(null, "Pedido salvo com sucesso !");
+                    //ControllerDashboard.setAlterouPedido(true);
                     btnCancelar.fire();
                 }else{
                     JOptionPane.showMessageDialog(null, "Erro, contate o administrador !");

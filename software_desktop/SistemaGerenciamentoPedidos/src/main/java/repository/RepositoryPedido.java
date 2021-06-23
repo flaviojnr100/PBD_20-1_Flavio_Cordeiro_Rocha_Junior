@@ -72,6 +72,38 @@ public class RepositoryPedido {
             return null;
     }
     
+     public List<Pedido> buscarPendentes(){
+        try {
+            
+            HttpURLConnection conn = (HttpURLConnection) new URL(url+"/pendente").openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+            
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String output = "";
+            String line;
+            
+            while((line = br.readLine()) != null){
+                output += line;
+            }
+            
+            conn.disconnect();
+
+            Type listType = new TypeToken<ArrayList<Pedido>>(){}.getType();
+            List<Pedido> pedidos = gson.fromJson(output, listType);
+            return pedidos;
+        
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ProtocolException ex) {
+            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return null;
+    }
+    
+    
      public List<Pedido> buscarMesa(int mesa){
         try {
             
@@ -306,7 +338,6 @@ public class RepositoryPedido {
             params.put("mesa", pedido.getMesa().getNumero());
             params.put("cardapio", converterArray(pedido.getItens()));
 
-            System.out.println("Formato: "+params.toString());
             
             StringBuilder postData = new StringBuilder();
             for (Map.Entry<String,Object> param : params.entrySet()) {
@@ -475,4 +506,36 @@ public class RepositoryPedido {
         }
         return false;
     }
+    
+    public boolean verificarPedidos(int tamanho){
+        try {
+            
+            HttpURLConnection conn = (HttpURLConnection) new URL(url+"/verificarPedidos/"+tamanho).openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+            
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String output = "";
+            String line;
+            
+            while((line = br.readLine()) != null){
+                output += line;
+            }
+            
+            conn.disconnect();
+
+            Boolean.parseBoolean(output);
+            return Boolean.parseBoolean(output);
+        
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ProtocolException ex) {
+            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return false;
+    }
+    
+    
 }

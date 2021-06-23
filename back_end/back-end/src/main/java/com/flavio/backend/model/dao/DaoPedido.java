@@ -43,4 +43,7 @@ public interface DaoPedido extends JpaRepository<Pedido, Integer> {
     
     @Procedure("efetuar_cancelamento")
     public void efetuarCancelamento(int id);
+    
+    @Procedure("verificar_pedidos")
+    public boolean verificarPedidos(int tamanho);
 }

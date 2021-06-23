@@ -206,5 +206,34 @@ public class RepositoryMesa {
         }
         return null;
     }
-     
+    public boolean verificarMesas(int tamanho){
+        try {
+            
+            HttpURLConnection conn = (HttpURLConnection) new URL(url+"/verificarMesas/"+tamanho).openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+            
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String output = "";
+            String line;
+            
+            while((line = br.readLine()) != null){
+                output += line;
+            }
+            
+            conn.disconnect();
+
+            
+           
+            return Boolean.parseBoolean(output);
+        
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryMesa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ProtocolException ex) {
+            Logger.getLogger(RepositoryMesa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryMesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return false;
+    }  
 }

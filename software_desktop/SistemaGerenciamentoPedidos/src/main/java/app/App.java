@@ -25,6 +25,7 @@ import repository.RepositoryFinancia;
 import repository.RepositoryFinanciaAnual;
 import repository.RepositoryFuncionario;
 import repository.RepositoryLog;
+import repository.RepositoryMesa;
 import repository.RepositoryPedido;
 import repository.RepositoryReset;
 
@@ -55,7 +56,8 @@ public class App extends Application {
     
     public static void main(String[] args) {
         launch(args);
-        
+
+       
     }
     
 }

@@ -37,6 +37,7 @@ public class BaseDados {
     private static List<ItemCardapio> cardapio;
     private static List<SenhaReset> resets;
     private static List<Pedido> pedidos;
+    private static List<Pedido> pedidoPendente;
     private static List<Mesa> mesas;
     private static List<FinanciaMensal> financia;
     private static List<FinanciaMensal> financiaMensal;
@@ -167,6 +168,9 @@ public class BaseDados {
     public static void atualizarLogData(int dia,int mes,int ano){
         logs = getRepositoryLog().buscarData(dia, mes, ano);
     }
+    public static void atualizarPedidosPendente(){
+        pedidoPendente = getRepositoryPedido().buscarPendentes();
+    }
     public static List<Funcionario> getFuncionarios(){
         if(funcionarios==null){
             atualizarFuncionarios();
@@ -231,6 +235,7 @@ public class BaseDados {
     }
 
     public static List<Pedido> getPedidos() {
+
         return pedidos;
     }
 
@@ -317,6 +322,11 @@ public class BaseDados {
     public static List<FinanciaMensal> getFinanciaDetalhado() {
         
         return financiaDetalhado;
+    }
+
+    public static List<Pedido> getPedidoPendente() {
+        
+        return pedidoPendente;
     }
     
     

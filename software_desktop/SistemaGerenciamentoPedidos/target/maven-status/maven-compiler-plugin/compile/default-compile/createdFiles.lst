@@ -9,6 +9,7 @@ repository\RepositoryFuncionario$3.class
 repository\RepositoryPedido.class
 controller\ControllerCardapio.class
 controller\ControllerPedido$4.class
+controller\ControllerDashboard$1$1.class
 controller\ControllerFinalizarPedido$1.class
 controller\ControllerFinanciaAnual.class
 controller\ControllerInformacoesCardapio.class
@@ -20,6 +21,7 @@ controller\ControllerFinanciaMensal.class
 repository\RepositoryLog$1.class
 controller\ControllerEditarFuncionario.class
 model\Criptografia.class
+controller\ControllerDashboard$2.class
 repository\RepositoryCardapio$2.class
 controller\ControllerReset$2.class
 repository\RepositoryMesa.class
@@ -46,6 +48,7 @@ controller\ControllerPedido$2.class
 controller\ControllerFinanciaAnual$1.class
 controller\ControllerLogin$1.class
 model\Mesa.class
+controller\ControllerDashboard$3.class
 controller\ControllerMesa$3.class
 repository\RepositoryFuncionario.class
 repository\RepositoryFuncionario$2.class
@@ -60,6 +63,7 @@ controller\ControllerReset$1.class
 controller\ControllerCardapio$4.class
 controller\ControllerDashboard$1.class
 controller\ControllerCadastroFuncionario.class
+controller\ControllerDashboard$4.class
 repository\RepositoryCardapio$1.class
 model\BaseDados.class
 model\ItemCardapio.class
@@ -70,6 +74,7 @@ repository\RepositoryCardapio.class
 repository\RepositoryUtil.class
 repository\RepositoryFuncionario$7.class
 repository\RepositoryFinancia$3.class
+controller\ControllerDashboard$1$2.class
 model\SenhaReset.class
 controller\ControllerMesa$1.class
 controller\ControllerInformacoesFuncionario.class
@@ -83,6 +88,7 @@ controller\ControllerEditarPedido$2.class
 controller\ControllerFinalizarPedido.class
 controller\ControllerPedido$6.class
 controller\ControllerEditarPedido.class
+repository\RepositoryPedido$5.class
 repository\RepositoryFinancia$2.class
 controller\ControllerCadastrarPedido.class
 controller\ControllerReset.class
@@ -101,3 +107,4 @@ repository\RepositoryFinanciaAnual$2.class
 repository\RepositoryFuncionario$5.class
 controller\ControllerFuncionario.class
 controller\ControllerLogSistema.class
+controller\ControllerVisualizacaoPedido.class

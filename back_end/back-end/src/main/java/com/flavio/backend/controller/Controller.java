@@ -105,7 +105,7 @@ public class Controller {
     }
     
     @PutMapping("/funcionario/{id}")
-    public ResponseEntity<Optional<Funcionario>> editar(@Validated Funcionario funcionario,@PathVariable("id") int id){
+    public ResponseEntity<Funcionario> editar(@Validated Funcionario funcionario,@PathVariable("id") int id){
         return bf.editar(id,funcionario);
     }
     @PutMapping("/funcionario/alterar_estado/{id}")
@@ -220,7 +220,7 @@ public class Controller {
         return bm.salvar(mesa);
     }
     @PutMapping("/mesa/{id}")
-    public ResponseEntity<Mesa> editarMesa(int id, @Validated Mesa mesa){
+    public ResponseEntity<Mesa> editarMesa(@PathVariable("id")int id, @Validated Mesa mesa){
         return bm.editar(id, mesa);
     }
     @GetMapping("/mesa")
@@ -240,6 +240,11 @@ public class Controller {
     @PutMapping("/mesa/alterarEstado/{id}")
     public ResponseEntity<Mesa> alterarEstadoMesa(@PathVariable("id") int id){
         return bm.alterarEstado(id);
+    }
+    
+    @GetMapping("/mesa/verificarMesas/{tamanho}")
+    public boolean verificarMesas(@PathVariable("tamanho")int tamanho){
+        return bm.verificarMesas(tamanho);
     }
     
     
@@ -304,6 +309,11 @@ public class Controller {
     public List<Pedido> efetuarCancelamento(@RequestParam("id")int mesa){
         return bp.efetuarCancelamento(mesa);
         
+    }
+    
+    @GetMapping("/pedido/verificarPedidos/{tamanho}")
+    public boolean verificarPedidos(@PathVariable("tamanho")int tamanho){
+        return bp.verificarPedidos(tamanho);
     }
     
     

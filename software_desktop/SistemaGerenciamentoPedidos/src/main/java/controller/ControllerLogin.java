@@ -64,6 +64,7 @@ public class ControllerLogin {
                     public void handle(WindowEvent event) {
                          if(JOptionPane.showConfirmDialog(null, "Desaja sair do sistema?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                             BaseDados.getRepositoryFuncionario().logout(BaseDados.getAutenticado().getLogin());
+                            ControllerDashboard.getTask().cancel();
                          }else{
                              event.consume();
                          }

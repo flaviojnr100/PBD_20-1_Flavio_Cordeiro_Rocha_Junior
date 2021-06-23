@@ -62,6 +62,7 @@ public class ControllerEditarPedido implements Initializable {
             pedido.setTotal(preco);
             if(BaseDados.getRepositoryPedido().editar(pedido)){
                 JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+               // ControllerDashboard.setAlterouPedido(true);
                 btnCancelar.fire();
             }else{
                 JOptionPane.showMessageDialog(null, "Erro,contate o administrador!");

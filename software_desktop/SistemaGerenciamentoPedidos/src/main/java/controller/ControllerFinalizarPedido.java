@@ -82,9 +82,10 @@ public class ControllerFinalizarPedido implements Initializable{
         if(JOptionPane.showConfirmDialog(null, "Deseja efetuar o pagamento do pedido ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             BaseDados.getRepositoryPedido().efetuarPagamento(pedidos.get(0).getMesa().getId());
             JOptionPane.showMessageDialog(null, "Pagamento realizado com sucesso!");
+            BaseDados.atualizarPedidosPendente();
             btnCancelar.fire();
         }else{
-            JOptionPane.showConfirmDialog(null, "Erro ao efetuar o pagamento!!","Erro",JOptionPane.YES_OPTION,JOptionPane.ERROR);
+            JOptionPane.showConfirmDialog(null, "Erro ao efetuar o pagamento!!","Erro",JOptionPane.YES_OPTION);
         }
     }
 

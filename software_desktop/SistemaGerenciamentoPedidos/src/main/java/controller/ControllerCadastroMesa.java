@@ -28,6 +28,7 @@ public class ControllerCadastroMesa {
         if(JOptionPane.showConfirmDialog(null, "Deseja salvar a mesa ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             if(!verificar(mesa.getNumero())){
                 if(BaseDados.getRepositoryMesa().salvar(mesa)){
+                    
                     JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
                     btnCancelar.fire();
                 }else{

@@ -92,15 +92,16 @@ public class BusinessFuncionario {
         }
         return funcionario;
     }
-    public ResponseEntity<Optional<Funcionario>> editar(int id,Funcionario funcionario){
+    public ResponseEntity<Funcionario> editar(int id,Funcionario funcionario){
         Optional<Funcionario> funcionario1 = dao.findById(id);
         if(funcionario1 == null){
             return ResponseEntity.notFound().build();
         }
+        
         Funcionario f = funcionario1.get();
         BeanUtils.copyProperties(funcionario, f,"id");
         dao.save(f);
-        return ResponseEntity.ok(funcionario1);
+        return ResponseEntity.ok(f);
     }
     
     public ResponseEntity<Optional<Funcionario>> alterarEstado(int id){

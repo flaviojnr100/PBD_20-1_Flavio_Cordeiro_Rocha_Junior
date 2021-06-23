@@ -133,5 +133,7 @@ public class BusinessPedido {
     public void excluirPedido(int id){
         dao.deleteById(id);
     }
-    
+    public boolean verificarPedidos(int tamanho){
+        return dao.verificarPedidos(tamanho);
+    }
 }

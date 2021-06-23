@@ -56,7 +56,7 @@ and open the template in the editor.
     
 }
 .botaoDashLado{
-    -fx-background-color:transparent;
+    -fx-background-color: rgb(46,168,189);
     -fx-border-color:black;
     -fx-border-radius:10px;
     

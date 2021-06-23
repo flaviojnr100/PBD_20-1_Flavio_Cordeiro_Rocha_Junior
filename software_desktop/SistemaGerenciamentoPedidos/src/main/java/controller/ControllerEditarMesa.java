@@ -38,6 +38,7 @@ public class ControllerEditarMesa implements Initializable {
         if(JOptionPane.showConfirmDialog(null, "Deseja alterar a mesa ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             mesa.setNumero(Integer.parseInt(numeroTxt.getText()));
             if(BaseDados.getRepositoryMesa().editar(mesa)){
+                ControllerDashboard.setAlterou(true);
                 JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
                 btnCancelar.fire();
             }else{

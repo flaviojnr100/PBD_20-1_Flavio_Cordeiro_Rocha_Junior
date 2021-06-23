@@ -62,5 +62,9 @@ public class BusinessMesa {
         mesa = dao.save(mesa);
         return ResponseEntity.ok(mesa);
     }
+    
+    public boolean verificarMesas(int tamanho){
+       return dao.verificarMesas(tamanho);
+    }
 
 }

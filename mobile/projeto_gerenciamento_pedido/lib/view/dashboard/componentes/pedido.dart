@@ -14,26 +14,31 @@ class Pedido extends StatefulWidget {
 }
 
 class _PedidoState extends State<Pedido> {
+  bool isCarregou = false;
   @override
   void initState() {
     widget.repositoryPedido.buscarTodos().whenComplete(() {
       widget.pedidos = List.from(widget.repositoryPedido.pedidos);
-      setState(() {});
+      setState(() {
+        isCarregou = true;
+      });
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        color: Colors.white,
-        child: ListView.builder(
-            itemCount: widget.pedidos.length,
-            itemBuilder: (context, index) => PedidoCard(
-                  pedido: widget.pedidos[index],
-                )),
-      ),
-    );
+    return isCarregou
+        ? Expanded(
+            child: Container(
+              color: Colors.white,
+              child: ListView.builder(
+                  itemCount: widget.pedidos.length,
+                  itemBuilder: (context, index) => PedidoCard(
+                        pedido: widget.pedidos[index],
+                      )),
+            ),
+          )
+        : Text("");
   }
 }

@@ -6,23 +6,31 @@ import 'package:projeto_gerenciamento_pedido/model/Validador.dart';
 import 'package:projeto_gerenciamento_pedido/view/dashboard/dashboard.dart';
 
 class EditarPerfil extends StatelessWidget {
-  EditarPerfil({Key key}) : super(key: key);
-  TextEditingController nomeC = new TextEditingController();
-  TextEditingController sobrenomeC = new TextEditingController();
-  TextEditingController cpfC = new TextEditingController();
-  TextEditingController telefoneC = new TextEditingController();
-  TextEditingController loginC = new TextEditingController();
-  TextEditingController senhaC = new TextEditingController();
-  TextEditingController senhaDC = new TextEditingController();
+  TextEditingController nomeC;
+  TextEditingController sobrenomeC;
+  TextEditingController cpfC;
+  TextEditingController telefoneC;
+  TextEditingController loginC;
+  TextEditingController senhaC;
+  TextEditingController senhaDC;
+  EditarPerfil({Key key}) {
+    nomeC = new TextEditingController();
+    sobrenomeC = new TextEditingController();
+    cpfC = new TextEditingController();
+    telefoneC = new TextEditingController();
+    loginC = new TextEditingController();
+    senhaC = new TextEditingController();
+    senhaDC = new TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
     nomeC.text = Dashboard.repositoryFuncionario.funcionario.nome;
     sobrenomeC.text = Dashboard.repositoryFuncionario.funcionario.sobrenome;
     telefoneC.text = Dashboard.repositoryFuncionario.funcionario.telefone;
     cpfC.text = Dashboard.repositoryFuncionario.funcionario.cpf;
     loginC.text = Dashboard.repositoryFuncionario.funcionario.login;
+  }
 
+  @override
+  Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(

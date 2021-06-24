@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:projeto_gerenciamento_pedido/model/Cardapio.dart';
 import 'package:projeto_gerenciamento_pedido/model/Mesa.dart';
 import 'package:projeto_gerenciamento_pedido/model/Pedido.dart';
+import 'package:projeto_gerenciamento_pedido/repository/RepositoryCardapio.dart';
 import 'package:projeto_gerenciamento_pedido/repository/RepositoryPedido.dart';
+import 'package:projeto_gerenciamento_pedido/view/cardapio/ItemCard.dart';
 import 'package:projeto_gerenciamento_pedido/view/dashboard/componentes/inicio.dart';
 import 'package:projeto_gerenciamento_pedido/view/dashboard/dashboard.dart';
+import 'package:projeto_gerenciamento_pedido/view/pedido/ItemCardapio.dart';
 
 class EditarPedido extends StatefulWidget {
   PedidoModel pedido;
+  List<ItemCardapio> cardapio;
   EditarPedido({Key key, this.pedido}) : super(key: key);
   TextEditingController controllerMesa = TextEditingController();
   RepositoryPedido repositoryPedido = RepositoryPedido();
+  RepositoryCardapio repositoryCardapio = RepositoryCardapio();
   @override
   _EditarPedidoState createState() => _EditarPedidoState();
 }
@@ -21,6 +27,9 @@ class _EditarPedidoState extends State<EditarPedido> {
   var _lista = ["pendente", "cancelado", "concluido"];
   @override
   void initState() {
+    widget.repositoryCardapio.buscarTodos().whenComplete(() {
+      widget.cardapio = widget.repositoryCardapio.cardapio;
+    });
     widget.controllerMesa.text = widget.pedido.mesa.numero.toString();
 
     Inicio.controller.precoEditar = widget.pedido.total;
@@ -30,7 +39,55 @@ class _EditarPedidoState extends State<EditarPedido> {
         itemSelecionado = item;
       }
     }
+    setState(() {});
     super.initState();
+  }
+
+  Widget exibirItens(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            color: Colors.black54,
+            child: Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.98,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 5),
+                      child: Center(
+                        child: Container(
+                          height: 10,
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          decoration: BoxDecoration(
+                              color: Colors.black26,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15))),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      height: MediaQuery.of(context).size.height * 0.50,
+                      color: Colors.white,
+                      child: ListView.builder(
+                          itemCount: widget.cardapio.length,
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context, index) =>
+                              ItemCardapioCard(item: widget.cardapio[index])),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 
   @override
@@ -144,6 +201,21 @@ class _EditarPedidoState extends State<EditarPedido> {
                                 });
                               },
                               value: itemSelecionado),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.black12,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30))),
+                              child: FlatButton.icon(
+                                  onPressed: () {
+                                    exibirItens(context);
+                                  },
+                                  icon: Icon(Icons.add),
+                                  label: Text("Adicionar")),
+                            ),
+                          )
                         ],
                       ),
                       Row(

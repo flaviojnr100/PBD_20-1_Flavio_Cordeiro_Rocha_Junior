@@ -8,7 +8,13 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -47,6 +53,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.converter.TimeStringConverter;
 import javax.swing.JOptionPane;
 import model.BaseDados;
 import model.Pedido;
@@ -86,6 +93,7 @@ public class ControllerDashboard implements Initializable {
     private int n_mesa=0;
     private static boolean alterouPedido = false;
     private static Task<Void> task;
+    private static Task<Void> task1;
     private int quant_mesas=0;
     private static boolean alterou=false;
     
@@ -165,6 +173,10 @@ public class ControllerDashboard implements Initializable {
         montarPainelMesas();
         montarPainelPedidos();
         verificarPedidos();
+        if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
+            BaseDados.getRepositoryBackup().bucarVariaveis();
+            verificarBackup();
+        }
     }
     
     private void verificarPedidos(){
@@ -209,7 +221,49 @@ public class ControllerDashboard implements Initializable {
         Thread thread = new Thread(task);
         thread.start();
     }
-    
+    private boolean verificarHorario(String horario){
+        
+        int seg=0;
+        String [] temp = horario.split(":");
+        seg+=(Integer.parseInt(temp[1]) *60);
+        seg+=(Integer.parseInt(temp[0]) * 3600);
+        
+        Calendar tempoVerif = Calendar.getInstance();
+        tempoVerif.setTimeInMillis(Long.parseLong(seg+""));
+        
+        if(tempoVerif.getTimeInMillis()<=LocalTime.now().toSecondOfDay()){
+            
+            return true;
+        }else{
+            if(BaseDados.isAlteracao()==true){
+                BaseDados.setAlteracao(false);
+            }
+            
+        }
+        return false;
+    }
+    private void verificarBackup(){
+        task1 = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                while(true){
+                    if(verificarHorario(BaseDados.getHorario()) && BaseDados.isAlteracao() == false){
+                        if(JOptionPane.showConfirmDialog(null, "Chegou o horário do backup","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                            BaseDados.setAlteracao(true);
+                            BaseDados.getRepositoryBackup().salvar(BaseDados.getHorario(), BaseDados.isAlteracao());
+                            BaseDados.getRepositoryBackup().backup();
+                        }
+                    }else{
+                    }
+                    Thread.sleep(1000);
+                }
+                
+                
+            }
+        };
+        Thread thread = new Thread(task1);
+        thread.start();
+    }
     private void montarPainelPedidos(){
         BaseDados.atualizarPedidosPendente();
         pedidosPane.getChildren().clear();
@@ -414,6 +468,10 @@ public class ControllerDashboard implements Initializable {
 
     public static Task<Void> getTask() {
         return task;
+    }
+
+    public static Task<Void> getTask1() {
+        return task1;
     }
     
     

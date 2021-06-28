@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Observer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import repository.RepositoryBackup;
 import repository.RepositoryCardapio;
 import repository.RepositoryFinancia;
 import repository.RepositoryFinanciaAnual;
@@ -33,6 +34,7 @@ public class BaseDados {
     private static RepositoryFinancia repositoryFinancia;
     private static RepositoryFinanciaAnual repositoryFinanciaAnual;
     private static RepositoryLog repositoryLog;
+    private static RepositoryBackup repositoryBackup;
     private static List<Funcionario> funcionarios;
     private static List<ItemCardapio> cardapio;
     private static List<SenhaReset> resets;
@@ -49,6 +51,8 @@ public class BaseDados {
     private static ObservableList mesesFx;
     private static ObservableList anosFx;
     private static int status;
+    private static String horario;
+    private static boolean alteracao;
     
     public static void atualizarMeses(){
         meses.add("Janeiro");
@@ -327,6 +331,29 @@ public class BaseDados {
     public static List<Pedido> getPedidoPendente() {
         
         return pedidoPendente;
+    }
+
+    public static RepositoryBackup getRepositoryBackup() {
+        if(repositoryBackup == null){
+            repositoryBackup = new RepositoryBackup();
+        }
+        return repositoryBackup;
+    }
+
+    public static String getHorario() {
+        return horario;
+    }
+
+    public static void setHorario(String horario) {
+        BaseDados.horario = horario;
+    }
+
+    public static boolean isAlteracao() {
+        return alteracao;
+    }
+
+    public static void setAlteracao(boolean alteracao) {
+        BaseDados.alteracao = alteracao;
     }
     
     

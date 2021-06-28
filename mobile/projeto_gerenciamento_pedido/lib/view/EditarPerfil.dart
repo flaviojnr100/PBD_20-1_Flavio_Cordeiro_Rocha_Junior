@@ -52,7 +52,7 @@ class EditarPerfil extends StatelessWidget {
                   height: mediaQuery.height * 0.05,
                   width: mediaQuery.width * 0.58,
                   decoration: BoxDecoration(
-                      color: Colors.black12,
+                      color: Color.fromRGBO(118, 226, 244, 0.7),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
@@ -78,7 +78,7 @@ class EditarPerfil extends StatelessWidget {
                   height: mediaQuery.height * 0.05,
                   width: mediaQuery.width * 0.58,
                   decoration: BoxDecoration(
-                      color: Colors.black12,
+                      color: Color.fromRGBO(118, 226, 244, 0.7),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
@@ -104,7 +104,7 @@ class EditarPerfil extends StatelessWidget {
                   height: mediaQuery.height * 0.05,
                   width: mediaQuery.width * 0.58,
                   decoration: BoxDecoration(
-                      color: Colors.black12,
+                      color: Color.fromRGBO(118, 226, 244, 0.7),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
@@ -130,7 +130,7 @@ class EditarPerfil extends StatelessWidget {
                   height: mediaQuery.height * 0.05,
                   width: mediaQuery.width * 0.58,
                   decoration: BoxDecoration(
-                      color: Colors.black12,
+                      color: Color.fromRGBO(118, 226, 244, 0.7),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
@@ -156,7 +156,7 @@ class EditarPerfil extends StatelessWidget {
                   height: mediaQuery.height * 0.05,
                   width: mediaQuery.width * 0.58,
                   decoration: BoxDecoration(
-                      color: Colors.black12,
+                      color: Color.fromRGBO(118, 226, 244, 0.7),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
@@ -182,7 +182,7 @@ class EditarPerfil extends StatelessWidget {
                   height: mediaQuery.height * 0.05,
                   width: mediaQuery.width * 0.58,
                   decoration: BoxDecoration(
-                      color: Colors.black12,
+                      color: Color.fromRGBO(118, 226, 244, 0.7),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
@@ -209,7 +209,7 @@ class EditarPerfil extends StatelessWidget {
                   height: mediaQuery.height * 0.05,
                   width: mediaQuery.width * 0.58,
                   decoration: BoxDecoration(
-                      color: Colors.black12,
+                      color: Color.fromRGBO(118, 226, 244, 0.7),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),

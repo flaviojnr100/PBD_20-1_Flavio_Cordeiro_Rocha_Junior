@@ -157,7 +157,7 @@ class _EditarPedidoState extends State<EditarPedido> {
                                         0.95,
                                     height: MediaQuery.of(context).size.height *
                                         0.08,
-                                    color: Colors.black12,
+                                    color: Color.fromRGBO(118, 226, 244, 0.7),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -205,7 +205,7 @@ class _EditarPedidoState extends State<EditarPedido> {
                             padding: const EdgeInsets.only(left: 20),
                             child: Container(
                               decoration: BoxDecoration(
-                                  color: Colors.black12,
+                                  color: Color.fromRGBO(118, 226, 244, 0.7),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(30))),
                               child: FlatButton.icon(
@@ -228,7 +228,7 @@ class _EditarPedidoState extends State<EditarPedido> {
                             height: MediaQuery.of(context).size.height * 0.06,
                             width: MediaQuery.of(context).size.width * 0.2,
                             decoration: BoxDecoration(
-                                color: Colors.black12,
+                                color: Color.fromRGBO(118, 226, 244, 0.7),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20))),
                             child: Padding(

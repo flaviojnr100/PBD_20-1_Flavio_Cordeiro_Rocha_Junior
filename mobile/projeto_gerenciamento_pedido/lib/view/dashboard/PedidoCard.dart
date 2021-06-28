@@ -27,7 +27,7 @@ class PedidoCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.98,
             height: MediaQuery.of(context).size.height * 0.15,
             decoration: BoxDecoration(
-                color: Colors.black12,
+                color: Color.fromRGBO(118, 226, 244, 0.7),
                 borderRadius: BorderRadius.all(Radius.circular(15))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

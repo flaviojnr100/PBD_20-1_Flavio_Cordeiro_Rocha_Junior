@@ -158,7 +158,7 @@ class _InicioState extends State<Inicio> {
                       width: 100,
                       height: 40,
                       decoration: BoxDecoration(
-                          color: Colors.black12,
+                          color: Color.fromRGBO(118, 226, 244, 0.7),
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10),
@@ -353,7 +353,7 @@ class _InicioState extends State<Inicio> {
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.95,
                             height: MediaQuery.of(context).size.height * 0.06,
-                            color: Colors.black12,
+                            color: Color.fromRGBO(118, 226, 244, 0.7),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[

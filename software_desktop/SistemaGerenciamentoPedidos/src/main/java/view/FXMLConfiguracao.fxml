@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="133.0" prefWidth="419.0" style="-fx-background-color: rgb(118,226,244);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerConfiguracao">
+<AnchorPane id="AnchorPane" prefHeight="133.0" prefWidth="486.0" style="-fx-background-color: rgb(118,226,244);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerConfiguracao">
    <children>
       <GridPane layoutX="30.0" layoutY="22.0" prefHeight="38.0" prefWidth="385.0">
         <columnConstraints>
@@ -21,15 +21,15 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Definir horario para o backup´:">
+            <Label text="Definir horario para o backup:">
                <font>
                   <Font name="Century Gothic" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="tempoTxt" styleClass="campoTexto" stylesheets="@style.css" GridPane.columnIndex="1" />
+            <TextField fx:id="tempoTxt" promptText="00:00" styleClass="campoTexto" stylesheets="@style.css" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="btnRedefinir" layoutX="31.0" layoutY="81.0" mnemonicParsing="false" onAction="#redefinir" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Redefinir backup">
+      <Button fx:id="btnRedefinir" layoutX="190.0" layoutY="81.0" mnemonicParsing="false" onAction="#redefinir" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Restaurar backup">
          <font>
             <Font name="Century Gothic" size="15.0" />
          </font>
@@ -37,13 +37,26 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnLog" layoutX="253.0" layoutY="81.0" mnemonicParsing="false" onAction="#log" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="log do sistema">
+      <Button fx:id="btnLog" layoutX="349.0" layoutY="81.0" mnemonicParsing="false" onAction="#log" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="log do sistema">
          <font>
             <Font name="Century Gothic" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+      </Button>
+      <Button fx:id="btnSalvar" layoutX="16.0" layoutY="81.0" mnemonicParsing="false" onAction="#salvar" prefHeight="26.0" prefWidth="74.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Salvar">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnBackup" layoutX="102.0" layoutY="81.0" mnemonicParsing="false" onAction="#backup" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Backup">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

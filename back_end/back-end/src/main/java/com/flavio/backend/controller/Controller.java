@@ -6,6 +6,7 @@
 package com.flavio.backend.controller;
 
 import com.flavio.backend.model.business.BusinessCardapio;
+import com.flavio.backend.model.business.BusinessConfiguracao;
 import com.flavio.backend.model.business.BusinessFinanciaAnual;
 import com.flavio.backend.model.business.BusinessFinanciaMensal;
 import com.flavio.backend.model.business.BusinessFuncionario;
@@ -14,6 +15,7 @@ import com.flavio.backend.model.business.BusinessLog;
 import com.flavio.backend.model.business.BusinessMesa;
 import com.flavio.backend.model.business.BusinessPedido;
 import com.flavio.backend.model.business.BusinessSenhaReset;
+import com.flavio.backend.model.object.Configuracao;
 import com.flavio.backend.model.object.FinanciaAnual;
 import com.flavio.backend.model.object.FinanciaMensal;
 import com.flavio.backend.model.object.Funcionario;
@@ -23,12 +25,23 @@ import com.flavio.backend.model.object.Log;
 import com.flavio.backend.model.object.Mesa;
 import com.flavio.backend.model.object.Pedido;
 import com.flavio.backend.model.object.SenhaReset;
+import com.flavio.backend.model.object.Util;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
@@ -83,6 +96,9 @@ public class Controller {
     
     @Autowired
     BusinessFuncionarioView bfv;
+    
+    @Autowired
+    BusinessConfiguracao bconfig;
     
     @GetMapping("/funcionario")
     public List<FuncionarioView> buscarTodos(){
@@ -373,6 +389,104 @@ public class Controller {
     @GetMapping("/log/{dia}/{mes}/{ano}")
     public List<Log> buscarLogData(@PathVariable("dia")int dia,@PathVariable("mes")int mes,@PathVariable("ano")int ano){
         return blo.buscarData(dia, mes, ano);
+    }
+    
+    @PostMapping("/backup/salvar")
+    public Configuracao salvarBackup(@RequestParam("id") int id,@RequestParam("horario") String horario,@RequestParam("alteracao") boolean alteracao){
+        Configuracao c = new Configuracao();
+        c.setId(id);
+        c.setHora(horario);
+        c.setAlteracao(alteracao);
+        return bconfig.salvar(c);
+    }
+    
+    @GetMapping("/backup/backup")
+    public void backup(){
+        final List<String> comandos = new ArrayList<String>();
+        comandos.add(Util.PG_DUMP);
+           
+           comandos.add("-h");      
+           comandos.add("localhost");     
+           comandos.add("-p");      
+           comandos.add("5432");      
+           comandos.add("-U");      
+           comandos.add("postgres");      
+           comandos.add("-F");      
+           comandos.add("c");      
+           comandos.add("-b");      
+           comandos.add("-v");
+           comandos.add("-f");      
+           comandos.add("src/main/java/com/flavio/backend/backup/SGPEDIDO.backup");  
+           comandos.add("SGPedido");      
+           ProcessBuilder pb = new ProcessBuilder(comandos);      
+           try {      
+               final Process process = pb.start();      
+         
+               final BufferedReader r = new BufferedReader(      
+                   new InputStreamReader(process.getErrorStream()));      
+               String line = r.readLine();      
+               while (line != null) {      
+               System.err.println(line);      
+               line = r.readLine();      
+               }      
+               r.close();      
+         
+               process.waitFor();    
+               process.destroy(); 
+               System.out.println("backup realizado com sucesso.");  
+         
+           } catch (IOException e) {      
+               e.printStackTrace();      
+           } catch (InterruptedException ie) {      
+               ie.printStackTrace();      
+           }         
+    }
+    
+    @GetMapping("/backup/restaurar")
+    public void restaurar(){
+        File file = new File("src/main/java/com/flavio/backend/backup/SGPEDIDO.backup");
+        if(file.exists()){
+        final List<String> comandos = new ArrayList<String>();      
+           comandos.add(Util.PG_RESTORE); 
+           comandos.add("-h");      
+           comandos.add("localhost");
+           comandos.add("-p");      
+           comandos.add("5432");      
+           comandos.add("-U");      
+           comandos.add("postgres");      
+           comandos.add("-d");      
+           comandos.add("SGPedido");     
+           comandos.add("-v");      
+           comandos.add("src/main/java/com/flavio/backend/backup/SGPEDIDO.backup"); 
+           ProcessBuilder pb = new ProcessBuilder(comandos);      
+           try {      
+               final Process process = pb.start();      
+               final BufferedReader r = new BufferedReader(      
+                   new InputStreamReader(process.getErrorStream()));      
+               String line = r.readLine();      
+               while (line != null) {      
+               System.err.println(line);      
+               line = r.readLine();      
+               }      
+               r.close();      
+         
+               process.waitFor();    
+               process.destroy(); 
+               System.out.println("Restore realizado com sucesso.");  
+         
+           } catch (IOException e) {      
+               e.printStackTrace();      
+           } catch (InterruptedException ie) {      
+               ie.printStackTrace();      
+           }         
+        }else{
+            System.out.println("Não existe o arquivo de backup!");
+        }
+    }
+    
+    @GetMapping("/backup/variaveis")
+    public Configuracao variaveisBackup(){
+        return bconfig.buscar();
     }
     
 }

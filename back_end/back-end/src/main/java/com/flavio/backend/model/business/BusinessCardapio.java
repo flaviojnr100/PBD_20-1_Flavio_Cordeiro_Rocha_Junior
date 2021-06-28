@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class BusinessCardapio {
         return dao.findById(id);
     }
     public List<ItemCardapio> buscarTodos(){
-        return dao.findAll();
+        return dao.findAll(Sort.by("nome"));
     }
     public ResponseEntity<ItemCardapio> editar(int id,ItemCardapio itemCardapio){
         ItemCardapio item = dao.getOne(id);

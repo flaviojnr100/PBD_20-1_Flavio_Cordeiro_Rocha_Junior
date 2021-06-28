@@ -14,6 +14,7 @@ controller\ControllerFinalizarPedido$1.class
 controller\ControllerFinanciaAnual.class
 controller\ControllerInformacoesCardapio.class
 repository\RepositoryFuncionario$6.class
+repository\RepositoryBackup.class
 model\FinanciaAnual.class
 repository\RepositoryPedido$3.class
 controller\ControllerEditarPedido$1.class
@@ -24,6 +25,7 @@ model\Criptografia.class
 controller\ControllerDashboard$2.class
 repository\RepositoryCardapio$2.class
 controller\ControllerReset$2.class
+controller\ControllerDashboard$5.class
 repository\RepositoryMesa.class
 controller\ControllerCadastroMesa.class
 model\Funcionario.class
@@ -35,6 +37,7 @@ model\Log.class
 repository\RepositoryFuncionario$8.class
 controller\ControllerMesa.class
 repository\RepositoryFuncionario$1.class
+model\Configuracao.class
 controller\ControllerEditarMesa.class
 controller\ControllerBalancoDetalhado.class
 controller\ControllerMesa$2.class

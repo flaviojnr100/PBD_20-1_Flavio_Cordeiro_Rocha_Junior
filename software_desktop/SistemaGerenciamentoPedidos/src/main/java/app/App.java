@@ -4,7 +4,16 @@ package app;
 import com.sun.jndi.toolkit.url.Uri;
 import java.io.File;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,6 +29,7 @@ import model.Log;
 import model.Mesa;
 import model.Pedido;
 import model.SenhaReset;
+import repository.RepositoryBackup;
 import repository.RepositoryCardapio;
 import repository.RepositoryFinancia;
 import repository.RepositoryFinanciaAnual;
@@ -55,8 +65,10 @@ public class App extends Application {
     }
     
     public static void main(String[] args) {
+        
         launch(args);
-
+     
+      
        
     }
     

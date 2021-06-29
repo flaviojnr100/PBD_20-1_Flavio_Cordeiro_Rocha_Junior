@@ -28,6 +28,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
+import javax.swing.JOptionPane;
 import model.BaseDados;
 import model.Mesa;
 
@@ -53,8 +54,32 @@ public class ControllerMesa implements Initializable {
 
     @FXML
     void buscar(ActionEvent event) {
-        BaseDados.atualizarMesaNumero(Integer.parseInt(buscarTxt.getText()));
-        atualizar();
+        
+        if(!verificarDigito(buscarTxt.getText())){
+        if(!buscarTxt.getText().equals("")){
+            BaseDados.atualizarMesaNumero(Integer.parseInt(buscarTxt.getText()));
+            atualizar();
+        }else{
+            JOptionPane.showMessageDialog(null, "Campo de busca em branco!");
+        }
+        }else{
+            JOptionPane.showMessageDialog(null, "Digite somente numeros!");
+        }
+    }
+     private boolean verificarDigito(String digito){
+        boolean condicao = false;
+        
+        for(int i=0;i<digito.length();i++){
+            int caract = digito.charAt(i);
+            if(caract>=48 && caract<=57){
+                condicao=false;
+            }else{
+                condicao=true;
+                break;
+            }
+        }
+        return condicao;
+    
     }
 
     @FXML

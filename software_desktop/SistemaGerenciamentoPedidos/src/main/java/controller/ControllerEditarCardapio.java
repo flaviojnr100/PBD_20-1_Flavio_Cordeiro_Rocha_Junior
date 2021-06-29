@@ -56,32 +56,81 @@ public class ControllerEditarCardapio implements Initializable {
     @FXML
     void salvar(ActionEvent event) {
         if(JOptionPane.showConfirmDialog(null, "Deseja editar o registro ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-            if(nomeTxt.getText().equals(item.getNome()) || BaseDados.getRepositoryCardapio().buscarNomeUnico(nomeTxt.getText())==null){
-            item.setNome(nomeTxt.getText());
-            item.setDescricao(descricaoTxt.getText());
-            item.setPreco(Double.parseDouble(precoTxt.getText()));
-            if(BaseDados.getRepositoryCardapio().editar(item.getId(), item)){
-                JOptionPane.showMessageDialog(null, "Registro editado com sucesso");
-                btnCancelar.fire();
+            if(!nomeTxt.getText().equals("") && !precoTxt.getText().equals("") && !descricaoTxt.getText().equals("")){
+            if(nomeTxt.getText().toLowerCase().equals(item.getNome()) || BaseDados.getRepositoryCardapio().buscarNomeUnico(nomeTxt.getText().toLowerCase())==null){
+                if(verificarDigitoNome(nomeTxt.getText())){
+                    String preco = precoTxt.getText();
+                    if(!verificarDigito(preco)){
+                        if(preco.contains(",")){
+                            preco = preco.replace(",", ".");
+                        }
+                        item.setNome(nomeTxt.getText());
+                        item.setDescricao(descricaoTxt.getText());
+                        item.setPreco(Double.parseDouble(preco));
+                        if(BaseDados.getRepositoryCardapio().editar(item.getId(), item)){
+                            JOptionPane.showMessageDialog(null, "Registro editado com sucesso");
+                            btnCancelar.fire();
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Erro, informe o administrador");
+                        }
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Formato de preço inválido!");
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Digite apenas texto no campo do nome");
+                    
+                    }
             }else{
-                JOptionPane.showMessageDialog(null, "Erro, informe o administrador");
+                 JOptionPane.showMessageDialog(null, "Esse item já existe no sistema!!");
             }
             }else{
-                JOptionPane.showMessageDialog(null, "Esse item já existe no sistema!!");
-            }
+            JOptionPane.showMessageDialog(null, "Não deixe nenhum campo de texto em branco!");
         }
-    }
+        }
+        }
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         nomeTxt.setText(item.getNome());
         descricaoTxt.setText(item.getDescricao());
         precoTxt.setText(item.getPreco()+"");
-        
     }
 
     public static void setItem(ItemCardapio item) {
         ControllerEditarCardapio.item = item;
     }
+    
+     private boolean verificarDigito(String digito){
+        boolean condicao = false;
+        
+        for(int i=0;i<digito.length();i++){
+            int caract = digito.charAt(i);
+            if(caract>=48 && caract<=57 || caract==44 || caract==46){
+                condicao=false;
+            }else{
+                condicao=true;
+                break;
+            }
+        }
+        return condicao;
+    
+    }
+    private boolean verificarDigitoNome(String digito){
+        boolean condicao = false;
+        
+        for(int i=0;i<digito.length();i++){
+            int caract = digito.charAt(i);
+            if(caract>=48 && caract<=57 || caract==44 || caract==46){
+                condicao=false;
+                break;
+            }else{
+                condicao=true;
+                
+            }
+        }
+        return condicao;
+    
+    } 
 
 }

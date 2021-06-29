@@ -54,6 +54,7 @@ public class ControllerEditarFuncionario implements Initializable{
     void editar(ActionEvent event) {
         Criptografia.getMd();
         if(JOptionPane.showConfirmDialog(null, "Deseja editar o registro ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(!nomeTxt.getText().equals("") && !sobrenomeTxt.getText().equals("") && !telefoneTxt.getText().equals("") && !cpfTxt.getText().equals("") && !loginTxt.getText().equals("") && !senhaTxt.getText().equals("") && !confirmarSenha.getText().equals("")){    
             if(senhaTxt.getText().equals(confirmarSenha.getText())){
             if(Criptografia.validarSenha(senhaTxt.getText())){
                 BaseDados.getAutenticado().setNome(nomeTxt.getText());
@@ -71,7 +72,10 @@ public class ControllerEditarFuncionario implements Initializable{
             
             }
             }else{
-                JOptionPane.showMessageDialog(null, "As senhas são diferentes, digite novamente!","Aviso",JOptionPane.YES_OPTION);
+                JOptionPane.showMessageDialog(null, "As senhas são diferentes, digite novamente!");
+            }
+            }else{
+                JOptionPane.showMessageDialog(null, "Não pode deixar campo de texto em branco!");
             }
         }
     }

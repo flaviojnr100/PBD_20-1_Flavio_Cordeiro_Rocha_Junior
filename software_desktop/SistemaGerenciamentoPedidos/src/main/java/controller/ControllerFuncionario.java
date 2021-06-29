@@ -6,6 +6,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,6 +29,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Callback;
+import javax.swing.JOptionPane;
 import model.BaseDados;
 import model.Funcionario;
 import repository.RepositoryFuncionario;
@@ -52,7 +56,7 @@ public class ControllerFuncionario implements Initializable {
     private TableColumn<Funcionario, String> colAcesso;
     
     @FXML
-    private TableColumn<Funcionario, Boolean> colPermissao;
+    private TableColumn<Funcionario, String> colPermissao;
 
     @FXML
     private TextField buscaTxt;
@@ -115,31 +119,34 @@ public class ControllerFuncionario implements Initializable {
 
     @FXML
     void pesquisar(ActionEvent event) {
+        if(!buscaTxt.getText().equals("")){
+            if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
+                if(rbtNome.isSelected()){
+                    BaseDados.atualizarFuncionariosNomeSU(buscaTxt.getText());
+                    atualizar();
+                }else if(rbtCpf.isSelected()){
+                    BaseDados.atualizarFuncionariosCpfSU(buscaTxt.getText());
+                    atualizar();
+                }else if(rbtLogin.isSelected()){
+                    BaseDados.atualizarFuncionariosLoginSU(buscaTxt.getText());
+                    atualizar();
+                }
+            }else{
         
-        if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
-            if(rbtNome.isSelected()){
-                BaseDados.atualizarFuncionariosNomeSU(buscaTxt.getText());
-                atualizar();
-            }else if(rbtCpf.isSelected()){
-                BaseDados.atualizarFuncionariosCpfSU(buscaTxt.getText());
-                atualizar();
-            }else if(rbtLogin.isSelected()){
-                BaseDados.atualizarFuncionariosLoginSU(buscaTxt.getText());
-                atualizar();
+                if(rbtNome.isSelected()){
+                    BaseDados.atualizarFuncionariosNome(buscaTxt.getText());
+                    atualizar();
+                }else if(rbtCpf.isSelected()){
+                    BaseDados.atualizarFuncionariosCpf(buscaTxt.getText());
+                    atualizar();
+                }else if(rbtLogin.isSelected()){
+                    BaseDados.atualizarFuncionariosLogin(buscaTxt.getText());
+                    atualizar();
+                }
             }
         }else{
-        
-            if(rbtNome.isSelected()){
-                BaseDados.atualizarFuncionariosNome(buscaTxt.getText());
-                atualizar();
-            }else if(rbtCpf.isSelected()){
-                BaseDados.atualizarFuncionariosCpf(buscaTxt.getText());
-                atualizar();
-            }else if(rbtLogin.isSelected()){
-                BaseDados.atualizarFuncionariosLogin(buscaTxt.getText());atualizar();
-            }
+            JOptionPane.showMessageDialog(null, "Não pode deixar em branco!");
         }
-        
     }
 
     @FXML
@@ -179,7 +186,14 @@ public class ControllerFuncionario implements Initializable {
         colTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         colCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
         colAcesso.setCellValueFactory(new PropertyValueFactory<>("tipoAcesso"));
-        colPermissao.setCellValueFactory(new PropertyValueFactory<>("isPermissao"));
+        colPermissao.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Funcionario, String> param) {
+                final Funcionario f = param.getValue();
+                final SimpleObjectProperty sop = new SimpleObjectProperty(f.isIsPermissao()?"Ativo":"Não ativo");
+                return sop;
+            }
+        });
         
         tableFuncionario.setItems(FXCollections.observableArrayList(BaseDados.getFuncionarios()));
     }

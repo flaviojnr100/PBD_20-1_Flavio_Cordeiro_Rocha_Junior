@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -22,12 +24,13 @@ import javafx.stage.WindowEvent;
 import javax.swing.JOptionPane;
 import model.BaseDados;
 import model.ItemCardapio;
+import model.Mesa;
 import model.Pedido;
 
 public class ControllerEditarPedido implements Initializable {
 
     @FXML
-    private TextField mesaTxt;
+    private ComboBox<Mesa> comboMesa;
 
     @FXML
     private Label lblTotal;
@@ -72,7 +75,9 @@ public class ControllerEditarPedido implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mesaTxt.setText(pedido.getMesa().getNumero()+"");
+       // mesaTxt.setText(pedido.getMesa().getNumero()+"");
+        comboMesa.setItems(FXCollections.observableArrayList(BaseDados.getMesas()));
+        comboMesa.getSelectionModel().select(pedido.getMesa());
         BaseDados.atualizarCardapio();
         List<ItemCardapio> cardapio = BaseDados.getCardapio();
         GridPane grid = new GridPane();

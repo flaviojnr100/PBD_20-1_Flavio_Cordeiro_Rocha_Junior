@@ -153,12 +153,8 @@ public class RepositoryBackup {
             
             conn.disconnect();
           Configuracao config =  gson.fromJson(output, Configuracao.class);
-            System.out.println(""+output);
           BaseDados.setAlteracao(config.isAlteracao());
           BaseDados.setHorario(config.getHora());
-            System.out.println(""+BaseDados.getHorario());
-            System.out.println(""+BaseDados.isAlteracao());
-           
         
         } catch (MalformedURLException ex) {
             Logger.getLogger(RepositoryBackup.class.getName()).log(Level.SEVERE, null, ex);

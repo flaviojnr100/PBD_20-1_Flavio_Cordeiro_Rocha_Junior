@@ -105,15 +105,35 @@ public class ControllerPedido implements Initializable {
     @FXML
     void buscar(ActionEvent event) {
         if(rbtnMesa.isSelected()){
-            //foi modificado a busca de mesas, a busca é de mesas com pedidos não cancelados, criar metodo para buscar tudo
-            BaseDados.atualizarPedidoMesaTodos(Integer.parseInt(buscarTxt.getText()));
-            atualizar();
+            if(!buscarTxt.getText().equals("")){
+                if(!verificarDigito(buscarTxt.getText())){
+                    BaseDados.atualizarPedidoMesaTodos(Integer.parseInt(buscarTxt.getText()));
+                    atualizar();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Só é permitido numeros!");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Não pode deixar campo de texto em branco!");
+            }
         }else if(rbtnCodigo.isSelected()){
-            BaseDados.atualizarPedidoId(Integer.parseInt(buscarTxt.getText()));
-            atualizar();
+            
+           if(!buscarTxt.getText().equals("")){
+                if(!verificarDigito(buscarTxt.getText())){
+                   BaseDados.atualizarPedidoId(Integer.parseInt(buscarTxt.getText()));
+                   atualizar();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Só é permitido numeros!");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Não pode deixar campo de texto em branco!");
+            }
         }else if(rbtnData.isSelected()){
-            BaseDados.atualizarPedidoData(dateData.getValue().getDayOfMonth(), dateData.getValue().getMonthValue(), dateData.getValue().getYear());
-            atualizar();
+            if(dateData.getValue()!=null){
+                BaseDados.atualizarPedidoData(dateData.getValue().getDayOfMonth(), dateData.getValue().getMonthValue(), dateData.getValue().getYear());
+                atualizar();
+            }else{
+                JOptionPane.showMessageDialog(null, "Formato de data invalido!");
+            }
         }
     }
 
@@ -150,30 +170,35 @@ public class ControllerPedido implements Initializable {
             buscarTxt.setVisible(false);
         }else{
             dateData.setVisible(false);
-        buscarTxt.setVisible(true);
+            buscarTxt.setVisible(true);
         }
     }
     @FXML
     void update(ActionEvent event) {
          try {
-            ControllerEditarPedido.setPedido(tablePedido.getSelectionModel().getSelectedItem());
-            Parent root = FXMLLoader.load(new File("src/main/java/view/FXMLEditarPedido.fxml").toURL());
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("Editar");
-            stage.setScene(scene);
-            stage.getIcons().add(new Image("file:src/main/java/asset/icone.png"));
-            stage.setResizable(false);
-            stage.initOwner((Stage) btnAdiciionar.getScene().getWindow());
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                @Override
-                public void handle(WindowEvent event) {
-                    BaseDados.atualizarCardapio();
-                    atualizar();
-                }
-            });
-            stage.showAndWait();
+            if(!tablePedido.getSelectionModel().getSelectedItem().getStatus().equals("pago")){
+                ControllerEditarPedido.setPedido(tablePedido.getSelectionModel().getSelectedItem());
+                Parent root = FXMLLoader.load(new File("src/main/java/view/FXMLEditarPedido.fxml").toURL());
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setTitle("Editar");
+                stage.setScene(scene);
+                stage.getIcons().add(new Image("file:src/main/java/asset/icone.png"));
+                stage.setResizable(false);
+                stage.initOwner((Stage) btnAdiciionar.getScene().getWindow());
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent event) {
+                        BaseDados.atualizarCardapio();
+                        atualizar();
+                    }
+                });
+                stage.showAndWait();
+                }else{
+                    contextMenu.hide();
+                    JOptionPane.showMessageDialog(null, "Não pode editar um pedido pago!");
+            }
         } catch (IOException ex) {
             Logger.getLogger(ControllerPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -289,5 +314,21 @@ public class ControllerPedido implements Initializable {
             atualizar();
             dateData.setValue(LocalDate.now());
         }
+    }
+    
+    private boolean verificarDigito(String digito){
+        boolean condicao = false;
+        
+        for(int i=0;i<digito.length();i++){
+            int caract = digito.charAt(i);
+            if(caract>=48 && caract<=57){
+                condicao=false;
+            }else{
+                condicao=true;
+                break;
+            }
+        }
+        return condicao;
+    
     }
 }

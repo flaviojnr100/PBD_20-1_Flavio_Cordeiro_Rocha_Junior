@@ -91,18 +91,39 @@ public class ControllerFinalizarPedido implements Initializable{
 
     @FXML
     void keyTroco(KeyEvent event) {
-        if(trocoTxt.getText().equals("")){
+        if(trocoTxt.getText().equals("") || trocoTxt.getText().equals(",") || trocoTxt.getText().equals(".")){
             lblTroco.setText("R$ 0,00");
-        }else if(trocoTxt.getText().contains(",")){
+            trocoTxt.setText("");
+        }else if(!verificarDigito(trocoTxt.getText())){
             
-            double total = montarTotal(pedidos);
-            double troco = Double.parseDouble(trocoTxt.getText().replace(",", "."));
-            lblTroco.setText("R$ "+String.format("%.2f", (troco - total)));
+            if(trocoTxt.getText().contains(",")){
+            
+                double total = montarTotal(pedidos);
+                double troco = Double.parseDouble(trocoTxt.getText().replace(",", "."));
+                lblTroco.setText("R$ "+String.format("%.2f", (troco - total)));
+            }else{
+                double total = montarTotal(pedidos);
+                double troco = Double.parseDouble(trocoTxt.getText());
+                lblTroco.setText("R$ "+String.format("%.2f", (troco - total)));
+            }
         }else{
-            double total = montarTotal(pedidos);
-            double troco = Double.parseDouble(trocoTxt.getText());
-            lblTroco.setText("R$ "+String.format("%.2f", (troco - total)));
+            trocoTxt.setText("");
         }
+    }
+    private boolean verificarDigito(String digito){
+        boolean condicao = false;
+        
+        for(int i=0;i<digito.length();i++){
+            int caract = digito.charAt(i);
+            if(caract>=48 && caract<=57 || caract==44 || caract==46){
+                condicao=false;
+            }else{
+                condicao=true;
+                break;
+            }
+        }
+        return condicao;
+    
     }
 
     @Override

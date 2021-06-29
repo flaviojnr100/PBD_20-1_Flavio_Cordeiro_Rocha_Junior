@@ -19,7 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -64,22 +63,26 @@ public class ControllerCadastrarPedido implements Initializable{
     void finalizar(ActionEvent event) {
         if(JOptionPane.showConfirmDialog(null, "Deseja finalizar o pedido ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             if(comboMesa.getSelectionModel().getSelectedIndex() != -1){
-                Pedido pedido = new Pedido();
-                pedido.setFuncionario(BaseDados.getAutenticado());
-                pedido.setItens(itemPedido);
-                Mesa mesa = new Mesa();
-                mesa.setNumero(comboMesa.getSelectionModel().getSelectedItem());
-                pedido.setMesa(mesa);
-                pedido.setStatus("pendente");
-                pedido.setTotal(total);
+                if(total!=0){
+                    Pedido pedido = new Pedido();
+                    pedido.setFuncionario(BaseDados.getAutenticado());
+                    pedido.setItens(itemPedido);
+                    Mesa mesa = new Mesa();
+                    mesa.setNumero(comboMesa.getSelectionModel().getSelectedItem());
+                    pedido.setMesa(mesa);
+                    pedido.setStatus("pendente");
+                    pedido.setTotal(total);
             
             
-                if(BaseDados.getRepositoryPedido().salvar(pedido)){
-                    JOptionPane.showMessageDialog(null, "Pedido salvo com sucesso !");
-                    //ControllerDashboard.setAlterouPedido(true);
-                    btnCancelar.fire();
+                    if(BaseDados.getRepositoryPedido().salvar(pedido)){
+                        JOptionPane.showMessageDialog(null, "Pedido salvo com sucesso !");
+                        btnCancelar.fire();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Erro, contate o administrador !");
+                    }
+                
                 }else{
-                    JOptionPane.showMessageDialog(null, "Erro, contate o administrador !");
+                    JOptionPane.showMessageDialog(null, "Não pode encerrar o pedido, pois não foi adicionado itens!");
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "Selecione uma mesa!");

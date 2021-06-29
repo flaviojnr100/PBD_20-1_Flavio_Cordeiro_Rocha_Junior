@@ -24,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
+import javax.swing.JOptionPane;
 import model.BaseDados;
 import model.Log;
 
@@ -94,8 +95,12 @@ public class ControllerLogSistema implements Initializable {
 
     @FXML
     void buscar(ActionEvent event) {
-        BaseDados.atualizarLogData(dataDate.getValue().getDayOfMonth(), dataDate.getValue().getMonthValue(), dataDate.getValue().getYear());
-        atualizar();
+        if(dataDate.getValue()!=null){
+            BaseDados.atualizarLogData(dataDate.getValue().getDayOfMonth(), dataDate.getValue().getMonthValue(), dataDate.getValue().getYear());
+            atualizar();
+        }else{
+            JOptionPane.showMessageDialog(null, "Formato de data inválido");
+        }
     }
 
 }

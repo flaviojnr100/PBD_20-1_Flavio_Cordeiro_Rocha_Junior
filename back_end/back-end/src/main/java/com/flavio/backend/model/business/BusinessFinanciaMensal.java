@@ -11,6 +11,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,7 +25,7 @@ public class BusinessFinanciaMensal {
     DaoFinanciaMensal dao;
     
     public List<FinanciaMensal> buscarTodos(){
-        return dao.findAll();
+        return dao.findAll(Sort.by(Sort.Direction.DESC,"dataPedido"));
     }
     
     public List<FinanciaMensal> buscarMes(int mes,int ano){

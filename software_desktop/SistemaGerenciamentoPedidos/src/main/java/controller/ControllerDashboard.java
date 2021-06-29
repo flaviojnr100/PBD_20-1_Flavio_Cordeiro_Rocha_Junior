@@ -96,6 +96,7 @@ public class ControllerDashboard implements Initializable {
     private static Task<Void> task1;
     private int quant_mesas=0;
     private static boolean alterou=false;
+    private static boolean janelaAberta=false;
     
     @FXML
     void cardapio(ActionEvent event) {
@@ -133,12 +134,16 @@ public class ControllerDashboard implements Initializable {
             stage.initOwner((Stage) btnCardapio.getScene().getWindow());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.getIcons().add(new Image("file:src/main/java/asset/icone.png"));
-           /* stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
+                    BaseDados.atualizarMesa();
                     montarPainelMesas();
+                    janelaAberta=false;
+                    
                 }
-            });*/
+            });
+            janelaAberta=true;
             stage.showAndWait();
         } catch (IOException ex) {
             Logger.getLogger(ControllerDashboard.class.getName()).log(Level.SEVERE, null, ex);
@@ -190,7 +195,7 @@ public class ControllerDashboard implements Initializable {
                         alterouPedido = true;
                         
                     }
-                    if(BaseDados.getRepositoryMesa().verificarMesas(BaseDados.getMesas().size()) == false){
+                    if(BaseDados.getRepositoryMesa().verificarMesas(BaseDados.getMesas().size()) == false && janelaAberta==false){
                         alterou = true;
                     }
                     
@@ -278,6 +283,7 @@ public class ControllerDashboard implements Initializable {
             button.setFont(Font.font("Century Gothic", 18.0));
             button.setCursor(Cursor.HAND);
             button.setOnAction(new EventHandler<ActionEvent>() {
+                private final int n_pedido= p.getId();
                 @Override
                 public void handle(ActionEvent event) {
                     try {
@@ -285,7 +291,7 @@ public class ControllerDashboard implements Initializable {
                         Parent root = FXMLLoader.load(new File("src/main/java/view/FXMLVisualizacaoPedido.fxml").toURL());
                         Scene scene = new Scene(root);
                         Stage stage = new Stage();
-                        stage.setTitle("Pedido");
+                        stage.setTitle("Pedido de Nº "+n_pedido);
                         stage.setScene(scene);
                         stage.setResizable(false);
                         stage.initOwner((Stage) btnCardapio.getScene().getWindow());
@@ -347,7 +353,7 @@ public class ControllerDashboard implements Initializable {
                                     Parent root = FXMLLoader.load(new File("src/main/java/view/FXMLFinalizarPedido.fxml").toURL());
                                     Scene scene = new Scene(root);
                                     Stage stage = new Stage();
-                                    stage.setTitle("Mesa "+BaseDados.getMesas().get(n).getNumero());
+                                    stage.setTitle("Finalizar pedido");
                                     stage.setScene(scene);
                                     stage.setResizable(false);
                                     stage.initOwner((Stage) btnCardapio.getScene().getWindow());
@@ -472,6 +478,10 @@ public class ControllerDashboard implements Initializable {
 
     public static Task<Void> getTask1() {
         return task1;
+    }
+
+    public static void setJanelaAberta(boolean janelaAberta) {
+        ControllerDashboard.janelaAberta = janelaAberta;
     }
     
     

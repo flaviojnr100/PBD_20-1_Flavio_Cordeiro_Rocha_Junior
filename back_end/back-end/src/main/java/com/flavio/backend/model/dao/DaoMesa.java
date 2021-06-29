@@ -6,6 +6,7 @@
 package com.flavio.backend.model.dao;
 
 import com.flavio.backend.model.object.Mesa;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -23,5 +24,9 @@ public interface DaoMesa extends JpaRepository<Mesa, Integer> {
     
     @Procedure("verificar_mesas")
     public boolean verificarMesas(int tamanho);
+    
+    @Query(value = "select * from mesa where is_livre = true order by id asc",nativeQuery = true)
+    @Override
+    public List<Mesa> findAll();
     
 }

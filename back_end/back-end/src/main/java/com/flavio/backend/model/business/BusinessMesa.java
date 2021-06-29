@@ -37,7 +37,7 @@ public class BusinessMesa {
         return ResponseEntity.ok(mesa);
     }
     public List<Mesa> buscarTodos(){
-        return dao.findAll(Sort.by(Sort.Direction.ASC,"id"));
+        return dao.findAll();
     }
     public Mesa buscarNumero(int numero){
         return dao.buscarNumero(numero);

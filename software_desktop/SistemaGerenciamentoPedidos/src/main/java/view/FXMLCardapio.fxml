@@ -41,7 +41,7 @@
       </Pane>
       <Pane layoutX="23.0" layoutY="116.0" prefHeight="78.0" prefWidth="566.0">
          <children>
-            <TextField fx:id="buscarTxt" layoutX="8.0" layoutY="27.0" onKeyReleased="#keyBuscar" prefHeight="25.0" prefWidth="465.0" styleClass="campoTexto" stylesheets="@style.css" />
+            <TextField fx:id="buscarTxt" layoutX="8.0" layoutY="27.0" onKeyReleased="#keyBuscar" prefHeight="25.0" prefWidth="465.0" promptText="Buscar pelo nome do item" styleClass="campoTexto" stylesheets="@style.css" />
             <Button fx:id="btnBuscar" layoutX="487.0" layoutY="21.0" mnemonicParsing="false" onAction="#buscar" prefHeight="36.0" prefWidth="76.0" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Buscar">
                <font>
                   <Font name="Century Gothic" size="15.0" />

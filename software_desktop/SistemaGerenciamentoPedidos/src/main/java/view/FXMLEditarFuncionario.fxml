@@ -71,7 +71,7 @@
                   <Font name="Century Gothic" size="15.0" />
                </font>
             </Label>
-            <PasswordField fx:id="confirmarSenha" styleClass="campoTexto" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <PasswordField fx:id="confirmarSenha" onKeyReleased="#keyPressedSalvar" styleClass="campoTexto" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
       <Button fx:id="btnEditar" layoutX="92.0" layoutY="373.0" mnemonicParsing="false" onAction="#editar" onKeyReleased="#keyPressedSalvar" prefHeight="42.0" prefWidth="78.0" style="-fx-border-color: black; -fx-border-radius: 10px;" styleClass="botaoMesa" stylesheets="@style.css" text="Editar">

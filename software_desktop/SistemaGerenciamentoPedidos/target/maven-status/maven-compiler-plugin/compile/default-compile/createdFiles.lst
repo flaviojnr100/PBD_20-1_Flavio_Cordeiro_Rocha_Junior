@@ -9,7 +9,6 @@ repository\RepositoryFuncionario$3.class
 repository\RepositoryPedido.class
 controller\ControllerCardapio.class
 controller\ControllerPedido$4.class
-controller\ControllerDashboard$1$1.class
 controller\ControllerFinalizarPedido$1.class
 controller\ControllerFinanciaAnual.class
 controller\ControllerInformacoesCardapio.class
@@ -23,6 +22,7 @@ repository\RepositoryLog$1.class
 controller\ControllerEditarFuncionario.class
 model\Criptografia.class
 controller\ControllerDashboard$2.class
+controller\ControllerFuncionario$2.class
 repository\RepositoryCardapio$2.class
 controller\ControllerReset$2.class
 controller\ControllerDashboard$5.class
@@ -77,13 +77,13 @@ repository\RepositoryCardapio.class
 repository\RepositoryUtil.class
 repository\RepositoryFuncionario$7.class
 repository\RepositoryFinancia$3.class
-controller\ControllerDashboard$1$2.class
 model\SenhaReset.class
 controller\ControllerMesa$1.class
 controller\ControllerInformacoesFuncionario.class
 controller\ControllerPedido$3.class
 controller\ControllerFinanciaMensal$2.class
 app\App.class
+controller\ControllerDashboard$6.class
 model\FinanciaMensal.class
 controller\ControllerFinancia.class
 repository\RepositoryFinanciaAnual$1.class
@@ -92,6 +92,7 @@ controller\ControllerFinalizarPedido.class
 controller\ControllerPedido$6.class
 controller\ControllerEditarPedido.class
 repository\RepositoryPedido$5.class
+controller\ControllerDashboard$2$1.class
 repository\RepositoryFinancia$2.class
 controller\ControllerCadastrarPedido.class
 controller\ControllerReset.class
@@ -101,6 +102,7 @@ repository\RepositoryLog.class
 controller\ControllerBalancoDetalhado$2.class
 model\Pedido.class
 controller\ControllerReset$3.class
+controller\ControllerDashboard$2$2.class
 controller\ControllerPedido$5.class
 repository\RepositoryPedido$4.class
 controller\ControllerCardapio$3.class

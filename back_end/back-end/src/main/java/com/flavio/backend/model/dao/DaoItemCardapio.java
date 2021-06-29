@@ -21,4 +21,7 @@ public interface DaoItemCardapio extends JpaRepository<ItemCardapio, Integer> {
     
     @Query(value = "select i from ItemCardapio i where i.nome = :nome")
     public ItemCardapio buscarNomeUnico(@Param("nome") String nome);
+    
+    @Query(value = "select * from item_cardapio where is_ativo=true order by nome",nativeQuery = true)
+    public List<ItemCardapio> findAll();
 }

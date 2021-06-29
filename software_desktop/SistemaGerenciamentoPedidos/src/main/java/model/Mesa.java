@@ -42,6 +42,11 @@ public class Mesa {
     public void setIsLivre(boolean isLivre) {
         this.isLivre = isLivre;
     }
+
+    @Override
+    public String toString() {
+        return ""+numero;
+    }
     
     
 }

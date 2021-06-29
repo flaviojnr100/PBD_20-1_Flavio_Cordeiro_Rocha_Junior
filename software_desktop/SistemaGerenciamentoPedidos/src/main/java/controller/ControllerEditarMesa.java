@@ -25,7 +25,7 @@ public class ControllerEditarMesa implements Initializable {
     private Button btnCancelar;
     
     private static Mesa mesa;
-
+    private int numero_old;
     @FXML
     void cancelar(ActionEvent event) {
         Stage stage = (Stage) btnCancelar.getScene().getWindow();
@@ -36,7 +36,9 @@ public class ControllerEditarMesa implements Initializable {
     @FXML
     void editar(ActionEvent event) {
         if(JOptionPane.showConfirmDialog(null, "Deseja alterar a mesa ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(!numeroTxt.getText().equals("")){
             mesa.setNumero(Integer.parseInt(numeroTxt.getText()));
+            if(!verificar(mesa.getNumero())){
             if(BaseDados.getRepositoryMesa().editar(mesa)){
                 ControllerDashboard.setAlterou(true);
                 JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
@@ -44,18 +46,35 @@ public class ControllerEditarMesa implements Initializable {
             }else{
                 JOptionPane.showMessageDialog(null, "Erro, contate o administrado!");
             }
+            }else{
+                JOptionPane.showMessageDialog(null, "Essa mesa já está cadastrada no sistema!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Não deixe nenhum campo de texto em branco");
+        }
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         numeroTxt.setText(mesa.getNumero()+"");
+        numero_old = mesa.getNumero();
     }
 
     public static void setMesa(Mesa mesa) {
         ControllerEditarMesa.mesa = mesa;
     }
     
-    
+    public boolean verificar(int mesaV){
+        if(mesaV !=numero_old){
+            for(Mesa mesa: BaseDados.getMesas()){
+                if(mesa.getNumero() == mesaV){
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
 
 }

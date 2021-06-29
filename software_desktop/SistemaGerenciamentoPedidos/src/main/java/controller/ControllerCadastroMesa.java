@@ -23,9 +23,11 @@ public class ControllerCadastroMesa {
 
     @FXML
     void cadastrar(ActionEvent event) {
-        Mesa mesa = new Mesa();
-        mesa.setNumero(Integer.parseInt(numeroTxt.getText()));
+
         if(JOptionPane.showConfirmDialog(null, "Deseja salvar a mesa ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(!numeroTxt.getText().equals("")){
+            Mesa mesa = new Mesa();
+            mesa.setNumero(Integer.parseInt(numeroTxt.getText()));
             if(!verificar(mesa.getNumero())){
                 if(BaseDados.getRepositoryMesa().salvar(mesa)){
                     
@@ -36,6 +38,9 @@ public class ControllerCadastroMesa {
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "Essa mesa já está cadastrada no sistema!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Não deixe o campo em branco!");
             }
         }
     }

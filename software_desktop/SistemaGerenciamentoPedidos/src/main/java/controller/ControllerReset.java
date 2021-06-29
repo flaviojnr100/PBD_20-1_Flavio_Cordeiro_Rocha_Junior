@@ -58,16 +58,22 @@ public class ControllerReset implements Initializable {
 
     @FXML
     void buscar(ActionEvent event) {
-        BaseDados.atualizarResetLogin(buscaTxt.getText());
-        if(BaseDados.getStatus()==202){
-            atualizar();
+        if(!buscaTxt.getText().equals("")){
+            BaseDados.atualizarResetLogin(buscaTxt.getText());
+            if(BaseDados.getStatus()==202){
+                BaseDados.atualizarResetLogin(buscaTxt.getText());
+                atualizar();
+            }else{
+                JOptionPane.showMessageDialog(null, "Login inválido");
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "Login inválido");
+            JOptionPane.showMessageDialog(null, "Não deixe o campo em branco!");
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        BaseDados.atualizarResets();
         atualizar();
     }
     
@@ -106,7 +112,7 @@ public class ControllerReset implements Initializable {
                  return sop;
              }
          });
-        BaseDados.atualizarResets();
+        
         tableReset.setItems(FXCollections.observableArrayList(BaseDados.getResets()));
          
     }
@@ -115,6 +121,7 @@ public class ControllerReset implements Initializable {
     void resetar(ActionEvent event) {
         if(JOptionPane.showConfirmDialog(null, "Deseja resetar a senha desse usuário ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             BaseDados.getRepositoryReset().resetar(tableReset.getSelectionModel().getSelectedItem().getId());
+            BaseDados.atualizarResets();
             atualizar();
         }
     }

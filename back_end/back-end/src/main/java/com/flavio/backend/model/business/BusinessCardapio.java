@@ -32,7 +32,7 @@ public class BusinessCardapio {
         return dao.findById(id);
     }
     public List<ItemCardapio> buscarTodos(){
-        return dao.findAll(Sort.by("nome"));
+        return dao.findAll();
     }
     public ResponseEntity<ItemCardapio> editar(int id,ItemCardapio itemCardapio){
         ItemCardapio item = dao.getOne(id);

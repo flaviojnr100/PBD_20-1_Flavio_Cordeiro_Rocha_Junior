@@ -1,5 +1,6 @@
 package controller;
 
+import com.lowagie.text.pdf.CFFFont;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -90,23 +91,23 @@ public class ControllerCadastroFuncionario implements Initializable {
 
     @FXML
     void salvar(ActionEvent event) {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setNome(nomeTxt.getText());
-        funcionario.setSobrenome(sobrenomeTxt.getText());
-        funcionario.setCpf(cpfTxt.getText());
-        funcionario.setTelefone(telefoneTxt.getText());
-        funcionario.setLogin(loginTxt.getText());
-        funcionario.setSenha(senhaTxt.getText());
-        funcionario.setIsPermissao(true);
-        funcionario.setUltimoAcesso(new Date());
-        if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
-            funcionario.setTipoAcesso((String) comboTipo.getSelectionModel().getSelectedItem());
-        }else{
-            funcionario.setTipoAcesso("funcionario");
-        }
-        
         
         if(JOptionPane.showConfirmDialog(null, "Deseja salvar o registro ?","Aviso",JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION){
+            if(!nomeTxt.getText().equals("") && !sobrenomeTxt.getText().equals("") && !telefoneTxt.getText().equals("") && !cpfTxt.getText().equals("") && !loginTxt.getText().equals("") && !senhaTxt.getText().equals("") && !confirmarSenha.getText().equals("")){    
+                Funcionario funcionario = new Funcionario();
+                funcionario.setNome(nomeTxt.getText().toLowerCase());
+                funcionario.setSobrenome(sobrenomeTxt.getText().toLowerCase());
+                funcionario.setCpf(cpfTxt.getText().toLowerCase());
+                funcionario.setTelefone(telefoneTxt.getText().toLowerCase());
+                funcionario.setLogin(loginTxt.getText());
+                funcionario.setSenha(senhaTxt.getText());
+                funcionario.setIsPermissao(true);
+                funcionario.setUltimoAcesso(new Date());
+                if(BaseDados.getAutenticado().getTipoAcesso().equals("superusuario")){
+                    funcionario.setTipoAcesso((String) comboTipo.getSelectionModel().getSelectedItem());
+                }else{
+                    funcionario.setTipoAcesso("funcionario");
+                }
             if(BaseDados.getRepositoryFuncionario().buscarCpfUnicoValidacao(cpfTxt.getText()) == null){
             if(BaseDados.getRepositoryFuncionario().buscarLoginUnicoValidacao(loginTxt.getText()) == null){
                 if(senhaTxt.getText().equals(confirmarSenha.getText())){
@@ -133,7 +134,10 @@ public class ControllerCadastroFuncionario implements Initializable {
             }else{
                 JOptionPane.showMessageDialog(null, "Esse cpf já foi cadastrado no sistema, digite outro !");
             }
-        }
+            
+        }else{
+             JOptionPane.showMessageDialog(null, "Não é permitido deixar campo de texto em branco!");
+            }}
     }
 
 

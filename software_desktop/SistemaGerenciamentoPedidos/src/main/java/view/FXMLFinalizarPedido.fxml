@@ -125,5 +125,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Button fx:id="btnNota" layoutX="274.0" layoutY="23.0" mnemonicParsing="false" onAction="#gerarNota" style="-fx-border-color: black; -fx-border-radius: 5px;" styleClass="botaoMesa" stylesheets="@style.css" text="Gerar nota">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

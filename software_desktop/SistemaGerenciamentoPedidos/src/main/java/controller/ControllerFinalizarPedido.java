@@ -7,8 +7,12 @@ package controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -27,6 +31,13 @@ import javax.swing.JOptionPane;
 import model.BaseDados;
 import model.ItemCardapio;
 import model.Pedido;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class ControllerFinalizarPedido implements Initializable{
 
@@ -53,6 +64,9 @@ public class ControllerFinalizarPedido implements Initializable{
 
     @FXML
     private Button btnAnular;
+    
+    @FXML
+    private Button btnNota;
 
     @FXML
     private Button btnCancelar;
@@ -83,6 +97,9 @@ public class ControllerFinalizarPedido implements Initializable{
             BaseDados.getRepositoryPedido().efetuarPagamento(pedidos.get(0).getMesa().getId());
             JOptionPane.showMessageDialog(null, "Pagamento realizado com sucesso!");
             BaseDados.atualizarPedidosPendente();
+            if(JOptionPane.showConfirmDialog(null, "Deseja imprimir a nota do pagamento ?","Aviso",JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
+                btnNota.fire();
+            }
             btnCancelar.fire();
         }else{
             JOptionPane.showConfirmDialog(null, "Erro ao efetuar o pagamento!!","Erro",JOptionPane.YES_OPTION);
@@ -173,6 +190,35 @@ public class ControllerFinalizarPedido implements Initializable{
 
     public static void setPedidos(List<Pedido> pedidos) {
         ControllerFinalizarPedido.pedidos = pedidos;
+    }
+    
+    @FXML
+    void gerarNota(ActionEvent event) {
+        try {
+            JasperReport report = JasperCompileManager.compileReport("src/main/java/report/Pagamento.jrxml");
+            Map<String, Object> param = new HashMap<String, Object>();
+            param.put("N_MESA",lblMesa.getText());
+            param.put("COD_PEDIDO",pedidos.get(0).getId()+"");
+            param.put("TROCO",lblTroco.getText());
+            param.put("VALOR_RECEBIDO","R$ "+(trocoTxt.getText().equals("")?"0,00":trocoTxt.getText()));
+            param.put("TOTAL",lblTotal.getText());
+            JasperPrint print = JasperFillManager.fillReport(report, param,new JRBeanCollectionDataSource(listaItens()));
+            JasperViewer viewer = new JasperViewer(print,false);
+            viewer.show();
+        } catch (JRException ex) {
+            Logger.getLogger(ControllerFinanciaMensal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    private List<ItemCardapio> listaItens(){
+        List<ItemCardapio> lista = new ArrayList<>();
+        for(Pedido p:pedidos){
+            for(ItemCardapio item:p.getItens()){
+                lista.add(item);
+            }
+        }
+        
+        return lista;
     }
 
 }

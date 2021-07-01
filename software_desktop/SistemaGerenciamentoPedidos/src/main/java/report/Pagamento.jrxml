@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pagamento" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	
+	<parameter name="TOTAL" class="java.lang.String"/>
+	<parameter name="VALOR_RECEBIDO" class="java.lang.String"/>
+	<parameter name="TROCO" class="java.lang.String"/>
+	<parameter name="COD_PEDIDO" class="java.lang.String"/>
+	<parameter name="N_MESA" class="java.lang.String"/>
+	
+	<field name="id" class="java.lang.Integer">
+		
+	</field>
+	<field name="nome" class="java.lang.String">
+	
+	</field>
+	<field name="preco" class="java.lang.Double">
+
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="150" splitType="Stretch">
+			<image>
+				<reportElement x="150" y="-24" width="258" height="130"/>
+				<imageExpression><![CDATA["src/main/java/asset/linkedin_banner_image_1.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="113" y="120" width="335" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Nota do pagamento do pedido]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="445" y="0" width="100" height="30"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="83" width="100" height="18"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Código do pedido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="103" width="91" height="16"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Nº da mesa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="102" y="86" width="100" height="18"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COD_PEDIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="105" width="100" height="18"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{N_MESA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="19">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8c44e6e7-ce73-453b-8044-1a7ecbbe699a"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="94" y="0" width="100" height="18">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ad177ef9-f2bd-4902-bb94-f26807c14c16"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="0" width="100" height="18">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="60f505b4-f71e-4e9d-a0ef-97cd4219f7dc"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Preço]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="23" width="559" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<textField>
+				<reportElement x="13" y="0" width="67" height="19">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8c44e6e7-ce73-453b-8044-1a7ecbbe699a"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="0" width="100" height="18">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ad177ef9-f2bd-4902-bb94-f26807c14c16"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="R$ #,##0.00#;#,##0.00#-">
+				<reportElement x="210" y="0" width="100" height="18">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="60f505b4-f71e-4e9d-a0ef-97cd4219f7dc"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{preco}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="269" y="10" width="100" height="19"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="135" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="557" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="10" width="80" height="30"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="45" width="140" height="30"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor recebido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-2" y="80" width="144" height="30"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Troco:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="150" y="10" width="220" height="30"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TOTAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="45" width="220" height="30"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{VALOR_RECEBIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="81" width="220" height="30"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TROCO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

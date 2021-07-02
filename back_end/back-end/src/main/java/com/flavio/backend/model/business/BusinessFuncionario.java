@@ -100,6 +100,7 @@ public class BusinessFuncionario {
         
         Funcionario f = funcionario1.get();
         BeanUtils.copyProperties(funcionario, f,"id");
+        f.setUltimoAcesso(new Date());
         dao.save(f);
         return ResponseEntity.ok(f);
     }

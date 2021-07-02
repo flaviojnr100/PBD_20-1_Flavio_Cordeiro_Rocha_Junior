@@ -16,7 +16,9 @@ repository\RepositoryFuncionario$6.class
 repository\RepositoryBackup.class
 model\FinanciaAnual.class
 repository\RepositoryPedido$3.class
+controller\ControllerInformacoesLog$2.class
 controller\ControllerEditarPedido$1.class
+repository\RepositoryLog$3.class
 controller\ControllerFinanciaMensal.class
 repository\RepositoryLog$1.class
 controller\ControllerEditarFuncionario.class
@@ -29,6 +31,7 @@ controller\ControllerDashboard$5.class
 repository\RepositoryMesa.class
 controller\ControllerCadastroMesa.class
 model\Funcionario.class
+controller\ControllerInformacoesLog$1.class
 repository\RepositoryPedido$2.class
 controller\ControllerLogSistema$1.class
 controller\ControllerFinancia$2.class
@@ -62,6 +65,7 @@ controller\ControllerCardapio$1.class
 controller\ControllerFinanciaAnual$2.class
 controller\ControllerFuncionario$1.class
 controller\ControllerReset$4.class
+controller\ControllerInformacoesLog$3.class
 controller\ControllerReset$1.class
 controller\ControllerCardapio$4.class
 controller\ControllerDashboard$1.class
@@ -69,6 +73,7 @@ controller\ControllerCadastroFuncionario.class
 controller\ControllerDashboard$4.class
 repository\RepositoryCardapio$1.class
 model\BaseDados.class
+controller\ControllerInformacoesLog.class
 model\ItemCardapio.class
 repository\RepositoryFinancia.class
 repository\RepositoryFuncionario$4.class
@@ -110,6 +115,7 @@ controller\ControllerPedido.class
 repository\RepositoryMesa$1.class
 repository\RepositoryFinanciaAnual$2.class
 repository\RepositoryFuncionario$5.class
+controller\ControllerInformacoesLog$4.class
 controller\ControllerFuncionario.class
 controller\ControllerLogSistema.class
 controller\ControllerVisualizacaoPedido.class

@@ -19,6 +19,8 @@ public class Log {
     private String enderecoIp;
     private String tabela;
     private Date data;
+    private String dadosOld;
+    private String dadosNew;
     
     
 
@@ -73,6 +75,22 @@ public class Log {
 
     public void setData(Date data) {
         this.data = data;
+    }
+
+    public String getDadosOld() {
+        return dadosOld;
+    }
+
+    public void setDadosOld(String dadosOld) {
+        this.dadosOld = dadosOld;
+    }
+
+    public String getDadosNew() {
+        return dadosNew;
+    }
+
+    public void setDadosNew(String dadosNew) {
+        this.dadosNew = dadosNew;
     }
 
 

@@ -62,12 +62,37 @@ public class ControllerLogin {
                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                     @Override
                     public void handle(WindowEvent event) {
-                         if(JOptionPane.showConfirmDialog(null, "Desaja sair do sistema?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                        int resultado = JOptionPane.showConfirmDialog(null, "Desaja sair do sistema e ir para a tela de login?","Aviso",JOptionPane.YES_NO_CANCEL_OPTION); 
+                        System.out.println(""+resultado);
+                         if(resultado == JOptionPane.YES_NO_OPTION){
                             BaseDados.getRepositoryFuncionario().logout(BaseDados.getAutenticado().getLogin());
                             ControllerDashboard.getTask().cancel();
                             if(ControllerDashboard.getTask1()!=null){
                                 ControllerDashboard.getTask1().cancel();
                             }
+                            try {
+                                Stage stage1 = new Stage();
+                                Parent login = FXMLLoader.load(new File("src/main/java/view/FXMLLogin.fxml").toURL());
+                                Scene scene = new Scene(login);
+                                stage1.setScene(scene);
+                                stage1.getIcons().add(new Image("file:src/main/java/asset/icone.png"));
+                                stage1.setResizable(false);
+                                
+                                stage.close();
+                                
+                                stage1.show();
+                                BaseDados.getMeses();
+                            } catch (IOException ex) {
+                                Logger.getLogger(ControllerLogin.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                         
+                         }else if(resultado==1){
+                            BaseDados.getRepositoryFuncionario().logout(BaseDados.getAutenticado().getLogin());
+                            ControllerDashboard.getTask().cancel();
+                            if(ControllerDashboard.getTask1()!=null){
+                                ControllerDashboard.getTask1().cancel();
+                            }
+                            
                          }else{
                              event.consume();
                          }

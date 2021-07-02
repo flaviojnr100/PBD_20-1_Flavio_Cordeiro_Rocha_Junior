@@ -65,6 +65,38 @@ public class RepositoryLog {
         }
             return null;
     }
+    
+        public List<Log> buscarTodosTeste(){
+        try {
+            
+            HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+            
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String output = "";
+            String line;
+            
+            while((line = br.readLine()) != null){
+                output += line;
+            }
+            
+            conn.disconnect();
+
+            Type listType = new TypeToken<ArrayList<Log>>(){}.getType();
+            List<Log> logs = gson.fromJson(output, listType);
+            return logs;
+        
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RepositoryLog.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ProtocolException ex) {
+            Logger.getLogger(RepositoryLog.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RepositoryLog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return null;
+    }
+    
      public List<Log> buscarData(int dia,int mes,int ano){
         try {
             

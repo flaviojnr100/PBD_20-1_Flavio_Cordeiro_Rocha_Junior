@@ -39,6 +39,11 @@ public class Log implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     private Date data;
     
+    @Column(name = "dados_new")
+    private String dadosNew;
+    @Column(name = "dados_old")
+    private String dadosOld;
+    
 
 
     public Log() {
@@ -91,6 +96,24 @@ public class Log implements Serializable{
     public void setData(Date data) {
         this.data = data;
     }
+
+    public String getDadosNew() {
+        return dadosNew;
+    }
+
+    public void setDadosNew(String dadosNew) {
+        this.dadosNew = dadosNew;
+    }
+
+    public String getDadosOld() {
+        return dadosOld;
+    }
+
+    public void setDadosOld(String dadosOld) {
+        this.dadosOld = dadosOld;
+    }
+    
+    
 
     @Override
     public int hashCode() {

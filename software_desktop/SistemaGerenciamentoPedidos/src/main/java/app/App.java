@@ -1,6 +1,8 @@
 package app;
 
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sun.jndi.toolkit.url.Uri;
 import java.io.File;
 import java.io.InputStream;
@@ -10,8 +12,10 @@ import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -67,8 +71,14 @@ public class App extends Application {
     public static void main(String[] args) {
         
         launch(args);
+  /*      RepositoryLog rl = new RepositoryLog();
+        List<Log> logs = rl.buscarTodos();
+        Map<String, Object> retMap = new Gson().fromJson(
+    logs.get(0).getDadosNew(), new TypeToken<HashMap<String, Object>>() {}.getType()
+);
+        System.out.println(""+retMap.toString());
      
-      
+      */
        
     }
     

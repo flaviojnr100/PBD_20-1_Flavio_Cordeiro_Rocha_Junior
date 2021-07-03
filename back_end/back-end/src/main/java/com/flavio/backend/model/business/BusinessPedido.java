@@ -18,6 +18,7 @@ import java.util.Optional;
 import javax.persistence.Entity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +56,7 @@ public class BusinessPedido {
         return dao.buscarPedidoFuncionario(id);
     }
     public List<Pedido> buscarTodos(){
-        return dao.findAll();
+        return dao.findAll(Sort.by(Sort.Direction.DESC,"id"));
     }
     public Optional<Pedido> buscarId(int id){
         return dao.findById(id);

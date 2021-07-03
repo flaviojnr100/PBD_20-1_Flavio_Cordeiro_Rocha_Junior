@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:projeto_gerenciamento_pedido/model/Cardapio.dart';
 import 'package:projeto_gerenciamento_pedido/model/Mesa.dart';
 import 'package:projeto_gerenciamento_pedido/model/Pedido.dart';
 import 'package:projeto_gerenciamento_pedido/repository/RepositoryCardapio.dart';
+import 'package:projeto_gerenciamento_pedido/repository/RepositoryMesa.dart';
 import 'package:projeto_gerenciamento_pedido/repository/RepositoryPedido.dart';
 import 'package:projeto_gerenciamento_pedido/view/cardapio/ItemCard.dart';
 import 'package:projeto_gerenciamento_pedido/view/dashboard/componentes/inicio.dart';
@@ -14,10 +16,12 @@ import 'package:projeto_gerenciamento_pedido/view/pedido/ItemCardapio.dart';
 class EditarPedido extends StatefulWidget {
   PedidoModel pedido;
   List<ItemCardapio> cardapio;
+  List<Mesa> mesas;
   EditarPedido({Key key, this.pedido}) : super(key: key);
   TextEditingController controllerMesa = TextEditingController();
   RepositoryPedido repositoryPedido = RepositoryPedido();
   RepositoryCardapio repositoryCardapio = RepositoryCardapio();
+  RepositoryMesa repositoryMesa = RepositoryMesa();
   @override
   _EditarPedidoState createState() => _EditarPedidoState();
 }
@@ -27,6 +31,9 @@ class _EditarPedidoState extends State<EditarPedido> {
   var _lista = ["pendente", "cancelado", "concluido"];
   @override
   void initState() {
+    widget.repositoryMesa.buscarTodos().whenComplete(() {
+      widget.mesas = widget.repositoryMesa.mesas;
+    });
     widget.repositoryCardapio.buscarTodos().whenComplete(() {
       widget.cardapio = widget.repositoryCardapio.cardapio;
     });
@@ -92,6 +99,25 @@ class _EditarPedidoState extends State<EditarPedido> {
 
   @override
   Widget build(BuildContext context) {
+    bool verificarMesa(int numero) {
+      bool resultado = false;
+      for (Mesa mesa in widget.mesas) {
+        if (mesa.numero == numero) {
+          resultado = true;
+          break;
+        }
+      }
+      return resultado;
+    }
+
+    int retornarIdMesa(int numero) {
+      for (Mesa mesa in widget.mesas) {
+        if (mesa.numero == numero) {
+          return mesa.id;
+        }
+      }
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Pedido"),
@@ -235,6 +261,10 @@ class _EditarPedidoState extends State<EditarPedido> {
                               padding: const EdgeInsets.only(left: 8),
                               child: TextFormField(
                                 controller: widget.controllerMesa,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: <TextInputFormatter>[
+                                  WhitelistingTextInputFormatter.digitsOnly
+                                ],
                                 decoration:
                                     InputDecoration(border: InputBorder.none),
                               ),
@@ -275,48 +305,87 @@ class _EditarPedidoState extends State<EditarPedido> {
                                         actions: <Widget>[
                                           FlatButton(
                                               onPressed: () {
-                                                widget.pedido.itens = Inicio
-                                                    .controller.itensEditar
-                                                    .toList();
-                                                Mesa mesa = Mesa();
-                                                mesa.numero = int.parse(
-                                                    widget.controllerMesa.text);
-                                                widget.pedido.mesa = mesa;
-                                                widget.pedido.status =
-                                                    this.itemSelecionado;
-                                                widget.pedido.total = Inicio
-                                                    .controller.precoEditar;
-                                                widget.repositoryPedido
-                                                    .editar(widget.pedido)
-                                                    .whenComplete(() {
-                                                  if (widget.repositoryPedido
-                                                          .statusCode ==
-                                                      200) {
-                                                    showDialog(
-                                                        context: context,
-                                                        builder:
-                                                            (BuildContext bc) {
-                                                          return AlertDialog(
-                                                            title:
-                                                                Text("Aviso"),
-                                                            content: Text(
-                                                                "Pedido alterado com sucesso!"),
-                                                            actions: <Widget>[
-                                                              FlatButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    Navigator.pop(
-                                                                        context);
-                                                                    Navigator.pop(
-                                                                        context);
-                                                                    Navigator.pop(
-                                                                        context);
-                                                                  },
-                                                                  child: Text(
-                                                                      "Ok"))
-                                                            ],
-                                                          );
-                                                        });
+                                                if (widget
+                                                        .controllerMesa.text !=
+                                                    "") {
+                                                  if (verificarMesa(int.parse(
+                                                      widget.controllerMesa
+                                                          .text))) {
+                                                    widget.pedido.itens = Inicio
+                                                        .controller.itensEditar
+                                                        .toList();
+                                                    Mesa mesa = Mesa();
+                                                    mesa.numero =
+                                                        retornarIdMesa(
+                                                            int.parse(widget
+                                                                .controllerMesa
+                                                                .text));
+
+                                                    widget.pedido.mesa = mesa;
+                                                    widget.pedido.status =
+                                                        this.itemSelecionado;
+                                                    widget.pedido.total = Inicio
+                                                        .controller.precoEditar;
+                                                    widget.repositoryPedido
+                                                        .editar(widget.pedido)
+                                                        .whenComplete(() {
+                                                      if (widget
+                                                              .repositoryPedido
+                                                              .statusCode ==
+                                                          200) {
+                                                        showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    bc) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    "Aviso"),
+                                                                content: Text(
+                                                                    "Pedido alterado com sucesso!"),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  FlatButton(
+                                                                      onPressed:
+                                                                          () {
+                                                                        Navigator.pop(
+                                                                            context);
+                                                                        Navigator.pop(
+                                                                            context);
+                                                                        Navigator.pop(
+                                                                            context);
+                                                                      },
+                                                                      child: Text(
+                                                                          "Ok"))
+                                                                ],
+                                                              );
+                                                            });
+                                                      } else {
+                                                        showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    bc) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    "Aviso"),
+                                                                content: Text(
+                                                                    "Erro ao alterar o pedido"),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  FlatButton(
+                                                                      onPressed:
+                                                                          () {
+                                                                        Navigator.pop(
+                                                                            context);
+                                                                      },
+                                                                      child: Text(
+                                                                          "Ok"))
+                                                                ],
+                                                              );
+                                                            });
+                                                      }
+                                                    });
                                                   } else {
                                                     showDialog(
                                                         context: context,
@@ -326,7 +395,7 @@ class _EditarPedidoState extends State<EditarPedido> {
                                                             title:
                                                                 Text("Aviso"),
                                                             content: Text(
-                                                                "Erro ao alterar o pedido"),
+                                                                "Numero de mesa inválido!"),
                                                             actions: <Widget>[
                                                               FlatButton(
                                                                   onPressed:
@@ -340,7 +409,27 @@ class _EditarPedidoState extends State<EditarPedido> {
                                                           );
                                                         });
                                                   }
-                                                });
+                                                } else {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (BuildContext bc) {
+                                                        return AlertDialog(
+                                                          title: Text("Aviso"),
+                                                          content: Text(
+                                                              "Não pode deixar o campo em branco!"),
+                                                          actions: <Widget>[
+                                                            FlatButton(
+                                                                onPressed: () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                child:
+                                                                    Text("Ok"))
+                                                          ],
+                                                        );
+                                                      });
+                                                }
                                               },
                                               child: Text("sim")),
                                           FlatButton(

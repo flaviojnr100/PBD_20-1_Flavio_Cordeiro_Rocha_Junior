@@ -100,50 +100,52 @@ class Login extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 15),
                     child: GestureDetector(
                       onTap: () {
-                        repositoryFuncionario
-                            .buscarLoginUnico(login.text)
-                            .whenComplete(() {
-                          print(repositoryFuncionario.statusCode);
-                          if (repositoryFuncionario.statusCode == 202) {
-                            repositoryFuncionario
-                                .reset(repositoryFuncionario.id);
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("Aviso"),
-                                    content: Text(
-                                        "Aguarde o administrador resetar a senha!"),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text("Ok"),
-                                      ),
-                                    ],
-                                  );
-                                });
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("Aviso"),
-                                    content: Text(
-                                        "Não existe esse usuário na base de dados!"),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text("Ok"),
-                                      ),
-                                    ],
-                                  );
-                                });
-                          }
-                        });
+                        if (login.text != "") {
+                          repositoryFuncionario
+                              .buscarLoginUnico(login.text)
+                              .whenComplete(() {
+                            print(repositoryFuncionario.statusCode);
+                            if (repositoryFuncionario.statusCode == 202) {
+                              repositoryFuncionario
+                                  .reset(repositoryFuncionario.id);
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Aviso"),
+                                      content: Text(
+                                          "Aguarde o administrador resetar a senha!"),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Ok"),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Aviso"),
+                                      content: Text(
+                                          "Não existe esse usuário na base de dados!"),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Ok"),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            }
+                          });
+                        }
                       },
                       child: Text(
                         "Esqueçeu a senha ?",

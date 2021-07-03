@@ -24,7 +24,7 @@ public interface DaoPedido extends JpaRepository<Pedido, Integer> {
     @Query(value = "select * from Pedido where extract(day from CAST(data_pedido as DATE)) = :dia and extract(month from CAST(data_pedido as DATE)) = :mes and extract(year from CAST(data_pedido as DATE)) = :ano",nativeQuery = true)
     public List<Pedido> buscarData(@Param("dia") int dia,@Param("mes") int mes,@Param("ano") int ano);
     
-    @Query(value = "select * from Pedido where status=:pendente",nativeQuery = true)
+    @Query(value = "select * from Pedido where status=:pendente order by id",nativeQuery = true)
     public List<Pedido> buscarPendente(@Param("pendente") String pendente);
     
     @Query(value = "select p from Pedido p where p.mesa.numero = :numero and (p.status = 'pendente' or p.status = 'concluido') ")

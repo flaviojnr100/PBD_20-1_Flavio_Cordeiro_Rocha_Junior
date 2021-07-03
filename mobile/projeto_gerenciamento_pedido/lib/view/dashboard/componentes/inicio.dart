@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:projeto_gerenciamento_pedido/controller/controller.dart';
@@ -9,15 +8,15 @@ import 'package:projeto_gerenciamento_pedido/model/Mesa.dart';
 import 'package:projeto_gerenciamento_pedido/model/Pedido.dart';
 
 import 'package:projeto_gerenciamento_pedido/repository/RepositoryCardapio.dart';
-import 'package:projeto_gerenciamento_pedido/repository/RepositoryFuncionario.dart';
+import 'package:projeto_gerenciamento_pedido/repository/RepositoryMesa.dart';
 import 'package:projeto_gerenciamento_pedido/repository/RepositoryPedido.dart';
 import 'package:projeto_gerenciamento_pedido/view/cardapio/ItemCard.dart';
-import 'package:projeto_gerenciamento_pedido/view/dashboard/componentes/perfil.dart';
 import 'package:projeto_gerenciamento_pedido/view/dashboard/dashboard.dart';
 
 class Inicio extends StatefulWidget {
   Inicio({Key key}) : super(key: key);
   List<ItemCardapio> cardapio;
+  List<Mesa> mesas;
   static PedidoModel pedido;
   static Controller controller = Controller();
   TextEditingController mesaController = TextEditingController();
@@ -25,6 +24,7 @@ class Inicio extends StatefulWidget {
   _InicioState createState() => _InicioState();
   RepositoryCardapio repositoryCardapio = RepositoryCardapio();
   RepositoryPedido repositoryPedido = RepositoryPedido();
+  RepositoryMesa repositoryMesa = RepositoryMesa();
 }
 
 class _InicioState extends State<Inicio> {
@@ -32,7 +32,9 @@ class _InicioState extends State<Inicio> {
   @override
   void initState() {
     // TODO: implement initState
-
+    widget.repositoryMesa.buscarTodos().whenComplete(() {
+      widget.mesas = widget.repositoryMesa.mesas;
+    });
     widget.repositoryCardapio.buscarTodos().whenComplete(() {
       widget.cardapio = widget.repositoryCardapio.cardapio;
 
@@ -126,6 +128,25 @@ class _InicioState extends State<Inicio> {
   }
 
   Widget exibirPedido(context) {
+    bool verificarMesa(int numero) {
+      bool resultado = false;
+      for (Mesa mesa in widget.mesas) {
+        if (mesa.numero == numero) {
+          resultado = true;
+          break;
+        }
+      }
+      return resultado;
+    }
+
+    int retornarIdMesa(int numero) {
+      for (Mesa mesa in widget.mesas) {
+        if (mesa.numero == numero) {
+          return mesa.id;
+        }
+      }
+    }
+
     showModalBottomSheet(
         context: context,
         builder: (BuildContext bc) {
@@ -164,6 +185,10 @@ class _InicioState extends State<Inicio> {
                         padding: const EdgeInsets.only(left: 10),
                         child: TextFormField(
                           controller: widget.mesaController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            WhitelistingTextInputFormatter.digitsOnly
+                          ],
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Nº mesa",
@@ -206,54 +231,87 @@ class _InicioState extends State<Inicio> {
                                             Radius.circular(20))),
                                     child: FlatButton(
                                         onPressed: () {
-                                          Inicio.pedido.funcionario = Dashboard
-                                              .repositoryFuncionario
-                                              .funcionario;
-                                          Mesa mesa = Mesa();
-                                          mesa.id = int.parse(
-                                              widget.mesaController.text);
+                                          if (widget.mesaController.text !=
+                                              "") {
+                                            if (verificarMesa(int.parse(
+                                                widget.mesaController.text))) {
+                                              Inicio.pedido.funcionario =
+                                                  Dashboard
+                                                      .repositoryFuncionario
+                                                      .funcionario;
+                                              Mesa mesa = Mesa();
+                                              mesa.id = retornarIdMesa(
+                                                  int.parse(widget
+                                                      .mesaController.text));
 
-                                          Inicio.pedido.mesa = mesa;
-                                          Inicio.pedido.total =
-                                              Inicio.controller.preco;
-                                          Inicio.pedido.itens =
-                                              Inicio.controller.itens.toList();
-                                          Inicio.pedido.status = "pendente";
-                                          widget.repositoryPedido
-                                              .salvar(Inicio.pedido)
-                                              .whenComplete(() {
-                                            if (widget.repositoryPedido
-                                                    .statusCode ==
-                                                200) {
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (BuildContext bc) {
-                                                    return AlertDialog(
-                                                      title: Text("Aviso"),
-                                                      content: Text(
-                                                          "Pedido salvo com sucesso!"),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                            onPressed: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                              Inicio.pedido =
-                                                                  null;
-                                                              Inicio.controller
-                                                                  .itens
-                                                                  .clear();
-                                                              Inicio.controller
-                                                                  .preco = 0;
-                                                              widget
-                                                                  .mesaController
-                                                                  .text = "";
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            child: Text("Ok"))
-                                                      ],
-                                                    );
-                                                  });
+                                              Inicio.pedido.mesa = mesa;
+                                              Inicio.pedido.total =
+                                                  Inicio.controller.preco;
+                                              Inicio.pedido.itens = Inicio
+                                                  .controller.itens
+                                                  .toList();
+                                              Inicio.pedido.status = "pendente";
+                                              widget.repositoryPedido
+                                                  .salvar(Inicio.pedido)
+                                                  .whenComplete(() {
+                                                if (widget.repositoryPedido
+                                                        .statusCode ==
+                                                    200) {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (BuildContext bc) {
+                                                        return AlertDialog(
+                                                          title: Text("Aviso"),
+                                                          content: Text(
+                                                              "Pedido salvo com sucesso!"),
+                                                          actions: <Widget>[
+                                                            FlatButton(
+                                                                onPressed: () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                  Inicio.pedido =
+                                                                      null;
+                                                                  Inicio
+                                                                      .controller
+                                                                      .itens
+                                                                      .clear();
+                                                                  Inicio
+                                                                      .controller
+                                                                      .preco = 0;
+                                                                  widget
+                                                                      .mesaController
+                                                                      .text = "";
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                child:
+                                                                    Text("Ok"))
+                                                          ],
+                                                        );
+                                                      });
+                                                } else {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (BuildContext bc) {
+                                                        return AlertDialog(
+                                                          title: Text("Aviso"),
+                                                          content: Text(
+                                                              "Erro ao efetuar o pedido!"),
+                                                          actions: <Widget>[
+                                                            FlatButton(
+                                                                onPressed: () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                child:
+                                                                    Text("Ok"))
+                                                          ],
+                                                        );
+                                                      });
+                                                }
+                                              });
                                             } else {
                                               showDialog(
                                                   context: context,
@@ -261,7 +319,7 @@ class _InicioState extends State<Inicio> {
                                                     return AlertDialog(
                                                       title: Text("Aviso"),
                                                       content: Text(
-                                                          "Erro ao efetuar o pedido!"),
+                                                          "Numero de mesa inválido!"),
                                                       actions: <Widget>[
                                                         FlatButton(
                                                             onPressed: () {
@@ -273,7 +331,25 @@ class _InicioState extends State<Inicio> {
                                                     );
                                                   });
                                             }
-                                          });
+                                          } else {
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext bc) {
+                                                  return AlertDialog(
+                                                    title: Text("Aviso"),
+                                                    content: Text(
+                                                        "Não pode deixar do Nº da mesa em branco!"),
+                                                    actions: <Widget>[
+                                                      FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Ok"))
+                                                    ],
+                                                  );
+                                                });
+                                          }
                                         },
                                         child: Text(
                                           "Finalizar",

@@ -13,4 +13,5 @@ class Urls {
   static const String pedidoFuncionario =
       "${RepositoryUtils.URL}/pedidosFuncionario";
   static const String pedido = "${RepositoryUtils.URL}/pedido";
+  static const String mesa = "${RepositoryUtils.URL}/mesa";
 }

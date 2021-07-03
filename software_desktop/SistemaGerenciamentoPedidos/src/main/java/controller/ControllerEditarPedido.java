@@ -63,6 +63,7 @@ public class ControllerEditarPedido implements Initializable {
     void finalizar(ActionEvent event) {
         if(JOptionPane.showConfirmDialog(null, "Deseja editar o registro ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             pedido.setTotal(preco);
+            pedido.setMesa(comboMesa.getSelectionModel().getSelectedItem());
             if(BaseDados.getRepositoryPedido().editar(pedido)){
                 JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
                // ControllerDashboard.setAlterouPedido(true);
@@ -155,7 +156,7 @@ public class ControllerEditarPedido implements Initializable {
                    pItem++;
            
         }
-        //Modificar preço
+        
         lblTotal.setText(String.format("%.2f", preco));
         }
         

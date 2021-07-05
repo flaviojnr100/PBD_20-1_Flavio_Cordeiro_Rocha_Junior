@@ -18,14 +18,7 @@ import org.springframework.data.repository.query.Param;
  * @author Flavio
  */
 public interface DaoFuncionario extends JpaRepository<Funcionario, Integer> {
-    
-    @Query(value = "select * from Funcionario f where f.tipo_acesso = 'funcionario' and f.cpf LIKE CONCAT('%',:cpf,'%')",nativeQuery = true)
-    public List<Funcionario> buscarCpf(@Param("cpf") String cpf);
-    @Query(value = "select * from Funcionario f where f.tipo_acesso = 'funcionario' and f.nome LIKE CONCAT('%',:nome,'%')",nativeQuery = true)
-    public List<Funcionario> buscarNome(@Param("nome") String nome);
-    @Query(value = "select * from Funcionario f where f.tipo_acesso = 'funcionario' and f.login LIKE CONCAT('%',:login,'%')",nativeQuery = true)
-    public List<Funcionario> buscarLogin(@Param("login") String login);
-    
+  
     @Query(value = "select * from Funcionario f where f.tipo_acesso != 'superusuario' and f.cpf LIKE CONCAT('%',:cpf,'%')",nativeQuery = true)
     public List<Funcionario> buscarCpfSU(@Param("cpf") String cpf);
     @Query(value = "select * from Funcionario f where f.tipo_acesso != 'superusuario' and f.nome LIKE CONCAT('%',:nome,'%')",nativeQuery = true)

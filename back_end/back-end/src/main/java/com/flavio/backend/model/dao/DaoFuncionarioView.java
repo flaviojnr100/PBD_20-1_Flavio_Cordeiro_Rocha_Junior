@@ -17,12 +17,12 @@ import org.springframework.data.repository.query.Param;
  */
 public interface DaoFuncionarioView extends JpaRepository<FuncionarioView, Integer> {
     
-    @Query(value = "select * from funcionarios_view as f where f.cpf =:cpf",nativeQuery = true)
+    @Query(value = "select * from funcionarios_view as f where f.cpf LIKE CONCAT('%',:cpf,'%')",nativeQuery = true)
     public List<FuncionarioView> buscarCpf(@Param("cpf")String cpf);
     
-    @Query(value = "select * from funcionarios_view as f where f.nome =:nome",nativeQuery = true)
+    @Query(value = "select * from funcionarios_view as f where f.nome LIKE CONCAT('%',:nome,'%')",nativeQuery = true)
     public List<FuncionarioView> buscarNome(@Param("nome")String nome);
     
-    @Query(value = "select * from funcionarios_view as f where f.login =:login",nativeQuery = true)
+    @Query(value = "select * from funcionarios_view as f where f.login LIKE CONCAT('%',:login,'%')",nativeQuery = true)
     public List<FuncionarioView> buscarLogin(@Param("login")String login);
 }

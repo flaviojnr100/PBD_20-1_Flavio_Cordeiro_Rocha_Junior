@@ -159,8 +159,8 @@ public class Controller {
     }
     
     @GetMapping("/funcionario/buscarLogin/{login}")
-    public List<Funcionario> buscarLogin(@PathVariable("login")String login){
-        return bf.buscarLogin(login);
+    public List<FuncionarioView> buscarLogin(@PathVariable("login")String login){
+        return bfv.buscarLogin(login);
     }
     
     @GetMapping("/funcionarioSU/buscarLogin/{login}")

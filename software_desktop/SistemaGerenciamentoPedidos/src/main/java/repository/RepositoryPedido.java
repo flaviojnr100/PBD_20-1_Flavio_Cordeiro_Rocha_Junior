@@ -46,9 +46,9 @@ public class RepositoryPedido {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
             String output = "";
             String line;
             
@@ -77,9 +77,9 @@ public class RepositoryPedido {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(url+"/pendente").openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
             String output = "";
             String line;
             
@@ -109,9 +109,9 @@ public class RepositoryPedido {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(url+"/buscarMesa/"+mesa).openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
             String output = "";
             String line;
             
@@ -139,9 +139,9 @@ public class RepositoryPedido {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(url+"/buscarMesaTodos/"+mesa).openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
             String output = "";
             String line;
             
@@ -253,9 +253,9 @@ public class RepositoryPedido {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(url+"/"+id).openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
             String output = "";
             String line;
             
@@ -382,7 +382,6 @@ public class RepositoryPedido {
             params.put("mesa", pedido.getMesa().getNumero());
             params.put("cardapio", converterArray(pedido.getItens()));
 
-            System.out.println("Formato: "+params.toString());
             
             StringBuilder postData = new StringBuilder();
             for (Map.Entry<String,Object> param : params.entrySet()) {
@@ -512,9 +511,9 @@ public class RepositoryPedido {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(url+"/verificarPedidos/"+tamanho).openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
             String output = "";
             String line;
             

@@ -18,6 +18,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -48,9 +49,9 @@ public class RepositoryCardapio {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));
             String output = "";
             String line;
             
@@ -75,12 +76,17 @@ public class RepositoryCardapio {
     }
     public List<ItemCardapio> buscarNome(String nome){
         try {
+            String nomeNovo = URLEncoder.encode(nome, "UTF-8");
+            if(nomeNovo.contains("+")){
+                nomeNovo = nomeNovo.replace("+", "%20");
+            }
+             
+            HttpURLConnection conn = (HttpURLConnection) new URL(url+"/buscarNome/"+nomeNovo).openConnection();
             
-            HttpURLConnection conn = (HttpURLConnection) new URL(url+"/buscarNome/"+nome).openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
             
-             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
             String output = "";
             String line;
             
@@ -106,12 +112,15 @@ public class RepositoryCardapio {
     
     public ItemCardapio buscarNomeUnico(String nome){
         try {
-            
-            HttpURLConnection conn = (HttpURLConnection) new URL(url+"/buscarNomeUnico/"+nome).openConnection();
+            String nomeNovo = URLEncoder.encode(nome, "UTF-8");
+            if(nomeNovo.contains("+")){
+                nomeNovo = nomeNovo.replace("+", "%20");
+            }
+            HttpURLConnection conn = (HttpURLConnection) new URL(url+"/buscarNomeUnico/"+nomeNovo).openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));
             String output = "";
             String line;
             
@@ -184,8 +193,8 @@ public class RepositoryCardapio {
             URL url = new URL(this.url+"/mudarEstado/"+id);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("PUT");
-            httpURLConnection.setRequestProperty("Accept", "application/json");
-            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            httpURLConnection.setRequestProperty("Accept", "application/json;charset=utf-8");
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(),"utf-8"));
             String output = "";
             String line;
             

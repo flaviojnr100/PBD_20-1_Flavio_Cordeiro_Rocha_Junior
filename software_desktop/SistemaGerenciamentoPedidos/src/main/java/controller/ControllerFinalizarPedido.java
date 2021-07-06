@@ -77,11 +77,12 @@ public class ControllerFinalizarPedido implements Initializable{
     @FXML
     void anularPedido(ActionEvent event) {
         if(JOptionPane.showConfirmDialog(null, "Deseja cancelar o pedido ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-            BaseDados.getRepositoryPedido().efetuarCancelamento(pedidos.get(0).getMesa().getId());
-            JOptionPane.showMessageDialog(null, "Cancelamento feito com sucesso!");
-            btnCancelar.fire();
-        }else{
-            JOptionPane.showConfirmDialog(null, "Erro ao efetuar o pagamento!!","Erro",JOptionPane.YES_OPTION,JOptionPane.ERROR);
+            if(BaseDados.getRepositoryPedido().efetuarCancelamento(pedidos.get(0).getMesa().getId())){
+                JOptionPane.showMessageDialog(null, "Cancelamento feito com sucesso!");
+                btnCancelar.fire();
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao efetuar o pagamento!!");
+        }
         }
     }
 
@@ -94,15 +95,16 @@ public class ControllerFinalizarPedido implements Initializable{
     @FXML
     void efetuarPagamento(ActionEvent event) {
         if(JOptionPane.showConfirmDialog(null, "Deseja efetuar o pagamento do pedido ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-            BaseDados.getRepositoryPedido().efetuarPagamento(pedidos.get(0).getMesa().getId());
-            JOptionPane.showMessageDialog(null, "Pagamento realizado com sucesso!");
-            BaseDados.atualizarPedidosPendente();
-            if(JOptionPane.showConfirmDialog(null, "Deseja imprimir a nota do pagamento ?","Aviso",JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
-                btnNota.fire();
+            if(BaseDados.getRepositoryPedido().efetuarPagamento(pedidos.get(0).getMesa().getId())){
+                JOptionPane.showMessageDialog(null, "Pagamento realizado com sucesso!");
+                BaseDados.atualizarPedidosPendente();
+                if(JOptionPane.showConfirmDialog(null, "Deseja imprimir a nota do pagamento ?","Aviso",JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
+                    btnNota.fire();
+                }
+                btnCancelar.fire();
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao efetuar o pagamento!!");
             }
-            btnCancelar.fire();
-        }else{
-            JOptionPane.showConfirmDialog(null, "Erro ao efetuar o pagamento!!","Erro",JOptionPane.YES_OPTION);
         }
     }
 

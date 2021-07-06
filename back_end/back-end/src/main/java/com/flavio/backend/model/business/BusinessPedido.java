@@ -84,7 +84,6 @@ public class BusinessPedido {
         p.setStatus(estado);
         
         dao.save(p);
-        System.out.println("Estado: "+estado);
         return ResponseEntity.ok(pedido);
     }
     

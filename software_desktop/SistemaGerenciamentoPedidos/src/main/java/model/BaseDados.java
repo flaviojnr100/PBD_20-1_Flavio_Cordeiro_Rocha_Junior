@@ -71,13 +71,15 @@ public class BaseDados {
     }
     public static void atualizarAnos(){
         List<FinanciaAnual>tempList = getRepositoryFinanciaAnual().buscarTodos();
-        int i=0;
-        for(FinanciaAnual fa:tempList){
-            if(getAnos().size()==0 || !getAnos().get(i-1).equals(fa.getAno()+"")){
-                getAnos().add(fa.getAno()+"");
+        for(FinanciaAnual financia:tempList){
+            if(getAnos().size()==0 || !getAnos().contains(financia.getAno()+"")){
+                getAnos().add(financia.getAno()+"");
+                
             }
-            i++;
         }
+       
+        
+        
         anosFx = FXCollections.observableArrayList(getAnos());
     }
     public static void atualizarFuncionarios(){

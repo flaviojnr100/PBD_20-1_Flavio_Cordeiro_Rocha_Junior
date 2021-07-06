@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.BaseDados;
+import repository.RepositoryCardapio;
 
 
 /*
@@ -28,7 +29,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
         Parent login = FXMLLoader.load(new File("src/main/java/view/FXMLLogin.fxml").toURL());
         Scene scene = new Scene(login);
         primaryStage.setScene(scene);
@@ -36,11 +36,13 @@ public class App extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
         BaseDados.getMeses();
+        BaseDados.atualizarAnos();
 
     }
     
     public static void main(String[] args) {
         launch(args);
+       
     }
     
 }

@@ -45,20 +45,22 @@ public class ControllerCadastrarCardapio{
         if(JOptionPane.showConfirmDialog(null, "Deseja cadastrar esse item ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             if(!nomeTxt.getText().equals("") && !precoTxt.getText().equals("") && !descricaoTxt.getText().equals("")){
             String preco = precoTxt.getText();
+            String nome = nomeTxt.getText().toLowerCase();
             if(!verificarDigito(preco)){
                 if(verificarDigitoNome(nomeTxt.getText())){
                     
                     if(preco.contains(",")){
                         preco = preco.replace(",", ".");
                     }
+                   
             
                     ItemCardapio item = new ItemCardapio();
-                    item.setNome(nomeTxt.getText().toLowerCase());
+                    item.setNome(nome);
             
                     item.setPreco(Double.parseDouble(preco));
                     item.setDescricao(descricaoTxt.getText());
                     item.setIsAtivo(true);
-                    ItemCardapio verificar = BaseDados.getRepositoryCardapio().buscarNomeUnico(nomeTxt.getText().toLowerCase());
+                    ItemCardapio verificar = BaseDados.getRepositoryCardapio().buscarNomeUnico(nome);
                     if(verificar==null){
                         if(BaseDados.getRepositoryCardapio().salvar(item)){
                             JOptionPane.showMessageDialog(null, "Item salvo com sucesso");
@@ -99,6 +101,7 @@ public class ControllerCadastrarCardapio{
         for(int i=0;i<digito.length();i++){
             int caract = digito.charAt(i);
             if(caract>=48 && caract<=57 || caract==44 || caract==46){
+                
                 condicao=false;
             }else{
                 condicao=true;

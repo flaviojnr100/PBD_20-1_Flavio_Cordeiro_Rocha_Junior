@@ -57,7 +57,8 @@ public class ControllerEditarCardapio implements Initializable {
     void salvar(ActionEvent event) {
         if(JOptionPane.showConfirmDialog(null, "Deseja editar o registro ?","Aviso",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             if(!nomeTxt.getText().equals("") && !precoTxt.getText().equals("") && !descricaoTxt.getText().equals("")){
-            if(nomeTxt.getText().toLowerCase().equals(item.getNome()) || BaseDados.getRepositoryCardapio().buscarNomeUnico(nomeTxt.getText().toLowerCase())==null){
+                String nome = nomeTxt.getText().toLowerCase();
+            if(nome.equals(item.getNome()) || BaseDados.getRepositoryCardapio().buscarNomeUnico(nome)==null){
                 if(verificarDigitoNome(nomeTxt.getText())){
                     String preco = precoTxt.getText();
                     if(!verificarDigito(preco)){

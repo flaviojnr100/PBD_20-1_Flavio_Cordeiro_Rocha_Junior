@@ -62,7 +62,7 @@ public class ControllerLogin {
                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                     @Override
                     public void handle(WindowEvent event) {
-                        int resultado = JOptionPane.showConfirmDialog(null, "Desaja sair do sistema e ir para a tela de login?","Aviso",JOptionPane.YES_NO_CANCEL_OPTION); 
+                        int resultado = JOptionPane.showConfirmDialog(null, "Deseja sair do sistema e ir para a tela de login?","Aviso",JOptionPane.YES_NO_CANCEL_OPTION); 
                         System.out.println(""+resultado);
                          if(resultado == JOptionPane.YES_NO_OPTION){
                             BaseDados.getRepositoryFuncionario().logout(BaseDados.getAutenticado().getLogin());

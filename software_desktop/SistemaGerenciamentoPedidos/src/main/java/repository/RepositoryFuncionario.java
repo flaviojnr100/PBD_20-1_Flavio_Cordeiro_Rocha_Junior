@@ -72,9 +72,9 @@ public class RepositoryFuncionario {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));
             String output = "";
             String line;
             
@@ -103,9 +103,9 @@ public class RepositoryFuncionario {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(urlSU).openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));
             String output = "";
             String line;
             
@@ -318,7 +318,7 @@ public class RepositoryFuncionario {
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("PUT");
             httpURLConnection.setRequestProperty("Accept", "application/json");
-            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(),"UTF-8"));
             String output = "";
             String line;
             
@@ -341,11 +341,11 @@ public class RepositoryFuncionario {
     
         public List<Funcionario> buscarNome(String nome){
         try {
-            URL url = new URL(this.url+"/buscarNome/"+nome);
+            URL url = new URL(this.url+"/buscarNome/"+URLEncoder.encode(nome, "UTF-8"));
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setRequestProperty("Accept", "application/json");
-            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(),"utf-8"));
             String output = "";
             String line;
             
@@ -369,11 +369,11 @@ public class RepositoryFuncionario {
     
     public List<Funcionario> buscarNomeSU(String nome){
         try {
-            URL url = new URL(this.urlSU+"/buscarNome/"+nome);
+            URL url = new URL(this.urlSU+"/buscarNome/"+URLEncoder.encode(nome, "UTF-8"));
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setRequestProperty("Accept", "application/json");
-            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(),"utf-8"));
             String output = "";
             String line;
             
@@ -400,7 +400,7 @@ public class RepositoryFuncionario {
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setRequestProperty("Accept", "application/json");
-            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(),"utf-8"));
             String output = "";
             String line;
             
@@ -427,7 +427,7 @@ public class RepositoryFuncionario {
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setRequestProperty("Accept", "application/json");
-            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(),"utf-8"));
             String output = "";
             String line;
             
@@ -450,11 +450,11 @@ public class RepositoryFuncionario {
     }
      public List<Funcionario> buscarLogin(String login){
         try {
-            URL url = new URL(this.url+"/buscarLogin/"+login);
+            URL url = new URL(this.url+"/buscarLogin/"+URLEncoder.encode(login, "UTF-8"));
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
-            httpURLConnection.setRequestProperty("Accept", "application/json");
-            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            httpURLConnection.setRequestProperty("Accept", "application/json;charset=utf-8");
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(),"utf-8"));
             String output = "";
             String line;
             
@@ -477,11 +477,11 @@ public class RepositoryFuncionario {
     }
      public List<Funcionario> buscarLoginSU(String login){
         try {
-            URL url = new URL(this.urlSU+"/buscarLogin/"+login);
+            URL url = new URL(this.urlSU+"/buscarLogin/"+URLEncoder.encode(login, "UTF-8"));
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
-            httpURLConnection.setRequestProperty("Accept", "application/json");
-            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            httpURLConnection.setRequestProperty("Accept", "application/json;charset=utf-8");
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(),"utf-8"));
             String output = "";
             String line;
             
@@ -559,11 +559,11 @@ public class RepositoryFuncionario {
       
       public Funcionario buscarLoginUnicoValidacao(String login){
         try {
-            URL url = new URL(this.url+"/buscarLoginUnico/"+login);
+            URL url = new URL(this.url+"/buscarLoginUnico/"+URLEncoder.encode(login, "UTF-8"));
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setRequestProperty("Accept", "application/json");
-            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(),"utf-8"));
             String output = "";
             String line;
             
@@ -590,7 +590,7 @@ public class RepositoryFuncionario {
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setRequestProperty("Accept", "application/json");
-            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(),"utf-8"));
             String output = "";
             String line;
             

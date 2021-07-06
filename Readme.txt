@@ -10,6 +10,11 @@ back_end(servidor da aplicação)
 	credenciais do administrador:
 		login:adm
 		senha:adm
+	credenciais de acesso ao banco de dados pela aplicação REST:
+		PBD_20-1_Flavio_Cordeiro_Rocha_Junior\back_end\back-end\src\main\resources\application.properties
+		spring.datasource.username = usuario
+		spring.datasource.password = usuario
+		Foi cadastrado o "usuario" no banco para fazer o acesso a aplicação com restrições
 
 software
 	IDE: netbeans
@@ -18,7 +23,7 @@ software
 		em "public static String ip = "localhost";", caso utilizar o software em outra maquina diferente na do servidor, modificar esse campo e colocar o ip da
 	 	maquina do servidor
 	bibliotecas:
-		no diretorio "\PBD_20-1_Flavio_Cordeiro_Rocha_Junior\software_desktop\SistemaGerenciamentoPedidos\src\lib", contém todas as bibliotecas utilizadas no software
+		MAVEN gerencia as dependências
 
 mobile
 	IDE: visual studio

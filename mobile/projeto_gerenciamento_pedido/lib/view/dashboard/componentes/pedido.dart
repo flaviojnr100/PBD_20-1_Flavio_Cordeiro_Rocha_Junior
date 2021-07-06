@@ -29,16 +29,28 @@ class _PedidoState extends State<Pedido> {
   @override
   Widget build(BuildContext context) {
     return isCarregou
-        ? Expanded(
-            child: Container(
-              color: Colors.white,
-              child: ListView.builder(
-                  itemCount: widget.pedidos.length,
-                  itemBuilder: (context, index) => PedidoCard(
-                        pedido: widget.pedidos[index],
-                      )),
-            ),
-          )
-        : Text("");
+        ? widget.pedidos.length != 0
+            ? Expanded(
+                child: Container(
+                  color: Colors.white,
+                  child: ListView.builder(
+                      itemCount: widget.pedidos.length,
+                      itemBuilder: (context, index) => PedidoCard(
+                            pedido: widget.pedidos[index],
+                          )),
+                ),
+              )
+            : Center(
+                heightFactor: 25,
+                child: Text(
+                  "Não há pedidos",
+                  style: TextStyle(fontSize: 20),
+                ))
+        : Center(
+            heightFactor: 25,
+            child: Text(
+              "Não há pedidos",
+              style: TextStyle(fontSize: 20),
+            ));
   }
 }

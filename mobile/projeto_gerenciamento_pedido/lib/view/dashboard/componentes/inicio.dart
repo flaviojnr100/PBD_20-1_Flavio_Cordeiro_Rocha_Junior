@@ -405,7 +405,7 @@ class _InicioState extends State<Inicio> {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: Text("Aviso"),
-                                  content: Text("Deseja exluir o item ?"),
+                                  content: Text("Deseja excluir o item ?"),
                                   actions: <Widget>[
                                     FlatButton(
                                         onPressed: () {

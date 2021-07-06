@@ -68,7 +68,9 @@ public class ControllerCardapio implements Initializable {
     @FXML
     void buscar(ActionEvent event) {
         if(!"".equals(buscarTxt.getText().trim())){
-            BaseDados.atualizarCardapioNome(buscarTxt.getText().trim());
+            String nome = buscarTxt.getText().trim().toLowerCase();
+           
+            BaseDados.atualizarCardapioNome(nome);
             atualizar();
         }
     }

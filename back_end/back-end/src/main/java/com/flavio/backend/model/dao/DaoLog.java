@@ -16,7 +16,7 @@ import org.springframework.data.repository.query.Param;
  */
 public interface DaoLog extends JpaRepository<Log, Integer>{
     
-    @Query(value = "select * from auditoria as a where extract( day from (CAST(a.criacao_alteracao as DATE))) = :dia and extract( month from (CAST(a.criacao_alteracao as DATE))) = :mes and extract( year from (CAST(a.criacao_alteracao as DATE))) = :ano  ",nativeQuery = true)
+    @Query(value = "select * from auditoria as a where extract( day from (CAST(a.criacao_alteracao as DATE))) = :dia and extract( month from (CAST(a.criacao_alteracao as DATE))) = :mes and extract( year from (CAST(a.criacao_alteracao as DATE))) = :ano order by id desc limit 50 ",nativeQuery = true)
     public List<Log> buscarData(@Param("dia")int dia,@Param("mes")int mes,@Param("ano")int ano);
     
     @Query(value = "select * from auditoria order by id desc limit 50",nativeQuery = true)

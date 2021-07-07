@@ -40,9 +40,9 @@ public class RepositoryLog {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
             String output = "";
             String line;
             
@@ -71,9 +71,9 @@ public class RepositoryLog {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
             String output = "";
             String line;
             
@@ -102,9 +102,9 @@ public class RepositoryLog {
             
             HttpURLConnection conn = (HttpURLConnection) new URL(url+"/"+dia+"/"+mes+"/"+ano).openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Accept", "application/json;charset=utf-8");
             
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
             String output = "";
             String line;
             

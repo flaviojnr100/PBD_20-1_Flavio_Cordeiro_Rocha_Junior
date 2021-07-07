@@ -287,7 +287,7 @@ public class ControllerDashboard implements Initializable {
                 @Override
                 public void handle(ActionEvent event) {
                     try {
-                        ControllerVisualizacaoPedido.setPedido(p);
+                        ControllerVisualizacaoPedido.setPedido(BaseDados.getRepositoryPedido().buscarId(n_pedido));
                         Parent root = FXMLLoader.load(new File("src/main/java/view/FXMLVisualizacaoPedido.fxml").toURL());
                         Scene scene = new Scene(root);
                         Stage stage = new Stage();
@@ -320,23 +320,32 @@ public class ControllerDashboard implements Initializable {
         
             double linhas = (BaseDados.getMesas().size()/4)>0?BaseDados.getMesas().size()/4:1;
             
-            for(int i=0;i<linhas;i++){
                 
-                ColumnConstraints col = new ColumnConstraints();
-                col.setHalignment(HPos.CENTER);
-                col.setHgrow(Priority.SOMETIMES);
-                col.setMinWidth(10);
-                col.setPrefWidth(90.0);
-                grid.getColumnConstraints().add(col);
-                
-                for(int j=0;j<4;j++){
-
+               for(int j=0;j<4;j++){
+                    ColumnConstraints col = new ColumnConstraints();
+                    col.setHalignment(HPos.CENTER);
+                    col.setHgrow(Priority.SOMETIMES);
+                    col.setMinWidth(10);
+                    col.setPrefWidth(90.0);
+                    grid.getColumnConstraints().add(col);
+               }
+            for(int i=0;i<linhas+1;i++){
                     RowConstraints row = new RowConstraints();
                     row.setMaxHeight(123.79999389648438);
                     row.setMinHeight(10);
                     row.setPrefHeight(123.79999389648438);
                     row.setVgrow(Priority.SOMETIMES);
                     grid.getRowConstraints().add(row);
+                 
+            }
+            
+            for(int i=0;i<linhas+1;i++){
+                
+               
+                
+                for(int j=0;j<4;j++){
+
+                    
                     
                     if(BaseDados.getMesas().size()==n_mesa){
                         break;
@@ -387,64 +396,6 @@ public class ControllerDashboard implements Initializable {
                     button.setGraphic(imagem);
                     
                     grid.add(button, j, i);
-                    
-                    n_mesa++;
-                }
-            }
-            if(BaseDados.getMesas().size()%4>0){
-                
-                for(int k=0;k<BaseDados.getMesas().size()%4;k++){
-                    
-                    
-                    if(BaseDados.getMesas().size()==n_mesa){
-                        break;
-                    }
-                    Button button = new Button("Mesa "+BaseDados.getMesas().get(n_mesa).getNumero());
-                    button.setOnAction(new EventHandler<ActionEvent>() {
-                        final int n = n_mesa;
-                        @Override
-                        public void handle(ActionEvent event) {
-                            try {
-                                BaseDados.atualizarPedidoMesa(BaseDados.getMesas().get(n).getNumero());
-                                ControllerFinalizarPedido.setPedidos(BaseDados.getPedidos());
-                                if(BaseDados.getPedidos().size()>0){
-                                    Parent root = FXMLLoader.load(new File("src/main/java/view/FXMLFinalizarPedido.fxml").toURL());
-                                    Scene scene = new Scene(root);
-                                    Stage stage = new Stage();
-                                    stage.setTitle("Mesa "+BaseDados.getMesas().get(n).getNumero());
-                                    stage.setScene(scene);
-                                    stage.setResizable(false);
-                                    stage.initOwner((Stage) btnCardapio.getScene().getWindow());
-                                    stage.initModality(Modality.APPLICATION_MODAL);
-                                    stage.getIcons().add(new Image("file:src/main/java/asset/icone.png"));
-                                    stage.showAndWait();
-                                }else{
-                                    JOptionPane.showMessageDialog(null, "Não há pedidos nessa mesa!");
-                                }
-                            } catch (IOException ex) {
-                                Logger.getLogger(ControllerDashboard.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                    });
-            
-                    button.getStyleClass().add("botaoMesa1");
-                    button.setPrefHeight(98.0);
-                    button.setPrefWidth(129.0);
-                    button.setAlignment(Pos.BOTTOM_CENTER);
-                    button.setContentDisplay(ContentDisplay.TOP);
-            
-                    button.setCursor(Cursor.HAND);
-                    button.setFont(Font.font("Century Gothic", 13.0));
-            
-                    ImageView imagem = new ImageView(new Image("file:src/main/java/asset/mesa.png"));
-                    imagem.setFitHeight(76.0);
-                    imagem.setFitWidth(94.0);
-                    imagem.setPickOnBounds(true);
-                    imagem.setPreserveRatio(true);
-            
-                    button.setGraphic(imagem);
-                    
-                    grid.add(button, k,(int)linhas);
                     
                     n_mesa++;
                 }

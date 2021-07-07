@@ -63,7 +63,6 @@ public class ControllerLogin {
                     @Override
                     public void handle(WindowEvent event) {
                         int resultado = JOptionPane.showConfirmDialog(null, "Deseja sair do sistema e ir para a tela de login?","Aviso",JOptionPane.YES_NO_CANCEL_OPTION); 
-                        System.out.println(""+resultado);
                          if(resultado == JOptionPane.YES_NO_OPTION){
                             BaseDados.getRepositoryFuncionario().logout(BaseDados.getAutenticado().getLogin());
                             ControllerDashboard.getTask().cancel();

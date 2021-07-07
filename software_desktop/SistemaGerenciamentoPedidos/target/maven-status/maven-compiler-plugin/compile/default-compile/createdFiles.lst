@@ -88,7 +88,6 @@ controller\ControllerInformacoesFuncionario.class
 controller\ControllerPedido$3.class
 controller\ControllerFinanciaMensal$2.class
 app\App.class
-controller\ControllerDashboard$6.class
 model\FinanciaMensal.class
 controller\ControllerFinancia.class
 repository\RepositoryFinanciaAnual$1.class

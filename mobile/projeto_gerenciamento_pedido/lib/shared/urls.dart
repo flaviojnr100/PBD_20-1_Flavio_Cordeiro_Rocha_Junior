@@ -8,6 +8,8 @@ class Urls {
   static const String editar = "${RepositoryUtils.URL}/funcionario";
   static const String buscarLoginUnico =
       "${RepositoryUtils.URL}/funcionario/login";
+  static const String buscarCpfUnico =
+      "${RepositoryUtils.URL}/funcionario/buscarCpfUnico";
   static const String reset = "${RepositoryUtils.URL}/senhaReset";
   static const String cardapio = "${RepositoryUtils.URL}/cardapio";
   static const String pedidoFuncionario =

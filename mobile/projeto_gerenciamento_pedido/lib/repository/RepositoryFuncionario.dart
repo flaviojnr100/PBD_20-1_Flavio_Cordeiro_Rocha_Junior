@@ -46,6 +46,13 @@ class RepositoryFuncionario {
     id = response.data['id'];
   }
 
+  Future buscarCpfUnico(String cpf) async {
+    Response response = await dio.get("${Urls.buscarCpfUnico}/" + cpf);
+    statusCode = response.statusCode;
+
+    id = response.data['id'];
+  }
+
   Future reset(int id) async {
     FormData form = new FormData.fromMap({'id': id});
     Response response = await dio.post("${Urls.reset}", data: form);

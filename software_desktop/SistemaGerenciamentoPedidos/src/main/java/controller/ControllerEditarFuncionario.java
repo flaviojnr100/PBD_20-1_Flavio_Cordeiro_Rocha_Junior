@@ -57,18 +57,26 @@ public class ControllerEditarFuncionario implements Initializable{
             if(!nomeTxt.getText().equals("") && !sobrenomeTxt.getText().equals("") && !telefoneTxt.getText().equals("") && !cpfTxt.getText().equals("") && !loginTxt.getText().equals("") && !senhaTxt.getText().equals("") && !confirmarSenha.getText().equals("")){    
             if(senhaTxt.getText().equals(confirmarSenha.getText())){
             if(Criptografia.validarSenha(senhaTxt.getText())){
-                BaseDados.getAutenticado().setNome(nomeTxt.getText());
-                BaseDados.getAutenticado().setSobrenome(sobrenomeTxt.getText());
-                BaseDados.getAutenticado().setTelefone(telefoneTxt.getText());
-                BaseDados.getAutenticado().setCpf(cpfTxt.getText());
-                BaseDados.getAutenticado().setLogin(loginTxt.getText());
-                BaseDados.getAutenticado().setSenha(Criptografia.criptografar(senhaTxt.getText()));
-                if(BaseDados.getRepositoryFuncionario().editar(BaseDados.getAutenticado().getId(), BaseDados.getAutenticado())){
-                    JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
-                    btnCancelar.fire();
-                }else{
-                    JOptionPane.showMessageDialog(null, "Erro, contate o administrador!");
-                }
+                 if(BaseDados.getRepositoryFuncionario().buscarLoginUnicoValidacao(loginTxt.getText()) == null || BaseDados.getAutenticado().getLogin().equals(loginTxt.getText())){
+                     if(BaseDados.getRepositoryFuncionario().buscarCpfUnicoValidacao(cpfTxt.getText()) == null || BaseDados.getAutenticado().getCpf().equals(cpfTxt.getText())){
+                       BaseDados.getAutenticado().setNome(nomeTxt.getText());
+                       BaseDados.getAutenticado().setSobrenome(sobrenomeTxt.getText());
+                       BaseDados.getAutenticado().setTelefone(telefoneTxt.getText());
+                       BaseDados.getAutenticado().setCpf(cpfTxt.getText());
+                       BaseDados.getAutenticado().setLogin(loginTxt.getText());
+                       BaseDados.getAutenticado().setSenha(Criptografia.criptografar(senhaTxt.getText()));
+                    if(BaseDados.getRepositoryFuncionario().editar(BaseDados.getAutenticado().getId(), BaseDados.getAutenticado())){
+                        JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
+                        btnCancelar.fire();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Erro, contate o administrador!");
+                    }
+                 }else{
+                     JOptionPane.showMessageDialog(null, "Esse cpf já existe no banco de dados, digite outro!");
+                 }
+                 }else{
+                     JOptionPane.showMessageDialog(null, "Esse login existe no banco de dados, digite outro!");
+                 }
             
             }
             }else{

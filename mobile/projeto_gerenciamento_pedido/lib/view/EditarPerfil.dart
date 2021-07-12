@@ -250,35 +250,94 @@ class EditarPerfil extends StatelessWidget {
                                               senhaC.text) &&
                                           Validador.verificarNumero(
                                               senhaC.text)) {
-                                        Dashboard.repositoryFuncionario
-                                            .funcionario.nome = nomeC.text;
-                                        Dashboard
-                                            .repositoryFuncionario
-                                            .funcionario
-                                            .sobrenome = sobrenomeC.text;
-                                        Dashboard
-                                            .repositoryFuncionario
-                                            .funcionario
-                                            .telefone = telefoneC.text;
-                                        Dashboard.repositoryFuncionario
-                                            .funcionario.cpf = cpfC.text;
-                                        Dashboard.repositoryFuncionario
-                                            .funcionario.login = loginC.text;
-                                        Dashboard.repositoryFuncionario
-                                                .funcionario.senha =
-                                            md5
-                                                .convert(
-                                                    utf8.encode(senhaC.text))
-                                                .toString()
-                                                .toUpperCase();
-                                        Dashboard.repositoryFuncionario
-                                            .editar(Dashboard
+                                        if (Dashboard.repositoryFuncionario
+                                                    .buscarCpfUnico(
+                                                        cpfC.text) ==
+                                                null ||
+                                            cpfC.text ==
+                                                Dashboard.repositoryFuncionario
+                                                    .funcionario.cpf) {
+                                          if (Dashboard.repositoryFuncionario
+                                                      .buscarLoginUnico(
+                                                          loginC.text) ==
+                                                  null ||
+                                              loginC.text ==
+                                                  Dashboard
+                                                      .repositoryFuncionario
+                                                      .funcionario
+                                                      .login) {
+                                            Dashboard.repositoryFuncionario
+                                                .funcionario.nome = nomeC.text;
+                                            Dashboard
                                                 .repositoryFuncionario
-                                                .funcionario)
-                                            .whenComplete(() {
-                                          Navigator.pop(context);
-                                          Navigator.pop(context);
-                                        });
+                                                .funcionario
+                                                .sobrenome = sobrenomeC.text;
+                                            Dashboard
+                                                .repositoryFuncionario
+                                                .funcionario
+                                                .telefone = telefoneC.text;
+                                            Dashboard.repositoryFuncionario
+                                                .funcionario.cpf = cpfC.text;
+                                            Dashboard
+                                                .repositoryFuncionario
+                                                .funcionario
+                                                .login = loginC.text;
+                                            Dashboard.repositoryFuncionario
+                                                    .funcionario.senha =
+                                                md5
+                                                    .convert(utf8
+                                                        .encode(senhaC.text))
+                                                    .toString()
+                                                    .toUpperCase();
+                                            Dashboard.repositoryFuncionario
+                                                .editar(Dashboard
+                                                    .repositoryFuncionario
+                                                    .funcionario)
+                                                .whenComplete(() {
+                                              Navigator.pop(context);
+                                              Navigator.pop(context);
+                                            });
+                                          } else {
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: Text("Aviso"),
+                                                    content: Text(
+                                                        "Esse login já esta cadastrado no sistema, digite outro!!"),
+                                                    actions: <Widget>[
+                                                      FlatButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text("ok"),
+                                                      ),
+                                                    ],
+                                                  );
+                                                });
+                                          }
+                                        } else {
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: Text("Aviso"),
+                                                  content: Text(
+                                                      "Esse CPF já está cadastrado no sistema, digite outro!"),
+                                                  actions: <Widget>[
+                                                    FlatButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: Text("ok"),
+                                                    ),
+                                                  ],
+                                                );
+                                              });
+                                        }
                                       } else {
                                         showDialog(
                                             context: context,
